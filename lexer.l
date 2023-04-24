@@ -208,18 +208,16 @@ struct dataType {
 	char * data_type;
 	char * our_type;
 	int line_num;
-} symbol_table[40];
+} symbol_table[10000];
 
-int i = 0;//glowbal table row counter
+int row_ctr = 0;//glowbal table row counter
 void insert(char* token, char* data_type, char* our_type){
 	
-	
-	
-	symbol_table[i].token = token;
-	symbol_table[i].data_type = data_type;
-	symbol_table[i].our_type = our_type;
-	symbol_table[i].line_num = line_num++;
-	
+	symbol_table[row_ctr].token = token;
+	symbol_table[row_ctr].data_type = data_type;
+	symbol_table[row_ctr].our_type = our_type;
+	symbol_table[row_ctr].line_num = line_num++;
+	row_ctr++;
 }
 
 
@@ -318,6 +316,20 @@ void display()
 	}
    	return;
 }
+
+void table_display()
+{
+	printf("\n\n");
+	printf("\t\t\t\t\t\t\t\t PHASE 1: LEXICAL ANALYSIS \n\n");
+	printf("\nSYMBOL   DATATYPE   TYPE   LINE NUMBER \n");
+	printf("_______________________________________\n\n");
+	
+	for(int i = 0; i < row_ctr; i++) 
+	{
+		printf("%s\t%s\t%s\t%d\t\n", symbol_table[i].token, symbol_table[i].data_type, symbol_table[i].our_type, symbol_table[i].line_num);
+	}
+}
+
 
 int main()
 {
