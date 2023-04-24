@@ -1,4 +1,7 @@
 %{
+    #include "lex.yy.c"
+    #include <stdio.h>
+    #include <string.h>
 	int yylineno;
 	char data_type[200];
 %}
@@ -367,9 +370,6 @@ FunctionDefinition
 	;
 %%
 
-#include "lex.yy.c"
-#include <stdio.h>
-#include <string.h>
 int main(int argc, char *argv[])
 {
 	yyin = fopen(argv[1], "r");

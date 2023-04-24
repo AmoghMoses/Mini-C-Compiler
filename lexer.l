@@ -1,102 +1,95 @@
 %{
-int lineno = 1;
+int line_num = 1;
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 
 // #define AUTO 1
-#define BREAK 2
-#define CASE 3
-#define CHAR 4
-#define CONST 5
-#define CONTINUE 6
-#define DEFAULT 7
+#define BREAK 1
+#define CASE 2
+#define CHAR 3
+#define CONST 4
+#define CONTINUE 5
+#define DEFAULT 6
 // #define DO 8
 // #define DOUBLE 9
-#define ELSE 10
+#define IF 7
+#define ELSE 8
 // #define ENUM 11
 // #define EXTERN 12
-#define FLOAT 13
-#define FOR 14
-#define GOTO 15
-#define IF 16
-#define INT 17
+#define FLOAT 9
+#define FOR 10
+#define GOTO 11
+
+#define INT 12
 // #define LONG 18
 // #define REGISTER 19
-#define RETURN 20
+#define RETURN 13
 // #define SHORT 21
-#define SIGNED 22
-#define SIZEOF 23
+#define SIGNED 14
+#define SIZEOF 15
 // #define STATIC 24
 // #define STRUCT 25
-#define SWITCH 26
+#define SWITCH 16
 // #define TYPEDEF 27
 // #define UNION 28
-#define UNSIGNED 29
-#define VOID 30
+#define UNSIGNED 17
+#define VOID 18
 // #define VOLATILE 31
-#define WHILE 32
+#define WHILE 19
 
-#define IDENTIFIER 33
-#define SLC 34
-#define MLCS 35
-#define MLCE 36
+#define IDENTIFIER 20
+#define SLC 21
+#define MLCS 22
+#define MLCE 23
 
-#define LEQ 37
-#define GEQ 38
-#define EQEQ 39
-#define NEQ 40
-#define LOR 41
-#define LAND 42
-#define ASSIGN 43
-#define PLUS 44
-#define SUB 45
-#define MULT 46
-#define DIV 47
-#define MOD 48
-#define LESSER 49
-#define GREATER 50
-#define INCR 51
-#define DECR 52
-#define BITAND 53
-#define BITOR 54
-#define BITXOR 55
-#define BITNOT 56
-#define BITLSHIFT 57
-#define BITRSHIFT 58
+#define LEQ 24
+#define GEQ 25
+#define EQEQ 26
+#define NEQ 27
+#define LOR 28
+#define LAND 29
+#define ASSIGN 30
+#define PLUS 31
+#define SUB 32
+#define MULT 33
+#define DIV 34
+#define MOD 35
+#define LESSER 36
+#define GREATER 37
+#define INCR 38
+#define DECR 39
+#define BITAND 40
+#define BITOR 41
+#define BITXOR 42
+#define BITNOT 43
+#define BITLSHIFT 44
+#define BITRSHIFT 45
 
-#define COMMA 59
-#define SEMI 60
-
-#define HEADER 61
-#define MAIN 62
-
-#define PRINTF 63
-// #define SCANF 58
+#define COMMA 46
+#define SEMI 47
+#define HEADER 48
+#define MAIN 49
+#define PRINTF 50
+// #define scanF 58
 // #define DEFINE 58
+#define INT_CONST 51
+#define FLOAT_CONST 52
+#define TYPE_SPEC 53
+#define DQ 54
+#define OBO 55
+#define OBC 56
+#define CBO 57
+#define CBC 58
+#define HASH 59
+#define ARR 60
+#define FUNC 61
+#define NUM_ERR 62
+#define UNKNOWN 63
+#define CHAR_CONST 64
+#define SIGNED_CONST 65
+#define STRING_CONST 66
 
-#define INT_CONST 64
-#define FLOAT_CONST 65
-
-#define TYPE_SPEC 66
-
-#define DQ 67
-
-#define OBO 68
-#define OBC 69
-#define CBO 70
-#define CBC 71
-#define HASH 72
-
-#define ARR 73
-#define FUNC 74
-
-#define NUM_ERR 75
-#define UNKNOWN 76
-
-#define CHAR_CONST 77
-#define SIGNED_CONST 78
-#define STRING_CONST 79
 %}
 
 alpha [A-Za-z]
@@ -142,7 +135,7 @@ printf return PRINTF;
 [+-][0-9]{digit}*(\.{digit}+)? return SIGNED_CONST;
 
 "//" return SLC;
-"/*" return MLCS;
+"/*" { return MLCS;}
 "*/" return MLCE;
 
 "<=" return LEQ;
@@ -206,25 +199,28 @@ struct hash
 	int count;
 };
 
+//from ehre
 struct dataType {
 	char * token;
 	char * data_type;
 	char * our_type;
-	int line_no;
+	int line_num;
 } symbol_table[40];
 
 
-void insert(char* token, char* data_type){
+void insert(char* token, char* data_type, char* our_type){
 	
 	int i = 0;//glowbal table row counter
 	
 	symbol_table[i].token = token;
 	symbol_table[i].data_type = data_type;
-	symbol_table[i].our_type = "variable";
-	symbol_table[i].line_no = lineno;
-	break;
+	symbol_table[i].our_type = our_type;
+	symbol_table[i].line_num = line_num++;
 	
 }
+
+
+//till here
 
 struct hash hashTable[1000];
 int eleCount = 1000;
@@ -322,129 +318,133 @@ void display()
 
 int main()
 {
-	int scan, slcline=0, mlc=0, mlcline=0, dq=0, dqline=0;
+	int scanner, slcline=0, mlc=0, mlcline=0, dq=0, dqline=0;
 	yyin = fopen("isPrime.c","r"); //add test case files here
 	printf("\n\n");
-	scan = yylex();
-	while(scan)
+	scanner = yylex();
+	while(scanner)
 	{
 		if(lineno == slcline)
 		{
-			scan = yylex();
+			scanner = yylex();
 			continue;
 		}
+
 		if(lineno!=dqline && dqline!=0)
 		{
 			if(dq%2!=0)
 				printf("\n******** ERROR!! INCOMPLETE STRING at Line %d ********\n\n", dqline);
 			dq=0;
 		}
-		if((scan>=1 && scan<=32) && mlc==0)
+
+		// checking frpm here
+		
+		if((scanner>=1 && scanner<=32) && mlc==0)
 		{
 			printf("%s\t\t\tKEYWORD\t\t\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "KEYWORD");
 		}
-		if(scan==33 && mlc==0) 
+		if(scanner==33 && mlc==0) 
 		{
 			printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "IDENTIFIER");
 		}
-		if(scan==34)
+		if(scanner==34)
 		{
 			//printf("%s\t\t\tSingleline Comment\t\tLine %d\n", yytext, lineno);
 			slcline = lineno;
 		}
-		if(scan==35 && mlc==0)
+		if(scanner==35 && mlc==0)
 		{
 			//printf("%s\t\t\tMultiline Comment Start\t\tLine %d\n", yytext, lineno);
 			mlcline = lineno;
 			mlc = 1;
 		}
-		if(scan==36 && mlc==0)
+		if(scanner==36 && mlc==0)
 		{
 			//printf("\n******** ERROR!! UNMATCHED MULTILINE COMMENT END %s at Line %d ********\n\n", yytext, lineno);
 		}
-		if(scan==36 && mlc==1)
+		if(scanner==36 && mlc==1)
 		{
 			mlc = 0;
 			//printf("%s\t\t\tMultiline Comment End\t\tLine %d\n", yytext, lineno);
 		}
-		if((scan>=37 && scan<=52) && mlc==0)
+		if((scanner>=37 && scanner<=52) && mlc==0)
 		{
 			printf("%s\t\t\tOPERATOR\t\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "OPERATOR");
 		}
-		if((scan==53||scan==54||scan==63||(scan>=64 && scan<=68)) && mlc==0)
+		if((scanner==53||scanner==54||scanner==63||(scanner>=64 && scanner<=68)) && mlc==0)
 		{
 			printf("%s\t\t\tSPECIAL SYMBOL\t\t\tLine %d\n", yytext, lineno);
-			if(scan==63)
+			if(scanner==63)
 			{
 				dq++;
 				dqline = lineno;
 			}
 			insertToHash(yytext,"SPECIAL SYMBOL");
 		}
-		if(scan==55 && mlc==0)
+		if(scanner==55 && mlc==0)
 		{
 			printf("%s\tHEADER\t\t\t\tLine %d\n",yytext, lineno);
 		}
-		if(scan==56 && mlc==0)
+		if(scanner==56 && mlc==0)
 		{
 			printf("%s\t\t\tMAIN FUNCTION\t\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "IDENTIFIER");
 		}
-		if((scan==57 || scan==58) && mlc==0)
+		if((scanner==57 || scanner==58) && mlc==0)
 		{
 			printf("%s\t\t\tPRE DEFINED FUNCTION\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "PRE DEFINED FUNCTION");
 		}
-		if(scan==59 && mlc==0)
+		if(scanner==59 && mlc==0)
 		{
 			printf("%s\t\t\tPRE PROCESSOR DIRECTIVE\t\tLine %d\n", yytext, lineno);
 		}
-		if(scan==60 && mlc==0)
+		if(scanner==60 && mlc==0)
 		{
 			printf("%s\t\t\tINTEGER CONSTANT\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "INTEGER CONSTANT");
 		}
-		if(scan==62 && mlc==0)
+		if(scanner==62 && mlc==0)
 		{
 			printf("%s\t\t\tTYPE SPECIFIER\t\t\tLine %d\n", yytext, lineno);
 		}
-		if(scan==69 && mlc==0)
+		if(scanner==69 && mlc==0)
 		{
 			printf("%s\t\t\tARRAY\t\t\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "ARRAY");
 		}
-		if(scan==70 && mlc==0)
+		if(scanner==70 && mlc==0)
 		{
 			printf("%s\t\t\tUSER DEFINED FUNCTION\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "USER DEFINED FUNCTION");
 		}
-		if(scan==71 && mlc==0)
+		if(scanner==71 && mlc==0)
 		{
 			printf("\n******** ERROR!! CONSTANT ERROR %s at Line %d ********\n\n", yytext, lineno);
 		}
-		if(scan==72 && mlc==0)
+		if(scanner==72 && mlc==0)
 		{
 			printf("\n******** ERROR!! UNKNOWN TOKEN T_%s at Line %d ********\n\n", yytext, lineno);
 		}
-		if(scan==73 && mlc==0)
+		if(scanner==73 && mlc==0)
 		{
 			printf("%s\t\t\tCHARACTER CONSTANT\t\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "CHARACTER CONSTANT");
 		}
-		if(scan==74 && mlc==0)
+		if(scanner==74 && mlc==0)
 		{
 			printf("%s\t\t\tSIGNED CONSTANT\t\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "SIGNED CONSTANT");
 		}
-		if(scan==75 && mlc==0)
+		if(scanner==75 && mlc==0)
 		{
 			printf("%s\t\t\tSTRING CONSTANT\t\t\tLine %d\n", yytext, lineno);
 			insertToHash(yytext, "STRING_CONSTANT");
 		}
-		scan = yylex();
+		scanner = yylex();
 	}
 	if(mlc==1)
 		printf("\n******** ERROR!! UNMATCHED COMMENT STARTING at Line %d ********\n\n",mlcline);
