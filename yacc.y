@@ -11,16 +11,16 @@
 %left  '*'  '/' '%'
 %left  '|'
 %left  '&'
+
 %token IDENTIFIER CONSTANT STRING_LITERAL SIZEOF
 %token PTR_OP INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
 %token AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
 %token SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN
 %token XOR_ASSIGN OR_ASSIGN DEFINE
-%token TYPEDEF EXTERN STATIC AUTO REGISTER
-%token CHAR SHORT INT LONG SIGNED UNSIGNED FLOAT DOUBLE CONST VOLATILE VOID
-%token STRUCT UNION ENUM 
-%token CASE DEFAULT IF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN
-%start begin
+
+%token CHAR INT SIGNED UNSIGNED FLOAT CONST VOID
+%token CASE DEFAULT IF ELSE SWITCH WHILE FOR GOTO CONTINUE BREAK RETURN
+%start Program
 
 %union{
 	char str[1000];
@@ -28,49 +28,52 @@
 
 %%
 
-begin
-	: external_declaration
-	| begin external_declaration
-	| Define begin
+Program 
+    : Begin { printf("-------------REACHED THE END OF THE PROGRAM----------"); }
+
+Begin
+	: OutsideMain
+	| Begin OutsideMain
+	| Define Begin
 	;
 
-primary_expression
+PrimaryExpression
 	: IDENTIFIER { insertToHash($<str>1, data_type , yylineno); }
 	| CONSTANT
 	| STRING_LITERAL
-	| '(' expression ')'
+	| '(' Expression ')'
 	;
 
 Define
 	: DEFINE
 	;
 
-postfix_expression
-	: primary_expression
-	| postfix_expression '[' expression ']'
-	| postfix_expression '(' ')'
-	| postfix_expression '(' argument_expression_list ')'
-	| postfix_expression '.' IDENTIFIER
-	| postfix_expression PTR_OP IDENTIFIER
-	| postfix_expression INC_OP
-	| postfix_expression DEC_OP
+PostfixExpression
+	: PrimaryExpression
+	| PostfixExpression '[' Expression ']'
+	| PostfixExpression '(' ')'
+	| PostfixExpression '(' ArgumentExpressionList ')'
+	| PostfixExpression '.' IDENTIFIER
+	| PostfixExpression PTR_OP IDENTIFIER
+	| PostfixExpression INC_OP
+	| PostfixExpression DEC_OP
 	;
 
-argument_expression_list
-	: assignment_expression
-	| argument_expression_list ',' assignment_expression
+ArgumentExpressionList
+	: AssignmentExpression
+	| ArgumentExpressionList ',' AssignmentExpression
 	;
 
-unary_expression
-	: postfix_expression
-	| INC_OP unary_expression
-	| DEC_OP unary_expression
-	| unary_operator cast_expression
-	| SIZEOF unary_expression
+UnaryExpression
+	: PostfixExpression
+	| INC_OP UnaryExpression
+	| DEC_OP UnaryExpression
+	| UnaryOperator CastExpression
+	| SIZEOF UnaryExpression
 	| SIZEOF '(' type_name ')'
 	;
 
-unary_operator
+UnaryOperator
 	: '&'
 	| '*'
 	| '+'
@@ -79,80 +82,80 @@ unary_operator
 	| '!'
 	;
 
-cast_expression
-	: unary_expression
-	| '(' type_name ')' cast_expression
+CastExpression
+	: UnaryExpression
+	| '(' type_name ')' CastExpression
 	;
 
-multiplicative_expression
-	: cast_expression
-	| multiplicative_expression '*' cast_expression
-	| multiplicative_expression '/' cast_expression
-	| multiplicative_expression '%' cast_expression
+MultiplicativeExpression
+	: CastExpression
+	| MultiplicativeExpression '*' CastExpression
+	| MultiplicativeExpression '/' CastExpression
+	| MultiplicativeExpression '%' CastExpression
 	;
 
-additive_expression
-	: multiplicative_expression
-	| additive_expression '+' multiplicative_expression
-	| additive_expression '-' multiplicative_expression
+AdditiveExpression
+	: MultiplicativeExpression
+	| AdditiveExpression '+' MultiplicativeExpression
+	| AdditiveExpression '-' MultiplicativeExpression
 	;
 
-shift_expression
-	: additive_expression
-	| shift_expression LEFT_OP additive_expression
-	| shift_expression RIGHT_OP additive_expression
+ShiftExpression
+	: AdditiveExpression
+	| ShiftExpression LEFT_OP AdditiveExpression
+	| ShiftExpression RIGHT_OP AdditiveExpression
 	;
 
-relational_expression
-	: shift_expression
-	| relational_expression '<' shift_expression
-	| relational_expression '>' shift_expression
-	| relational_expression LE_OP shift_expression
-	| relational_expression GE_OP shift_expression
+RelationalExpression
+	: ShiftExpression
+	| RelationalExpression '<' ShiftExpression
+	| RelationalExpression '>' ShiftExpression
+	| RelationalExpression LE_OP ShiftExpression
+	| RelationalExpression GE_OP ShiftExpression
 	;
 
-equality_expression
-	: relational_expression
-	| equality_expression EQ_OP relational_expression
-	| equality_expression NE_OP relational_expression
+EqualityExpression
+	: RelationalExpression
+	| EqualityExpression EQ_OP RelationalExpression
+	| EqualityExpression NE_OP RelationalExpression
 	;
 
-and_expression
-	: equality_expression
-	| and_expression '&' equality_expression
+AndExpression
+	: EqualityExpression
+	| AndExpression '&' EqualityExpression
 	;
 
-exclusive_or_expression
-	: and_expression
-	| exclusive_or_expression '^' and_expression
+XorExpression
+	: AndExpression
+	| XorExpression '^' AndExpression
 	;
 
-inclusive_or_expression
-	: exclusive_or_expression
-	| inclusive_or_expression '|' exclusive_or_expression
+OrExpression
+	: XorExpression
+	| OrExpression '|' XorExpression
 	;
 
-logical_and_expression
-	: inclusive_or_expression
-	| logical_and_expression AND_OP inclusive_or_expression
+LogicalAndExpression
+	: OrExpression
+	| LogicalAndExpression AND_OP OrExpression
 	;
 
-logical_or_expression
-	: logical_and_expression
-	| logical_or_expression OR_OP logical_and_expression
+LogicalOrExpression
+	: LogicalAndExpression
+	| LogicalOrExpression OR_OP LogicalAndExpression
 	;
 
-conditional_expression
-	: logical_or_expression
-	| logical_or_expression '?' expression ':' conditional_expression
+ConditionalExpression
+	: LogicalOrExpression
+	| LogicalOrExpression '?' Expression ':' ConditionalExpression
 	;
 
-assignment_expression
-	: conditional_expression
-	| unary_expression assignment_operator assignment_expression
+AssignmentExpression
+	: ConditionalExpression
+	| UnaryExpression AssignmentOperator AssignmentExpression
 	;
 
-assignment_operator
+AssignmentOperator
 	: '='
 	| MUL_ASSIGN
 	| DIV_ASSIGN
@@ -166,201 +169,201 @@ assignment_operator
 	| OR_ASSIGN
 	;
 
-expression
-	: assignment_expression
-	| expression ',' assignment_expression
+Expression
+	: AssignmentExpression
+	| Expression ',' AssignmentExpression
 	;
 
-constant_expression
-	: conditional_expression
+ConstantExpression
+	: ConditionalExpression
 	;
 
-declaration
-	: declaration_specifiers ';'
-	| declaration_specifiers init_declarator_list ';'
+Declaration
+	: DeclarationSpecifiers ';'
+	| DeclarationSpecifiers init_Declarator_list ';'
 	;
 
-declaration_specifiers
+DeclarationSpecifiers
 	: storage_class_specifier
-	| storage_class_specifier declaration_specifiers
-	| type_specifier	{ strcpy(data_type, $<str>1); }
-	| type_specifier declaration_specifiers
+	| storage_class_specifier DeclarationSpecifiers
+	| TypeSpecifier	{ strcpy(data_type, $<str>1); }
+	| TypeSpecifier DeclarationSpecifiers
 	;
 
-init_declarator_list
-	: init_declarator
-	| init_declarator_list ',' init_declarator
+init_Declarator_list
+	: init_Declarator
+	| init_Declarator_list ',' init_Declarator
 	;
 
-init_declarator
-	: declarator
-	| declarator '=' initializer
+init_Declarator
+	: Declarator
+	| Declarator '=' Initializer
 	;
 
-storage_class_specifier
-	: TYPEDEF
-	| EXTERN
-	| STATIC
-	| AUTO
-	| REGISTER
-	;
+// storage_class_specifier
+	// : TYPEDEF
+	// | EXTERN
+	// | STATIC
+	// | AUTO
+	// | REGISTER
+	// ;
 
-type_specifier
+TypeSpecifier
 	: VOID
 	| CHAR
-	| SHORT
+	// | SHORT
 	| INT
-	| LONG
+	// | LONG
 	| FLOAT
-	| DOUBLE
+	// | DOUBLE
 	| SIGNED
 	| UNSIGNED
-	| struct_or_union_specifier
+	// | struct_or_union_specifier
 	;
 
-specifier_qualifier_list
-	: type_specifier specifier_qualifier_list
-	| type_specifier
-	| CONST specifier_qualifier_list
+SpecifierQualifierList
+	: TypeSpecifier SpecifierQualifierList
+	| TypeSpecifier
+	| CONST SpecifierQualifierList
 	| CONST
 	;
 
-struct_or_union_specifier
-	: struct_or_union IDENTIFIER '{' struct_declaration_list '}' ';'
-	| struct_or_union '{' struct_declaration_list '}' ';'
-	| struct_or_union IDENTIFIER ';'
+// struct_or_union_specifier
+// 	: struct_or_union IDENTIFIER '{' struct_DeclarationList '}' ';'
+// 	| struct_or_union '{' struct_DeclarationList '}' ';'
+// 	| struct_or_union IDENTIFIER ';'
+// 	;
+
+// struct_or_union
+// 	: STRUCT
+// 	| UNION
+// 	;
+
+// struct_DeclarationList
+// 	: struct_Declaration
+// 	| struct_DeclarationList struct_Declaration
+// 	;
+
+// struct_Declaration
+// 	: SpecifierQualifierList struct_Declarator_list ';'
+// 	;
+
+
+// struct_Declarator_list
+// 	: Declarator
+// 	| struct_Declarator_list ',' Declarator
+// 	;
+
+Declarator
+	: Pointer DirectDeclarator
+	| DirectDeclarator
 	;
 
-struct_or_union
-	: STRUCT
-	| UNION
-	;
-
-struct_declaration_list
-	: struct_declaration
-	| struct_declaration_list struct_declaration
-	;
-
-struct_declaration
-	: specifier_qualifier_list struct_declarator_list ';'
-	;
-
-
-struct_declarator_list
-	: declarator
-	| struct_declarator_list ',' declarator
-	;
-
-declarator
-	: pointer direct_declarator
-	| direct_declarator
-	;
-
-direct_declarator
+DirectDeclarator
 	: IDENTIFIER
-	| '(' declarator ')'
-	| direct_declarator '[' constant_expression ']'
-	| direct_declarator '[' ']'
-	| direct_declarator '(' parameter_list ')'
-	| direct_declarator '(' identifier_list ')'
-	| direct_declarator '(' ')'
+	| '(' Declarator ')'
+	| DirectDeclarator '[' ConstantExpression ']'
+	| DirectDeclarator '[' ']'
+	| DirectDeclarator '(' ParameterList ')'
+	| DirectDeclarator '(' IdentifierList ')'
+	| DirectDeclarator '(' ')'
 	;
 
-pointer
+Pointer
 	: '*'
-	| '*' pointer
+	| '*' Pointer
 	;
 
-parameter_list
-	: parameter_declaration
-	| parameter_list ',' parameter_declaration
+ParameterList
+	: ParameterDeclaration
+	| ParameterList ',' ParameterDeclaration
 	;
 
-parameter_declaration
-	: declaration_specifiers declarator
-	| declaration_specifiers
+ParameterDeclaration
+	: DeclarationSpecifiers Declarator
+	| DeclarationSpecifiers
 	;
 
-identifier_list
+IdentifierList
 	: IDENTIFIER
-	| identifier_list ',' IDENTIFIER
+	| IdentifierList ',' IDENTIFIER
 	;
 
 type_name
-	: specifier_qualifier_list
-	| specifier_qualifier_list declarator
+	: SpecifierQualifierList
+	| SpecifierQualifierList Declarator
 	;
 
-initializer
-	: assignment_expression
-	| '{' initializer_list '}'
-	| '{' initializer_list ',' '}'
+Initializer
+	: AssignmentExpression
+	| '{' InitializerList '}'
+	| '{' InitializerList ',' '}'
 	;
 
-initializer_list
-	: initializer
-	| initializer_list ',' initializer
+InitializerList
+	: Initializer
+	| InitializerList ',' Initializer
 	;
 
-statement
-	: compound_statement
-	| expression_statement
-	| selection_statement
-	| iteration_statement
-	| jump_statement
+Statement
+	: CompoundStatement
+	| ExpressionStatement
+	| SelectionStatement
+	| IterationStatement
+	| JumpStatement
 	;
 
-compound_statement
+CompoundStatement
 	: '{' '}'
-	| '{' statement_list '}'
-	| '{' declaration_list '}'
-	| '{' declaration_list statement_list '}'
+	| '{' StatementList '}'
+	| '{' DeclarationList '}'
+	| '{' DeclarationList StatementList '}'
 	;
 
-declaration_list
-	: declaration
-	| declaration_list declaration
+DeclarationList
+	: Declaration
+	| DeclarationList Declaration
 	;
 
-statement_list
-	: statement
-	| statement_list statement
+StatementList
+	: Statement
+	| StatementList Statement
 	;
 
-expression_statement
+ExpressionStatement
 	: ';'
-	| expression ';'
+	| Expression ';'
 	;
 
-selection_statement
-	: IF '(' expression ')' statement    %prec NO_ELSE
-	| IF '(' expression ')' statement ELSE statement
+SelectionStatement
+	: IF '(' Expression ')' Statement    %prec NO_ELSE
+	| IF '(' Expression ')' Statement ELSE Statement
 	;
 
-iteration_statement
-	: WHILE '(' expression ')' statement
-	| DO statement WHILE '(' expression ')' ';'
-	| FOR '(' expression_statement expression_statement ')' statement
-	| FOR '(' expression_statement expression_statement expression ')' statement
+IterationStatement
+	: WHILE '(' Expression ')' Statement
+	| DO Statement WHILE '(' Expression ')' ';'
+	| FOR '(' ExpressionStatement ExpressionStatement ')' Statement
+	| FOR '(' ExpressionStatement ExpressionStatement Expression ')' Statement
 	;
 
-jump_statement
+JumpStatement
 	: CONTINUE ';'
 	| BREAK ';'
 	| RETURN ';'
-	| RETURN expression ';'
+	| RETURN Expression ';'
 	;
 
-external_declaration
-	: function_definition
-	| declaration
+OutsideMain
+	: FunctionDefinition
+	| Declaration
 	;
 
-function_definition
-	: declaration_specifiers declarator declaration_list compound_statement
-	| declaration_specifiers declarator compound_statement
-	| declarator declaration_list compound_statement
-	| declarator compound_statement
+FunctionDefinition
+	: DeclarationSpecifiers Declarator DeclarationList CompoundStatement
+	| DeclarationSpecifiers Declarator CompoundStatement
+	| Declarator DeclarationList CompoundStatement
+	| Declarator CompoundStatement
 	;
 %%
 

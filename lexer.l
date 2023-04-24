@@ -206,6 +206,26 @@ struct hash
 	int count;
 };
 
+struct dataType {
+	char * token;
+	char * data_type;
+	char * our_type;
+	int line_no;
+} symbol_table[40];
+
+
+void insert(char* token, char* data_type){
+	
+	int i = 0;//glowbal table row counter
+	
+	symbol_table[i].token = token;
+	symbol_table[i].data_type = data_type;
+	symbol_table[i].our_type = "variable";
+	symbol_table[i].line_no = lineno;
+	break;
+	
+}
+
 struct hash hashTable[1000];
 int eleCount = 1000;
 
