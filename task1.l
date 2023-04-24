@@ -3,17 +3,10 @@
     #include "y.tab.h"
     #include <stdio.h>
     #include <string.h>
+    #include <stdlib.h>
+    #include <ctype.h>
 
     int lineNum = 1;
-    /*** Symbol Table structure ***/
-    struct Table
-    {
-        char *symbol;
-        char *classtype;
-        char *datatype;
-        int lineNum;
-
-    } symbolTable[1000];
 %}
 
 alphabet [A-Za-z]
@@ -97,6 +90,19 @@ return {return RETURN;}
 {alphabet}({alphabet}|{digit})*   { return ID; }
 
 %%
+
+int lineNum = 1;
+    /*** Symbol Table structure ***/
+struct Table
+{
+    char *symbol;
+    char *classtype;
+    char *datatype;
+    int lineNum;
+
+} symbolTable[1000];
+
+
 
 /*** C Code section ***/
 int yywrap()
