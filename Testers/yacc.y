@@ -6,7 +6,6 @@
 	char data_type[200];
 %}
 
-%expect 19
 %nonassoc NO_ELSE
 %nonassoc  ELSE 
 %left '<' '>' '=' GE_OP LE_OP EQ_OP NE_OP 
@@ -203,13 +202,14 @@ init_Declarator
 	| Declarator '=' Initializer
 	;
 
-// storage_class_specifier
-	// : TYPEDEF
+storage_class_specifier
+	: 
+	// TYPEDEF
 	// | EXTERN
 	// | STATIC
 	// | AUTO
 	// | REGISTER
-	// ;
+	;
 
 TypeSpecifier
 	: VOID
@@ -345,7 +345,7 @@ SelectionStatement
 
 IterationStatement
 	: WHILE '(' Expression ')' Statement
-	| DO Statement WHILE '(' Expression ')' ';'
+	// | DO Statement WHILE '(' Expression ')' ';'
 	| FOR '(' ExpressionStatement ExpressionStatement ')' Statement
 	| FOR '(' ExpressionStatement ExpressionStatement Expression ')' Statement
 	;

@@ -224,110 +224,110 @@ void insert(char* token, char* data_type, char* our_type){
 
 //till here
 
-struct hash hashTable[1000];
-int eleCount = 1000;
+// struct hash hashTable[1000];
+// int eleCount = 1000;
 
-struct node * createNode(char *token, char *attr)
-{
-	struct node *newnode;
-	newnode = (struct node *) malloc(sizeof(struct node));
-	strcpy(newnode->token, token);
-	strcpy(newnode->attr, attr);
-	newnode->next = NULL;
-	return newnode;
-}
+// struct node * createNode(char *token, char *attr)
+// {
+// 	struct node *newnode;
+// 	newnode = (struct node *) malloc(sizeof(struct node));
+// 	strcpy(newnode->token, token);
+// 	strcpy(newnode->attr, attr);
+// 	newnode->next = NULL;
+// 	return newnode;
+// }
 
-int hashIndex(char *token)
-{
-	int hi=0;
-	int l,i;
-	for(i=0;token[i]!='\0';i++)
-	{
-		hi = hi + (int)token[i];
-	}
-	hi = hi%eleCount;
-	return hi;
-}
+// int hashIndex(char *token)
+// {
+// 	int hi=0;
+// 	int l,i;
+// 	for(i=0;token[i]!='\0';i++)
+// 	{
+// 		hi = hi + (int)token[i];
+// 	}
+// 	hi = hi%eleCount;
+// 	return hi;
+// }
 
-void insertToHash(char *token, char *attr)
-{
-	int flag=0;
-	int hi;
-	hi = hashIndex(token);
-	struct node *newnode = createNode(token, attr);
-	/* head of list for the bucket with index "hashIndex" */
-	if (hashTable[hi].head==NULL)
-	{
-		hashTable[hi].head = newnode;
-	        hashTable[hi].count = 1;
-	        return;
-	}
-	struct node *myNode;
-    	myNode = hashTable[hi].head;
-	while (myNode != NULL)
-    	{
-        	if (strcmp(myNode->token, token)==0)
-        	{
-            		flag = 1;
-            		break;
-        	}
-        	myNode = myNode->next;
-    	}
-	if(!flag)
-	{
-		//adding new node to the list
-		newnode->next = (hashTable[hi].head);
-		//update the head of the list and no of nodes in the current bucket
-		hashTable[hi].head = newnode;
-		hashTable[hi].count++;
-	}
-	return;
-}
+// void insertToHash(char *token, char *attr)
+// {
+// 	int flag=0;
+// 	int hi;
+// 	hi = hashIndex(token);
+// 	struct node *newnode = createNode(token, attr);
+// 	/* head of list for the bucket with index "hashIndex" */
+// 	if (hashTable[hi].head==NULL)
+// 	{
+// 		hashTable[hi].head = newnode;
+// 	        hashTable[hi].count = 1;
+// 	        return;
+// 	}
+// 	struct node *myNode;
+//     	myNode = hashTable[hi].head;
+// 	while (myNode != NULL)
+//     	{
+//         	if (strcmp(myNode->token, token)==0)
+//         	{
+//             		flag = 1;
+//             		break;
+//         	}
+//         	myNode = myNode->next;
+//     	}
+// 	if(!flag)
+// 	{
+// 		//adding new node to the list
+// 		newnode->next = (hashTable[hi].head);
+// 		//update the head of the list and no of nodes in the current bucket
+// 		hashTable[hi].head = newnode;
+// 		hashTable[hi].count++;
+// 	}
+// 	return;
+// }
 
-void display()
-{
-    	struct node *myNode;
-    	int i,j, k=1;
-    	printf("-------------------------------------------------------------------");
-    	printf("\nSNo \t|\tToken \t\t|\tToken Type \t\n");
-        printf("-------------------------------------------------------------------\n");
-    	for (i = 0; i < eleCount; i++)
-    	{
-        	if (hashTable[i].count == 0)
-            		continue;
-        	myNode = hashTable[i].head;
-        	if (!myNode)
-            		continue;
-        	while (myNode != NULL)
-        	{
-					if(strcmp(myNode->attr,"SPECIAL SYMBOL")==0)
-					{
-						printf("%d\t\t", k++);
-            			printf("T_%s\t\t\t", myNode->token);
-            			printf("%d\t\n", *myNode->token);
-					}
-					else
-					{
-						printf("%d\t\t", k++);
-						printf("T_%s\t\t\t", myNode->token);
-						printf("%s\t\n", myNode->attr);
-					}
-            		myNode = myNode->next;
-        	}
-	}
-   	return;
-}
+// void display()
+// {
+//     	struct node *myNode;
+//     	int i,j, k=1;
+//     	printf("-------------------------------------------------------------------");
+//     	printf("\nSNo \t|\tToken \t\t|\tToken Type \t\n");
+//         printf("-------------------------------------------------------------------\n");
+//     	for (i = 0; i < eleCount; i++)
+//     	{
+//         	if (hashTable[i].count == 0)
+//             		continue;
+//         	myNode = hashTable[i].head;
+//         	if (!myNode)
+//             		continue;
+//         	while (myNode != NULL)
+//         	{
+// 					if(strcmp(myNode->attr,"SPECIAL SYMBOL")==0)
+// 					{
+// 						printf("%d\t\t", k++);
+//             			printf("T_%s\t\t\t", myNode->token);
+//             			printf("%d\t\n", *myNode->token);
+// 					}
+// 					else
+// 					{
+// 						printf("%d\t\t", k++);
+// 						printf("T_%s\t\t\t", myNode->token);
+// 						printf("%s\t\n", myNode->attr);
+// 					}
+//             		myNode = myNode->next;
+//         	}
+// 	}
+//    	return;
+// }
 
 void table_display()
 {
 	printf("\n\n");
 	printf("\t\t\t\t\tPHASE 1: LEXICAL ANALYSIS \n\n");
-	printf("\nSYMBOL\t\t\tDATATYPE\t\t\t\tTYPE\t\t\t\tLINE NUMBER \n");
+	printf("\nSYMBOL\t\t\tDATATYPE\t\t\t\tTYPE\t\t \n");
 	// printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, line_num);
 	printf("_________________________________________________________________________________________________________________\n\n");
 	for(int i = 0; i < row_ctr; i++) 
 	{
-		printf("%s\t\t\t%s\t\t\t\t%s\t\t\t\t %d\t\n", symbol_table[i].token, symbol_table[i].data_type, symbol_table[i].our_type, symbol_table[i].line_num);
+		printf("%s\t\t\t%s\t\t\t\t%s\t\t\t\t\n", symbol_table[i].token, symbol_table[i].data_type, symbol_table[i].our_type);
 	}
 
 	// for(int i = 0; i < row_ctr; i++) 
@@ -372,7 +372,7 @@ int main()
 		}
 		if(scanner==21)
 		{
-			//printf("%s\t\t\tSingleline Comment\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tSingleline Comment\t\tLine %d\n", yytext, line_num);
 			slcline = line_num;
 		}
 		if(scanner==22 && mlc==0)

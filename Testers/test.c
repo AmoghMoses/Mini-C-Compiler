@@ -50,3 +50,9 @@ int main()
     // printf("%s \n", token);
     printf ("%5d", 42);
 }
+
+*
+// $ yacc -d sample.y // compile yacc program
+// $ flex samplelex.l // compile lex program
+// $ cc y.tab.c lex.yy.c -ll –ly // using yacc and lex to generate .c program
+// $ ./
