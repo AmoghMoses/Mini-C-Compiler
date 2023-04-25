@@ -1,4 +1,5 @@
 %{
+	#include <string.h>
 	int yylineno;
 	char data_type[200];
 %}

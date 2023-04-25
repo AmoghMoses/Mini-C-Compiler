@@ -362,12 +362,12 @@ int main()
 		
 		if((scanner>=1 && scanner<=19) && mlc==0)
 		{
-			printf("%s\t\t\tKEYWORD\t\t\t\tLine %d\n", yytext, line_num);
+			// printf("%s\t\t\tKEYWORD\t\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "KEYWORD");
 		}
 		if(scanner==20 && mlc==0) 
 		{
-			printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, line_num);
+			// printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "IDENTIFIER");
 		}
 		if(scanner==21)
