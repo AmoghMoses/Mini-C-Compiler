@@ -213,10 +213,11 @@ struct dataType {
 int row_ctr = 0;//glowbal table row counter
 void insert(char* token, char* data_type, char* our_type){
 	
-	symbol_table[row_ctr].token = token;
-	symbol_table[row_ctr].data_type = data_type;
-	symbol_table[row_ctr].our_type = our_type;
-	symbol_table[row_ctr].line_num = line_num++;
+	// strcpy(symbol_table[row_ctr].token, token);
+	symbol_table[row_ctr].token = strdup(token);
+	symbol_table[row_ctr].data_type = strdup(data_type);
+	symbol_table[row_ctr].our_type = strdup(our_type);
+	symbol_table[row_ctr].line_num = line_num;
 	row_ctr++;
 }
 
@@ -320,14 +321,19 @@ void display()
 void table_display()
 {
 	printf("\n\n");
-	printf("\t\t\t\t\t\t\t\t PHASE 1: LEXICAL ANALYSIS \n\n");
-	printf("\nSYMBOL   DATATYPE   TYPE   LINE NUMBER \n");
-	printf("_______________________________________\n\n");
-	
+	printf("\t\t\t\t\tPHASE 1: LEXICAL ANALYSIS \n\n");
+	printf("\nSYMBOL\t\t\tDATATYPE\t\t\t\tTYPE\t\t\t\tLINE NUMBER \n");
+	// printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, line_num);
+	printf("_________________________________________________________________________________________________________________\n\n");
 	for(int i = 0; i < row_ctr; i++) 
 	{
-		printf("%s\t%s\t%s\t%d\t\n", symbol_table[i].token, symbol_table[i].data_type, symbol_table[i].our_type, symbol_table[i].line_num);
+		printf("%s\t\t\t%s\t\t\t\t%s\t\t\t\t %d\t\n", symbol_table[i].token, symbol_table[i].data_type, symbol_table[i].our_type, symbol_table[i].line_num);
 	}
+
+	// for(int i = 0; i < row_ctr; i++) 
+	// {
+	// 	printf("%s\t\n", symbol_table[i].token);
+	// }
 }
 
 
@@ -356,12 +362,12 @@ int main()
 		
 		if((scanner>=1 && scanner<=19) && mlc==0)
 		{
-			// printf("%s\t\t\tKEYWORD\t\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tKEYWORD\t\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "KEYWORD");
 		}
 		if(scanner==20 && mlc==0) 
 		{
-			// printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "IDENTIFIER");
 		}
 		if(scanner==21)
@@ -386,12 +392,12 @@ int main()
 		}
 		if((scanner>=24 && scanner<=45) && mlc==0)
 		{
-			// printf("%s\t\t\tOPERATOR\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tOPERATOR\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "OPERATOR");
 		}
 		if((scanner==46||scanner==47||scanner==54||(scanner>=55 && scanner<=59)) && mlc==0)
 		{
-			// printf("%s\t\t\tSPECIAL SYMBOL\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tSPECIAL SYMBOL\t\t\tLine %d\n", yytext, line_num);
 			if(scanner==54)
 			{
 				dq++;
@@ -405,7 +411,7 @@ int main()
 		}
 		if(scanner==49 && mlc==0)
 		{
-			// printf("%s\t\t\tMAIN FUNCTION\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tMAIN FUNCTION\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "IDENTIFIER"); 
 			// CHECK THIS CHECK THIS--------------------------------------------------------------
 		}
@@ -420,7 +426,7 @@ int main()
 		}
 		if(scanner==51 && mlc==0)
 		{
-			// printf("%s\t\t\tINTEGER CONSTANT\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tINTEGER CONSTANT\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "INTEGER CONSTANT");
 		}
 		if(scanner==53 && mlc==0)
@@ -429,12 +435,12 @@ int main()
 		}
 		if(scanner==60 && mlc==0)
 		{
-			// printf("%s\t\t\tARRAY\t\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tARRAY\t\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "ARRAY");
 		}
 		if(scanner==61 && mlc==0)
 		{
-			// printf("%s\t\t\tUSER DEFINED FUNCTION\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tUSER DEFINED FUNCTION\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "USER DEFINED FUNCTION");
 		}
 		if(scanner==62 && mlc==0)
@@ -447,17 +453,17 @@ int main()
 		}
 		if(scanner==64 && mlc==0)
 		{
-			// printf("%s\t\t\tCHARACTER CONSTANT\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tCHARACTER CONSTANT\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "CHARACTER CONSTANT");
 		}
 		if(scanner==65 && mlc==0)
 		{
-			// printf("%s\t\t\tSIGNED CONSTANT\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tSIGNED CONSTANT\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "SIGNED CONSTANT");
 		}
 		if(scanner==66 && mlc==0)
 		{
-			// printf("%s\t\t\tSTRING CONSTANT\t\t\tLine %d\n", yytext, line_num);
+			printf("%s\t\t\tSTRING CONSTANT\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "STRING_CONSTANT");
 		}
 		scanner = yylex();
@@ -467,8 +473,9 @@ int main()
 		printf("\n******** ERROR!! UNMATCHED COMMENT STARTING at Line %d ********\n\n",mlcline);
 	printf("\n");
 
+
 	printf("\n\t******** SYMBOL TABLE ********\t\t\n");
-	display();
+	table_display();
         printf("-------------------------------------------------------------------\n\n");
 }
 
