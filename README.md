@@ -22,11 +22,11 @@
 
 
 ## Team Members
-Aditya Dhanekula (2020A7PS0205H)
-Akshat Khaitan (2020A7PS2055H)
-Amogh Moses (2020A7PS1199H)
-Prakhar Nigam (2020A7PS0168H)
-Abhirath N B (2020A7PS)
+Aditya Dhanekula (2020A7PS0205H)  
+Akshat Khaitan (2020A7PS2055H)  
+Amogh Moses (2020A7PS1199H)  
+Prakhar Nigam (2020A7PS0168H)  
+Abhirath N B (2020A7PS0260H)
 
 
 
