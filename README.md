@@ -4,13 +4,13 @@
 
 ### Task 1
 `flex task1.l`  
-`gcc lex.yy.c -ll`
+`gcc lex.yy.c -ll`  
 `./a.out`
 
 ### Task 2
-`yacc -d task2.y`
-`flex task2.l`
-`gcc y.tab.c -ll`
+`yacc -d task2.y`  
+`flex task2.l`  
+`gcc y.tab.c -ll`  
 `./a.out`
 
 ### Task 3

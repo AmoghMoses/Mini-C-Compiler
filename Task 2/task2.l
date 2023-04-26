@@ -1,11 +1,3 @@
-alpha 		[A-Za-z_]
-fl			(f|F|l|L)
-ul			(u|U|l|L)* //NOT REQ
-digit 		[0-9]
-space 		[ ]
-hex			[a-fA-F0-9]
-exp			[Ee][+-]?{digit}+
-
 %{
 //int yylineno = 1;
 char datatype[100] = "dummy";
@@ -14,6 +6,14 @@ char next;
 #include <stdio.h>
 #include <string.h> 
 %}
+
+alpha 		[A-Za-z_]
+fl			(f|F|l|L)
+ul			(u|U|l|L)* //NOT REQ
+digit 		[0-9]
+space 		[ ]
+hex			[a-fA-F0-9]
+exp			[Ee][+-]?{digit}+
 
 %%	
 \n   { yylineno++; }
@@ -37,11 +37,10 @@ char next;
 
 {alpha}?\"(\\.|[^\\"])*\"		{  insertToConstTable(yytext, yylineno, "STRING"); return STRING_LITERAL; } 
 
-"->"			{  return PTR_OP; } //NOT REQ
+
 "++"			{  return INC_OP; }
 "--"			{  return DEC_OP; }
-"<<"			{  return LEFT_OP; } //NOT REQ
-">>"			{  return RIGHT_OP; } //NOT REQ
+
 "<="			{  return LE_OP; }
 ">="			{  return GE_OP; }
 "=="			{  return EQ_OP; }
@@ -53,11 +52,7 @@ char next;
 "%="			{  return MOD_ASSIGN; } 
 "+="			{  return ADD_ASSIGN; } 
 "-="			{  return SUB_ASSIGN; } 
-"<<="			{  return LEFT_ASSIGN; } //NOT REQ
-">>="			{  return RIGHT_ASSIGN; } //NOT REQ
-"&="			{  return AND_ASSIGN; } //NOT REQ
-"^="			{  return XOR_ASSIGN; } //NOT REQ
-"|="			{  return OR_ASSIGN; } //NOT REQ
+
 
 "auto"			{ return AUTO; }
 "break"			{ return BREAK; }
@@ -132,6 +127,26 @@ char next;
 .			{ /* ignore bad characters */ }
 %%
 
+struct dataType 
+{
+    char * token;
+	char * data_type;
+	char * our_type;
+	int line_num;
+
+} symbol_table[10000];
+
+int row_ctr = 0; // global table row counter
+
+void insert(char* token, char* data_type, char* our_type)
+{
+	symbol_table[row_ctr].token = strdup(token);
+	symbol_table[row_ctr].data_type = strdup(data_type);
+	symbol_table[row_ctr].our_type = strdup(our_type);
+	symbol_table[row_ctr].line_num = line_num;
+	row_ctr++;
+}
+
 struct cnode
 {
 	char num[50];
@@ -165,88 +180,7 @@ void disp()
 	printf("\n\n");
 }
 
-struct node
-{
-	char token[100];
-	char attr[100];
-    // int line[100];
-   	int line_count;
-	struct node *next;
-};
 
-struct hash
-{
-	struct node *head;
-	int hash_count;
-};
-
-struct hash hashTable[1000];
-int eleCount = 1000;
-
-struct node * createNode(char *token, char *attr, int l)
-{
-	struct node *newnode;
-	newnode = (struct node *) malloc(sizeof(struct node));
-	strcpy(newnode->token, token);
-	strcpy(newnode->attr, attr);
-	//newnode->line[0] = l;
-	newnode->line_count = 1; 
-	newnode->next = NULL;
-	return newnode;
-}
-
-int hashIndex(char *token)
-{
-	int hi=0;
-	int l,i;
-	for(i=0;token[i]!='\0';i++)
-	{
-		hi = hi + (int)token[i];
-	}
-
-	hi = hi%eleCount;
-	return hi;
-}
-
-void insertToHash(char *token, char *attr, int l)
-{
-	int flag=0;
-	int hi;
-	hi = hashIndex(token);
-	struct node *newnode = createNode(token, attr, l);
-	/* head of list for the bucket with index "hashIndex" */
-	if (hashTable[hi].head==NULL)
-	{
-		hashTable[hi].head = newnode;
-	        hashTable[hi].hash_count = 1;
-	        return;
-	}
-	struct node *myNode;
-    	myNode = hashTable[hi].head;
-	while (myNode != NULL)
-    	{
-        	if (strcmp(myNode->token, token)==0)
-        	{
-            		flag = 1;
-            		//myNode->line[(myNode->line_count)++] = l;
-            		if(strcmp(myNode->attr, attr)!=0)
-            		{
-            			strcpy(myNode->attr, attr);
-            		}
-            		break;
-        	}
-        	myNode = myNode->next;
-    	}
-	if(!flag)
-	{
-		//adding new node to the list
-		newnode->next = (hashTable[hi].head);
-		//update the head of the list and no of nodes in the current bucket
-		hashTable[hi].head = newnode;
-		hashTable[hi].hash_count++;
-	}
-	return;
-}
 
 void display()
 {
