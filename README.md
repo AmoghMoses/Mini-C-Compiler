@@ -1,8 +1,10 @@
 # CC-Assignment
 
-## How to Complie
+## How to Compile
 
 ### Task 1
+flex task1.l
+./a.out
 
 
 ### Task 2

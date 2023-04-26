@@ -304,9 +304,11 @@ void display()
 int main()
 {
 	int scan, slcline=0, mlc=0, mlcline=0, dq=0, dqline=0;
+	printf("HIhIHI\n");
 	yyin = fopen("isPrime.c","r"); //add test case files here
 	printf("\n\n");
 	scan = yylex();
+	printf("HIhIHI\n");
 	while(scan)
 	{
 		if(lineno == slcline)
@@ -320,6 +322,8 @@ int main()
 				printf("\n******** ERROR!! INCOMPLETE STRING at Line %d ********\n\n", dqline);
 			dq=0;
 		}
+
+		//printf("Yytext: %s\n", *yytext);
 		if((scan>=1 && scan<=32) && mlc==0)
 		{
 			printf("%s\t\t\tKEYWORD\t\t\t\tLine %d\n", yytext, lineno);
@@ -435,9 +439,9 @@ int main()
 	if(mlc==1)
 		printf("\n******** ERROR!! UNMATCHED COMMENT STARTING at Line %d ********\n\n",mlcline);
 	printf("\n");
-	printf("\n\t******** SYMBOL TABLE ********\t\t\n");
-	display();
-        printf("-------------------------------------------------------------------\n\n");
+	// printf("\n\t******** SYMBOL TABLE ********\t\t\n");
+	// display();
+        // printf("-------------------------------------------------------------------\n\n");
 }
 int yywrap()
 {

@@ -154,7 +154,7 @@ printf return PRINTF;
 
 [+-][0-9]{digit}*(\.{digit}+)? return SIGNED_CONST;
 
-"//" return SLC;
+"//"[^\n]* {return SLC;} // CHECK THIS
 "/*" { return MLCS;}
 "*/" return MLCE;
 
@@ -205,9 +205,9 @@ printf return PRINTF;
 void table_display()
 {
 	printf("\n\n");
-	printf("\t\t\t\t\tPHASE 1: LEXICAL ANALYSIS \n\n");
+	// printf("\t\t\t\t\tPHASE 1: LEXICAL ANALYSIS \n\n");
 	printf("\nSYMBOL\t\t\tDATATYPE\t\t\t\tTYPE\t\t \n");
-	printf("_________________________________________________________________________________________________________________\n\n");
+	printf("_________________________________________________________________________\n\n");
 	
 	for(int i = 0; i < row_ctr; i++) 
 	{
@@ -220,8 +220,8 @@ int main()
 	int scanner, slcline=0, mlc=0, mlcline=0, dq=0, dqline=0;
 	yyin = fopen("isPrime.c","r"); //add test case files here
 
-	printf("HI PRAKHAR\n\n");
-	printf("\n");
+	// printf("HI PRAKHAR\n\n");
+	// printf("\n");
 
 	scanner = yylex();
 
