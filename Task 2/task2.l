@@ -1,4 +1,3 @@
-
 alpha 			[A-Za-z_]
 fl			(f|F|l|L)
 ul			(u|U|l|L)*
@@ -38,27 +37,27 @@ char next;
 
 {alpha}?\"(\\.|[^\\"])*\"		{  insertToConstTable(yytext, yylineno, "STRING"); return STRING_LITERAL; } 
 
-"->"			{  return PTR_OP; }
+"->"			{  return PTR_OP; } //NOT REQ
 "++"			{  return INC_OP; }
 "--"			{  return DEC_OP; }
-"<<"			{  return LEFT_OP; }
-">>"			{  return RIGHT_OP; }
+"<<"			{  return LEFT_OP; } //NOT REQ
+">>"			{  return RIGHT_OP; } //NOT REQ
 "<="			{  return LE_OP; }
 ">="			{  return GE_OP; }
 "=="			{  return EQ_OP; }
 "!="			{  return NE_OP; }
 "&&"			{  return AND_OP; }
 "||"			{  return OR_OP; }
-"*="			{  return MUL_ASSIGN; }
-"/="			{  return DIV_ASSIGN; }
-"%="			{  return MOD_ASSIGN; }
-"+="			{  return ADD_ASSIGN; }
-"-="			{  return SUB_ASSIGN; }
-"<<="			{  return LEFT_ASSIGN; }
-">>="			{  return RIGHT_ASSIGN; }
-"&="			{  return AND_ASSIGN; }
-"^="			{  return XOR_ASSIGN; }
-"|="			{  return OR_ASSIGN; }
+"*="			{  return MUL_ASSIGN; } 
+"/="			{  return DIV_ASSIGN; } 
+"%="			{  return MOD_ASSIGN; } 
+"+="			{  return ADD_ASSIGN; } 
+"-="			{  return SUB_ASSIGN; } 
+"<<="			{  return LEFT_ASSIGN; } //NOT REQ
+">>="			{  return RIGHT_ASSIGN; } //NOT REQ
+"&="			{  return AND_ASSIGN; } //NOT REQ
+"^="			{  return XOR_ASSIGN; } //NOT REQ
+"|="			{  return OR_ASSIGN; } //NOT REQ
 
 "auto"			{ return AUTO; }
 "break"			{ return BREAK; }

@@ -3,7 +3,7 @@ int main()
 {
     int a,i,j,flag=0;
     printf("Input no"); //Input 
-    scanf("%d",&a);
+    // scanf("%d",&a);
     i=3.1415E+3;
     j=127;
     float b = 9.5;
