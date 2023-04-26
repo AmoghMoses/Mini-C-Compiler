@@ -1,5 +1,4 @@
 %{
-	#include <string.h>
 	int yylineno;
 	char data_type[200];
 %}
@@ -52,7 +51,7 @@ postfix_expression
 	| postfix_expression '(' ')'
 	| postfix_expression '(' argument_expression_list ')'
 	| postfix_expression '.' IDENTIFIER
-	// | postfix_expression PTR_OP IDENTIFIER
+	| postfix_expression PTR_OP IDENTIFIER
 	| postfix_expression INC_OP
 	| postfix_expression DEC_OP
 	;
@@ -66,7 +65,7 @@ unary_expression
 	: postfix_expression
 	| INC_OP unary_expression
 	| DEC_OP unary_expression
-	| unary_operator unary_expression
+	| unary_operator cast_expression
 	| SIZEOF unary_expression
 	| SIZEOF '(' type_name ')'
 	;
@@ -80,16 +79,16 @@ unary_operator
 	| '!'
 	;
 
-// cast_expression
-// 	: unary_expression
-// 	| '(' type_name ')' unary_expression
-// 	;
+cast_expression
+	: unary_expression
+	| '(' type_name ')' cast_expression
+	;
 
 multiplicative_expression
-	: unary_expression
-	| multiplicative_expression '*' unary_expression
-	| multiplicative_expression '/' unary_expression
-	| multiplicative_expression '%' unary_expression
+	: cast_expression
+	| multiplicative_expression '*' cast_expression
+	| multiplicative_expression '/' cast_expression
+	| multiplicative_expression '%' cast_expression
 	;
 
 additive_expression
@@ -98,18 +97,18 @@ additive_expression
 	| additive_expression '-' multiplicative_expression
 	;
 
-// shift_expression
-// 	: additive_expression
-	// | additive_expression LEFT_OP additive_expression
-	// | additive_expression RIGHT_OP additive_expression
-	// ;
+shift_expression
+	: additive_expression
+	| shift_expression LEFT_OP additive_expression
+	| shift_expression RIGHT_OP additive_expression
+	;
 
 relational_expression
-	: additive_expression
-	| relational_expression '<' additive_expression
-	| relational_expression '>' additive_expression
-	| relational_expression LE_OP additive_expression
-	| relational_expression GE_OP additive_expression
+	: shift_expression
+	| relational_expression '<' shift_expression
+	| relational_expression '>' shift_expression
+	| relational_expression LE_OP shift_expression
+	| relational_expression GE_OP shift_expression
 	;
 
 equality_expression
@@ -160,13 +159,12 @@ assignment_operator
 	| MOD_ASSIGN
 	| ADD_ASSIGN
 	| SUB_ASSIGN
-	// | LEFT_ASSIGN
-	// | RIGHT_ASSIGN
-	// | AND_ASSIGN
-	// | XOR_ASSIGN
-	// | OR_ASSIGN
+	| LEFT_ASSIGN
+	| RIGHT_ASSIGN
+	| AND_ASSIGN
+	| XOR_ASSIGN
+	| OR_ASSIGN
 	;
-
 
 expression
 	: assignment_expression
@@ -227,31 +225,31 @@ specifier_qualifier_list
 	| CONST
 	;
 
-// struct_or_union_specifier
-// 	: struct_or_union IDENTIFIER '{' struct_declaration_list '}' ';'
-// 	| struct_or_union '{' struct_declaration_list '}' ';'
-// 	| struct_or_union IDENTIFIER ';'
-// 	;
+struct_or_union_specifier
+	: struct_or_union IDENTIFIER '{' struct_declaration_list '}' ';'
+	| struct_or_union '{' struct_declaration_list '}' ';'
+	| struct_or_union IDENTIFIER ';'
+	;
 
-// struct_or_union
-// 	: STRUCT
-// 	| UNION
-// 	;
+struct_or_union
+	: STRUCT
+	| UNION
+	;
 
-// struct_declaration_list
-// 	: struct_declaration
-// 	| struct_declaration_list struct_declaration
-// 	;
+struct_declaration_list
+	: struct_declaration
+	| struct_declaration_list struct_declaration
+	;
 
-// struct_declaration
-// 	: specifier_qualifier_list struct_declarator_list ';'
-// 	;
+struct_declaration
+	: specifier_qualifier_list struct_declarator_list ';'
+	;
 
 
-// struct_declarator_list
-// 	: declarator
-// 	| struct_declarator_list ',' declarator
-// 	;
+struct_declarator_list
+	: declarator
+	| struct_declarator_list ',' declarator
+	;
 
 declarator
 	: pointer direct_declarator
@@ -369,14 +367,13 @@ function_definition
 #include "lex.yy.c"
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 int main(int argc, char *argv[])
 {
 	yyin = fopen(argv[1], "r");
 	if(!yyparse())
-		printf("\nGiven program is syntactically correct\n");
+		printf("\nParsing complete\n");
 	else
-		printf("\nGiven program is NOT syntactically correct\n");
+		printf("\nParsing failed\n");
 
 	fclose(yyin);
 	display();

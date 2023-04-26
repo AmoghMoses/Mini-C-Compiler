@@ -1,8 +1,8 @@
-alpha 			[A-Za-z_]
+alpha 		[A-Za-z_]
 fl			(f|F|l|L)
-ul			(u|U|l|L)*
-digit 			[0-9]
-space 			[ ]
+ul			(u|U|l|L)* //NOT REQ
+digit 		[0-9]
+space 		[ ]
 hex			[a-fA-F0-9]
 exp			[Ee][+-]?{digit}+
 
@@ -18,7 +18,7 @@ char next;
 %%	
 \n   { yylineno++; }
 "/*"					{ multicomment(); }
-"//"					{ singlecomment(); }
+"//"[^\n]*\n					{ singlecomment(); }
 
 "#include<"({alpha})*".h>" {}
 
