@@ -368,13 +368,14 @@ function_definition
 #include "lex.yy.c"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 int main(int argc, char *argv[])
 {
 	yyin = fopen(argv[1], "r");
 	if(!yyparse())
-		printf("\nParsing complete\n");
+		printf("\nGiven program is syntactically correct\n");
 	else
-		printf("\nParsing failed\n");
+		printf("\nGiven program is NOT syntactically correct\n");
 
 	fclose(yyin);
 	display();

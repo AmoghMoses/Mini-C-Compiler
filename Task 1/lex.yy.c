@@ -610,8 +610,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "lexer.l"
-#line 2 "lexer.l"
+#line 1 "task1.l"
+#line 2 "task1.l"
 int line_num = 1;
 #include<stdio.h>
 #include<stdlib.h>
@@ -927,7 +927,7 @@ YY_DECL
 		}
 
 	{
-#line 108 "lexer.l"
+#line 108 "task1.l"
 
 #line 933 "lex.yy.c"
 
@@ -989,353 +989,353 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 109 "lexer.l"
+#line 109 "task1.l"
 {}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 110 "lexer.l"
+#line 110 "task1.l"
 {}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 111 "lexer.l"
+#line 111 "task1.l"
 return STRING_CONST;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 112 "lexer.l"
+#line 112 "task1.l"
 return CHAR_CONST;
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 113 "lexer.l"
+#line 113 "task1.l"
 {line_num++;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 114 "lexer.l"
+#line 114 "task1.l"
 return BREAK;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 115 "lexer.l"
+#line 115 "task1.l"
 return CASE;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 116 "lexer.l"
+#line 116 "task1.l"
 return CHAR;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 117 "lexer.l"
+#line 117 "task1.l"
 return CONST;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 118 "lexer.l"
+#line 118 "task1.l"
 return CONTINUE;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 119 "lexer.l"
+#line 119 "task1.l"
 return DEFAULT;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 120 "lexer.l"
+#line 120 "task1.l"
 return ELSE;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 121 "lexer.l"
+#line 121 "task1.l"
 return FLOAT;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 122 "lexer.l"
+#line 122 "task1.l"
 return FOR;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 123 "lexer.l"
+#line 123 "task1.l"
 return GOTO;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 124 "lexer.l"
+#line 124 "task1.l"
 return IF;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 125 "lexer.l"
+#line 125 "task1.l"
 return INT;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 126 "lexer.l"
+#line 126 "task1.l"
 return RETURN;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 127 "lexer.l"
+#line 127 "task1.l"
 return SIGNED;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 128 "lexer.l"
+#line 128 "task1.l"
 return SIZEOF;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 129 "lexer.l"
+#line 129 "task1.l"
 return SWITCH;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 130 "lexer.l"
+#line 130 "task1.l"
 return UNSIGNED;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 131 "lexer.l"
+#line 131 "task1.l"
 return VOID;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 132 "lexer.l"
+#line 132 "task1.l"
 return WHILE;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 134 "lexer.l"
+#line 134 "task1.l"
 return PRINTF;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 136 "lexer.l"
+#line 136 "task1.l"
 return IDENTIFIER;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 138 "lexer.l"
+#line 138 "task1.l"
 return SIGNED_CONST;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 140 "lexer.l"
+#line 140 "task1.l"
 return SLC;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 141 "lexer.l"
+#line 141 "task1.l"
 { return MLCS;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 142 "lexer.l"
+#line 142 "task1.l"
 return MLCE;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 144 "lexer.l"
+#line 144 "task1.l"
 return LEQ;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 145 "lexer.l"
+#line 145 "task1.l"
 return GEQ;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 146 "lexer.l"
+#line 146 "task1.l"
 return EQEQ;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 147 "lexer.l"
+#line 147 "task1.l"
 return NEQ;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 148 "lexer.l"
+#line 148 "task1.l"
 return LOR;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 149 "lexer.l"
+#line 149 "task1.l"
 return LAND;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 150 "lexer.l"
+#line 150 "task1.l"
 return ASSIGN;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 151 "lexer.l"
+#line 151 "task1.l"
 return PLUS;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 152 "lexer.l"
+#line 152 "task1.l"
 return SUB;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 153 "lexer.l"
+#line 153 "task1.l"
 return MULT;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 154 "lexer.l"
+#line 154 "task1.l"
 return DIV;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 155 "lexer.l"
+#line 155 "task1.l"
 return MOD;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 156 "lexer.l"
+#line 156 "task1.l"
 return LESSER;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 157 "lexer.l"
+#line 157 "task1.l"
 return GREATER;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 158 "lexer.l"
+#line 158 "task1.l"
 return INCR;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 159 "lexer.l"
+#line 159 "task1.l"
 return DECR;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 162 "lexer.l"
+#line 162 "task1.l"
 {return BITAND;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 163 "lexer.l"
+#line 163 "task1.l"
 {return BITOR;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 164 "lexer.l"
+#line 164 "task1.l"
 {return BITXOR;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 165 "lexer.l"
+#line 165 "task1.l"
 {return BITNOT;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 166 "lexer.l"
+#line 166 "task1.l"
 {return BITLSHIFT;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 167 "lexer.l"
+#line 167 "task1.l"
 {return BITRSHIFT;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 169 "lexer.l"
+#line 169 "task1.l"
 return COMMA;
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 170 "lexer.l"
+#line 170 "task1.l"
 return SEMI;
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 172 "lexer.l"
+#line 172 "task1.l"
 {return HEADER;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 173 "lexer.l"
+#line 173 "task1.l"
 return MAIN;
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 175 "lexer.l"
+#line 175 "task1.l"
 return INT_CONST;
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 176 "lexer.l"
+#line 176 "task1.l"
 return FLOAT_CONST;
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 178 "lexer.l"
+#line 178 "task1.l"
 return TYPE_SPEC;
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 179 "lexer.l"
+#line 179 "task1.l"
 return DQ;
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 180 "lexer.l"
+#line 180 "task1.l"
 return OBO;
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 181 "lexer.l"
+#line 181 "task1.l"
 return OBC;
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 182 "lexer.l"
+#line 182 "task1.l"
 return CBO;
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 183 "lexer.l"
+#line 183 "task1.l"
 return CBC;
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 184 "lexer.l"
+#line 184 "task1.l"
 return HASH;
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 186 "lexer.l"
+#line 186 "task1.l"
 return ARR;
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 187 "lexer.l"
+#line 187 "task1.l"
 return FUNC;
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 188 "lexer.l"
+#line 188 "task1.l"
 return NUM_ERR;
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 189 "lexer.l"
+#line 189 "task1.l"
 return UNKNOWN;
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 190 "lexer.l"
+#line 190 "task1.l"
 ECHO;
 	YY_BREAK
 #line 1342 "lex.yy.c"
@@ -2346,21 +2346,21 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 190 "lexer.l"
+#line 190 "task1.l"
 
 
-struct node
-{
-	char token[100];
-    	char attr[100];
-	struct node *next;
-};
+// struct node
+// {
+// 	char token[100];
+//     	char attr[100];
+// 	struct node *next;
+// };
 
-struct hash
-{
-	struct node *head;
-	int count;
-};
+// struct hash
+// {
+// 	struct node *head;
+// 	int count;
+// };
 
 //from ehre
 struct dataType {
@@ -2500,7 +2500,7 @@ void table_display()
 int main()
 {
 	int scanner, slcline=0, mlc=0, mlcline=0, dq=0, dqline=0;
-	yyin = fopen("isPrime.c","r"); //add test case files here
+	yyin = fopen("test1.c","r"); //add test case files here
 	printf("\n\n");
 	scanner = yylex();
 	while(scanner)
@@ -2522,12 +2522,12 @@ int main()
 		
 		if((scanner>=1 && scanner<=19) && mlc==0)
 		{
-			printf("%s\t\t\tKEYWORD\t\t\t\tLine %d\n", yytext, line_num);
+			// printf("%s\t\t\tKEYWORD\t\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "KEYWORD");
 		}
 		if(scanner==20 && mlc==0) 
 		{
-			printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, line_num);
+			// printf("%s\t\t\tIDENTIFIER\t\t\tLine %d\n", yytext, line_num);
 			insert(yytext, map[scanner], "IDENTIFIER");
 		}
 		if(scanner==21)

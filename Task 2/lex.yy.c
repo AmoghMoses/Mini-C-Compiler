@@ -2507,9 +2507,9 @@ void disp()
 struct node
 {
 	char token[100];
-    	char attr[100];
-    	//int line[100];
-    	int line_count;
+	char attr[100];
+    // int line[100];
+   	int line_count;
 	struct node *next;
 };
 
@@ -2542,6 +2542,7 @@ int hashIndex(char *token)
 	{
 		hi = hi + (int)token[i];
 	}
+
 	hi = hi%eleCount;
 	return hi;
 }

@@ -189,18 +189,18 @@ printf return PRINTF;
 ({digit}|{at})+({alpha}|{digit}|{und}|{at})* return UNKNOWN;
 %%
 
-struct node
-{
-	char token[100];
-    	char attr[100];
-	struct node *next;
-};
+// struct node
+// {
+// 	char token[100];
+//     	char attr[100];
+// 	struct node *next;
+// };
 
-struct hash
-{
-	struct node *head;
-	int count;
-};
+// struct hash
+// {
+// 	struct node *head;
+// 	int count;
+// };
 
 //from ehre
 struct dataType {
@@ -340,7 +340,7 @@ void table_display()
 int main()
 {
 	int scanner, slcline=0, mlc=0, mlcline=0, dq=0, dqline=0;
-	yyin = fopen("isPrime.c","r"); //add test case files here
+	yyin = fopen("test1.c","r"); //add test case files here
 	printf("\n\n");
 	scanner = yylex();
 	while(scanner)

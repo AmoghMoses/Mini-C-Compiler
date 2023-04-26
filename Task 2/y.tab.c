@@ -100,10 +100,11 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
  #line 88 "/usr/share/bison++/bison.cc"
 #line 1 "task2.y"
 
+	#include <string.h>
 	int yylineno;
 	char data_type[200];
 
-#line 25 "task2.y"
+#line 26 "task2.y"
 typedef union{
 	char str[1000];
 } yy_parse_stype;
@@ -772,24 +773,24 @@ static const short yyrhs[] = {   137,
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-    32,    33,    34,    38,    39,    40,    41,    45,    49,    50,
-    51,    52,    53,    54,    55,    56,    60,    61,    65,    66,
-    67,    68,    69,    70,    74,    75,    76,    77,    78,    79,
-    83,    84,    88,    89,    90,    91,    95,    96,    97,   101,
-   102,   103,   107,   108,   109,   110,   111,   115,   116,   117,
-   121,   122,   126,   127,   131,   132,   136,   137,   141,   142,
-   146,   147,   151,   152,   156,   157,   158,   159,   160,   161,
-   162,   163,   164,   165,   166,   170,   171,   175,   179,   180,
-   184,   185,   186,   187,   191,   192,   196,   197,   201,   202,
-   203,   204,   205,   209,   210,   211,   212,   213,   214,   215,
-   216,   217,   218,   222,   223,   224,   225,   229,   230,   231,
-   235,   236,   240,   241,   245,   250,   251,   255,   256,   260,
-   261,   262,   263,   264,   265,   266,   270,   271,   275,   276,
-   280,   281,   285,   286,   290,   291,   295,   296,   297,   301,
-   302,   306,   307,   308,   309,   310,   314,   315,   316,   317,
-   321,   322,   326,   327,   331,   332,   336,   337,   341,   342,
-   343,   344,   348,   349,   350,   351,   355,   356,   360,   361,
-   362,   363
+    33,    34,    35,    39,    40,    41,    42,    46,    50,    51,
+    52,    53,    54,    55,    56,    57,    61,    62,    66,    67,
+    68,    69,    70,    71,    75,    76,    77,    78,    79,    80,
+    84,    85,    89,    90,    91,    92,    96,    97,    98,   102,
+   103,   104,   108,   109,   110,   111,   112,   116,   117,   118,
+   122,   123,   127,   128,   132,   133,   137,   138,   142,   143,
+   147,   148,   152,   153,   157,   158,   159,   160,   161,   162,
+   163,   164,   165,   166,   167,   171,   172,   176,   180,   181,
+   185,   186,   187,   188,   192,   193,   197,   198,   202,   203,
+   204,   205,   206,   210,   211,   212,   213,   214,   215,   216,
+   217,   218,   219,   223,   224,   225,   226,   230,   231,   232,
+   236,   237,   241,   242,   246,   251,   252,   256,   257,   261,
+   262,   263,   264,   265,   266,   267,   271,   272,   276,   277,
+   281,   282,   286,   287,   291,   292,   296,   297,   298,   302,
+   303,   307,   308,   309,   310,   311,   315,   316,   317,   318,
+   322,   323,   327,   328,   332,   333,   337,   338,   342,   343,
+   344,   345,   349,   350,   351,   352,   356,   357,   361,   362,
+   363,   364
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","NO_ELSE",
@@ -1630,11 +1631,11 @@ YYLABEL(yyreduce)
   switch (yyn) {
 
 case 4:
-#line 38 "task2.y"
+#line 39 "task2.y"
 { insertToHash(yyvsp[0].str, data_type , yylineno); ;
     break;}
 case 83:
-#line 186 "task2.y"
+#line 187 "task2.y"
 { strcpy(data_type, yyvsp[0].str); ;
     break;}
 }
@@ -1841,19 +1842,20 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 365 "task2.y"
+#line 366 "task2.y"
 
 
 #include "lex.yy.c"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 int main(int argc, char *argv[])
 {
 	yyin = fopen(argv[1], "r");
 	if(!yyparse())
-		printf("\nParsing complete\n");
+		printf("\nGiven program is syntactically correct\n");
 	else
-		printf("\nParsing failed\n");
+		printf("\nGiven program is NOT syntactically correct\n");
 
 	fclose(yyin);
 	display();

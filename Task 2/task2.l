@@ -204,7 +204,7 @@ int hashIndex(char *token)
 	{
 		hi = hi + (int)token[i];
 	}
-	
+
 	hi = hi%eleCount;
 	return hi;
 }
