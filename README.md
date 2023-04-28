@@ -10,7 +10,7 @@
 ### Task 2
 `yacc -d task2.y`  
 `flex task2.l`  
-`gcc y.tab.c -ll`  
+`gcc y.tab.c lex.yy.c -ll`  
 `./a.out`
 
 ### Task 3

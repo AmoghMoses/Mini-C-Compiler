@@ -1,10 +1,10 @@
 %{
 	void yyerror(char* s);
 	int yylex();
-	#include "ctype.h"
-	#include "string.h"
 	#include "stdio.h"
 	#include "stdlib.h"
+	#include "ctype.h"
+	#include "string.h"
 	void ins();
 	void insV();
 	int flag=0;
@@ -21,17 +21,19 @@
 %}
 
 %nonassoc IF
-%token INT CHAR FLOAT
+%token INT CHAR FLOAT DOUBLE LONG SHORT SIGNED UNSIGNED STRUCT
 %token RETURN MAIN
 %token VOID
-%token WHILE FOR
+%token WHILE FOR DO 
 %token BREAK
 %token ENDIF
-%token CONTINUE 
 %expect 2
 
 %token identifier
-%token integer_constant string_constant float_constant character_constant
+%token integer_constant
+%token string_constant
+%token float_constant
+%token character_constant
 
 %nonassoc ELSE
 
@@ -73,12 +75,12 @@ D
 
 declaration
 			: variable_declaration 
-			| function_declaration;
-			// | structure_definition;
+			| function_declaration
+			| structure_definition;
 
 variable_declaration
-			: type_specifier variable_declaration_list ';';
-			// | structure_declaration;
+			: type_specifier variable_declaration_list ';' 
+			| structure_declaration;
 
 variable_declaration_list
 			: variable_declaration_identifier V;
@@ -88,49 +90,31 @@ V
 			| ;
 
 variable_declaration_identifier 
-			: identifier { ins(); } | identifier { ins(); } vdi;
+			: identifier { printf("hrllo "); ins(); } vdi;
 
-vdi : {} identifier_twod_array_type
-	| {} identifier_array_type 
-	| {} assignment_operator expression;
+vdi 
+    : identifier_array_type {printf("1 ");}
+	| identifier_twod_array_type {printf("0 ");}  
+	| assignment_operator expression {printf("2 ");}
+    | {printf("3 ");};
 
 
-	// FLOAT NOT WORKING FOR 2D ARRAY
+// handle 2d array here
 
-
-// new ones for 2d array
-
-// CONTINUE NOT HANDELED YET
 identifier_twod_array_type
-			: '['initilization_params_2d ']' '['initilization_params_new;
-			// removed epsilon for this rule and 2 shift reduce conflicts were removed
+			:  '[' initilization_params_2d ']' '['initilization_params_new;
+
+identifier_array_type
+			: '[' initilization_params;
 
 initilization_params_2d
 			: integer_constant
-
 			| identifier;
-
+			
 initilization_params_new
 			: initilization_params_2d ']' initilization_2d 
 			| initilization_params_2d ']';
 
-initilization_2d 
-			: assignment_operator '{' array_init_2d '}' 
-			| assignment_operator '{' string_init_2d '}'
-
-array_init_2d
-			: '{' array_int_declarations '}' ',' array_init_2d
-			| '{' array_int_declarations '}';
-
-string_init_2d 
-			: string_constant ',' string_init_2d
-			| string_constant;
-
-
-// hello 2d array till here
-
-identifier_array_type
-			: '[' initilization_params;
 
 initilization_params
 			: integer_constant ']' initilization
@@ -141,17 +125,47 @@ initilization
 			| array_initialization
 			| ;
 
+initilization_2d 
+			: assignment_operator '{' array_init_2d '}' 
+			| assignment_operator '{' string_init_2d '}';
+
+
+array_init_2d
+			: '{' array_int_declarations '}' ',' array_init_2d
+			| '{' array_int_declarations '}';
+
+string_init_2d 
+			: string_constant ',' string_init_2d
+			| string_constant;
+
+
 type_specifier 
-			: INT | CHAR | FLOAT 
+			: INT | CHAR | FLOAT | DOUBLE 
+			| LONG long_grammar 
+			| SHORT short_grammar
+			| UNSIGNED unsigned_grammar 
+			| SIGNED signed_grammar
 			| VOID ;
 
-// structure_definition
-// 			: STRUCT identifier { ins(); } '{' V1  '}' ';';
+unsigned_grammar 
+			: INT | LONG long_grammar | SHORT short_grammar | ;
 
-// V1 : variable_declaration V1 | ;
+signed_grammar 
+			: INT | LONG long_grammar | SHORT short_grammar | ;
 
-// structure_declaration 
-// 			: STRUCT identifier variable_declaration_list;
+long_grammar 
+			: INT | ;
+
+short_grammar 
+			: INT | ;
+
+structure_definition
+			: STRUCT identifier { ins(); } '{' V1  '}' ';';
+
+V1 : variable_declaration V1 | ;
+
+structure_declaration 
+			: STRUCT identifier variable_declaration_list;
 
 
 function_declaration
@@ -209,8 +223,8 @@ conditional_statements_breakup
 
 iterative_statements 
 			: WHILE '(' simple_expression ')' statement 
-			| FOR '(' expression ';' simple_expression ';' expression ')'; 
-			// | DO statement WHILE '(' simple_expression ')' ';';
+			| FOR '(' expression ';' simple_expression ';' expression ')' 
+			| DO statement WHILE '(' simple_expression ')' ';';
 
 return_statement 
 			: RETURN return_statement_breakup;

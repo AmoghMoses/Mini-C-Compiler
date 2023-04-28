@@ -1,7 +1,7 @@
 #define YY_parse_h_included
 /*#define YY_USE_CLASS 
 */
-/*  A Bison++ parser, made from parser.y  */
+/*  A Bison++ parser, made from prakhar.y  */
 
  /* with Bison++ version bison++ Version 1.21.9-1, adapted from GNU bison by coetmeur@icdc.fr
 Maintained by Magnus Ekdahl <magnus@debian.org>
@@ -98,14 +98,14 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 #define YYBISON 1  
 
  #line 88 "/usr/share/bison++/bison.cc"
-#line 1 "parser.y"
+#line 1 "prakhar.y"
 
 	void yyerror(char* s);
 	int yylex();
-	#include "ctype.h"
-	#include "string.h"
 	#include "stdio.h"
 	#include "stdlib.h"
+	#include "ctype.h"
+	#include "string.h"
 	void ins();
 	void insV();
 	int flag=0;
@@ -324,54 +324,60 @@ typedef
 #define	INT	259
 #define	CHAR	260
 #define	FLOAT	261
-#define	RETURN	262
-#define	MAIN	263
-#define	VOID	264
-#define	WHILE	265
-#define	FOR	266
-#define	BREAK	267
-#define	ENDIF	268
-#define	CONTINUE	269
-#define	identifier	270
-#define	integer_constant	271
-#define	string_constant	272
-#define	float_constant	273
-#define	character_constant	274
-#define	ELSE	275
-#define	leftshift_assignment_operator	276
-#define	rightshift_assignment_operator	277
-#define	XOR_assignment_operator	278
-#define	OR_assignment_operator	279
-#define	AND_assignment_operator	280
-#define	modulo_assignment_operator	281
-#define	multiplication_assignment_operator	282
-#define	division_assignment_operator	283
-#define	addition_assignment_operator	284
-#define	subtraction_assignment_operator	285
-#define	assignment_operator	286
-#define	OR_operator	287
-#define	AND_operator	288
-#define	pipe_operator	289
-#define	caret_operator	290
-#define	amp_operator	291
-#define	equality_operator	292
-#define	inequality_operator	293
-#define	lessthan_assignment_operator	294
-#define	lessthan_operator	295
-#define	greaterthan_assignment_operator	296
-#define	greaterthan_operator	297
-#define	leftshift_operator	298
-#define	rightshift_operator	299
-#define	add_operator	300
-#define	subtract_operator	301
-#define	multiplication_operator	302
-#define	division_operator	303
-#define	modulo_operator	304
-#define	SIZEOF	305
-#define	tilde_operator	306
-#define	exclamation_operator	307
-#define	increment_operator	308
-#define	decrement_operator	309
+#define	DOUBLE	262
+#define	LONG	263
+#define	SHORT	264
+#define	SIGNED	265
+#define	UNSIGNED	266
+#define	STRUCT	267
+#define	RETURN	268
+#define	MAIN	269
+#define	VOID	270
+#define	WHILE	271
+#define	FOR	272
+#define	DO	273
+#define	BREAK	274
+#define	ENDIF	275
+#define	identifier	276
+#define	integer_constant	277
+#define	string_constant	278
+#define	float_constant	279
+#define	character_constant	280
+#define	ELSE	281
+#define	leftshift_assignment_operator	282
+#define	rightshift_assignment_operator	283
+#define	XOR_assignment_operator	284
+#define	OR_assignment_operator	285
+#define	AND_assignment_operator	286
+#define	modulo_assignment_operator	287
+#define	multiplication_assignment_operator	288
+#define	division_assignment_operator	289
+#define	addition_assignment_operator	290
+#define	subtraction_assignment_operator	291
+#define	assignment_operator	292
+#define	OR_operator	293
+#define	AND_operator	294
+#define	pipe_operator	295
+#define	caret_operator	296
+#define	amp_operator	297
+#define	equality_operator	298
+#define	inequality_operator	299
+#define	lessthan_assignment_operator	300
+#define	lessthan_operator	301
+#define	greaterthan_assignment_operator	302
+#define	greaterthan_operator	303
+#define	leftshift_operator	304
+#define	rightshift_operator	305
+#define	add_operator	306
+#define	subtract_operator	307
+#define	multiplication_operator	308
+#define	division_operator	309
+#define	modulo_operator	310
+#define	SIZEOF	311
+#define	tilde_operator	312
+#define	exclamation_operator	313
+#define	increment_operator	314
+#define	decrement_operator	315
 
 
 #line 263 "/usr/share/bison++/bison.cc"
@@ -425,14 +431,20 @@ static const int IF;
 static const int INT;
 static const int CHAR;
 static const int FLOAT;
+static const int DOUBLE;
+static const int LONG;
+static const int SHORT;
+static const int SIGNED;
+static const int UNSIGNED;
+static const int STRUCT;
 static const int RETURN;
 static const int MAIN;
 static const int VOID;
 static const int WHILE;
 static const int FOR;
+static const int DO;
 static const int BREAK;
 static const int ENDIF;
-static const int CONTINUE;
 static const int identifier;
 static const int integer_constant;
 static const int string_constant;
@@ -485,54 +497,60 @@ enum YY_parse_ENUM_TOKEN { YY_parse_NULL_TOKEN=0
 	,INT=259
 	,CHAR=260
 	,FLOAT=261
-	,RETURN=262
-	,MAIN=263
-	,VOID=264
-	,WHILE=265
-	,FOR=266
-	,BREAK=267
-	,ENDIF=268
-	,CONTINUE=269
-	,identifier=270
-	,integer_constant=271
-	,string_constant=272
-	,float_constant=273
-	,character_constant=274
-	,ELSE=275
-	,leftshift_assignment_operator=276
-	,rightshift_assignment_operator=277
-	,XOR_assignment_operator=278
-	,OR_assignment_operator=279
-	,AND_assignment_operator=280
-	,modulo_assignment_operator=281
-	,multiplication_assignment_operator=282
-	,division_assignment_operator=283
-	,addition_assignment_operator=284
-	,subtraction_assignment_operator=285
-	,assignment_operator=286
-	,OR_operator=287
-	,AND_operator=288
-	,pipe_operator=289
-	,caret_operator=290
-	,amp_operator=291
-	,equality_operator=292
-	,inequality_operator=293
-	,lessthan_assignment_operator=294
-	,lessthan_operator=295
-	,greaterthan_assignment_operator=296
-	,greaterthan_operator=297
-	,leftshift_operator=298
-	,rightshift_operator=299
-	,add_operator=300
-	,subtract_operator=301
-	,multiplication_operator=302
-	,division_operator=303
-	,modulo_operator=304
-	,SIZEOF=305
-	,tilde_operator=306
-	,exclamation_operator=307
-	,increment_operator=308
-	,decrement_operator=309
+	,DOUBLE=262
+	,LONG=263
+	,SHORT=264
+	,SIGNED=265
+	,UNSIGNED=266
+	,STRUCT=267
+	,RETURN=268
+	,MAIN=269
+	,VOID=270
+	,WHILE=271
+	,FOR=272
+	,DO=273
+	,BREAK=274
+	,ENDIF=275
+	,identifier=276
+	,integer_constant=277
+	,string_constant=278
+	,float_constant=279
+	,character_constant=280
+	,ELSE=281
+	,leftshift_assignment_operator=282
+	,rightshift_assignment_operator=283
+	,XOR_assignment_operator=284
+	,OR_assignment_operator=285
+	,AND_assignment_operator=286
+	,modulo_assignment_operator=287
+	,multiplication_assignment_operator=288
+	,division_assignment_operator=289
+	,addition_assignment_operator=290
+	,subtraction_assignment_operator=291
+	,assignment_operator=292
+	,OR_operator=293
+	,AND_operator=294
+	,pipe_operator=295
+	,caret_operator=296
+	,amp_operator=297
+	,equality_operator=298
+	,inequality_operator=299
+	,lessthan_assignment_operator=300
+	,lessthan_operator=301
+	,greaterthan_assignment_operator=302
+	,greaterthan_operator=303
+	,leftshift_operator=304
+	,rightshift_operator=305
+	,add_operator=306
+	,subtract_operator=307
+	,multiplication_operator=308
+	,division_operator=309
+	,modulo_operator=310
+	,SIZEOF=311
+	,tilde_operator=312
+	,exclamation_operator=313
+	,increment_operator=314
+	,decrement_operator=315
 
 
 #line 310 "/usr/share/bison++/bison.cc"
@@ -573,54 +591,60 @@ const int YY_parse_CLASS::IF=258;
 const int YY_parse_CLASS::INT=259;
 const int YY_parse_CLASS::CHAR=260;
 const int YY_parse_CLASS::FLOAT=261;
-const int YY_parse_CLASS::RETURN=262;
-const int YY_parse_CLASS::MAIN=263;
-const int YY_parse_CLASS::VOID=264;
-const int YY_parse_CLASS::WHILE=265;
-const int YY_parse_CLASS::FOR=266;
-const int YY_parse_CLASS::BREAK=267;
-const int YY_parse_CLASS::ENDIF=268;
-const int YY_parse_CLASS::CONTINUE=269;
-const int YY_parse_CLASS::identifier=270;
-const int YY_parse_CLASS::integer_constant=271;
-const int YY_parse_CLASS::string_constant=272;
-const int YY_parse_CLASS::float_constant=273;
-const int YY_parse_CLASS::character_constant=274;
-const int YY_parse_CLASS::ELSE=275;
-const int YY_parse_CLASS::leftshift_assignment_operator=276;
-const int YY_parse_CLASS::rightshift_assignment_operator=277;
-const int YY_parse_CLASS::XOR_assignment_operator=278;
-const int YY_parse_CLASS::OR_assignment_operator=279;
-const int YY_parse_CLASS::AND_assignment_operator=280;
-const int YY_parse_CLASS::modulo_assignment_operator=281;
-const int YY_parse_CLASS::multiplication_assignment_operator=282;
-const int YY_parse_CLASS::division_assignment_operator=283;
-const int YY_parse_CLASS::addition_assignment_operator=284;
-const int YY_parse_CLASS::subtraction_assignment_operator=285;
-const int YY_parse_CLASS::assignment_operator=286;
-const int YY_parse_CLASS::OR_operator=287;
-const int YY_parse_CLASS::AND_operator=288;
-const int YY_parse_CLASS::pipe_operator=289;
-const int YY_parse_CLASS::caret_operator=290;
-const int YY_parse_CLASS::amp_operator=291;
-const int YY_parse_CLASS::equality_operator=292;
-const int YY_parse_CLASS::inequality_operator=293;
-const int YY_parse_CLASS::lessthan_assignment_operator=294;
-const int YY_parse_CLASS::lessthan_operator=295;
-const int YY_parse_CLASS::greaterthan_assignment_operator=296;
-const int YY_parse_CLASS::greaterthan_operator=297;
-const int YY_parse_CLASS::leftshift_operator=298;
-const int YY_parse_CLASS::rightshift_operator=299;
-const int YY_parse_CLASS::add_operator=300;
-const int YY_parse_CLASS::subtract_operator=301;
-const int YY_parse_CLASS::multiplication_operator=302;
-const int YY_parse_CLASS::division_operator=303;
-const int YY_parse_CLASS::modulo_operator=304;
-const int YY_parse_CLASS::SIZEOF=305;
-const int YY_parse_CLASS::tilde_operator=306;
-const int YY_parse_CLASS::exclamation_operator=307;
-const int YY_parse_CLASS::increment_operator=308;
-const int YY_parse_CLASS::decrement_operator=309;
+const int YY_parse_CLASS::DOUBLE=262;
+const int YY_parse_CLASS::LONG=263;
+const int YY_parse_CLASS::SHORT=264;
+const int YY_parse_CLASS::SIGNED=265;
+const int YY_parse_CLASS::UNSIGNED=266;
+const int YY_parse_CLASS::STRUCT=267;
+const int YY_parse_CLASS::RETURN=268;
+const int YY_parse_CLASS::MAIN=269;
+const int YY_parse_CLASS::VOID=270;
+const int YY_parse_CLASS::WHILE=271;
+const int YY_parse_CLASS::FOR=272;
+const int YY_parse_CLASS::DO=273;
+const int YY_parse_CLASS::BREAK=274;
+const int YY_parse_CLASS::ENDIF=275;
+const int YY_parse_CLASS::identifier=276;
+const int YY_parse_CLASS::integer_constant=277;
+const int YY_parse_CLASS::string_constant=278;
+const int YY_parse_CLASS::float_constant=279;
+const int YY_parse_CLASS::character_constant=280;
+const int YY_parse_CLASS::ELSE=281;
+const int YY_parse_CLASS::leftshift_assignment_operator=282;
+const int YY_parse_CLASS::rightshift_assignment_operator=283;
+const int YY_parse_CLASS::XOR_assignment_operator=284;
+const int YY_parse_CLASS::OR_assignment_operator=285;
+const int YY_parse_CLASS::AND_assignment_operator=286;
+const int YY_parse_CLASS::modulo_assignment_operator=287;
+const int YY_parse_CLASS::multiplication_assignment_operator=288;
+const int YY_parse_CLASS::division_assignment_operator=289;
+const int YY_parse_CLASS::addition_assignment_operator=290;
+const int YY_parse_CLASS::subtraction_assignment_operator=291;
+const int YY_parse_CLASS::assignment_operator=292;
+const int YY_parse_CLASS::OR_operator=293;
+const int YY_parse_CLASS::AND_operator=294;
+const int YY_parse_CLASS::pipe_operator=295;
+const int YY_parse_CLASS::caret_operator=296;
+const int YY_parse_CLASS::amp_operator=297;
+const int YY_parse_CLASS::equality_operator=298;
+const int YY_parse_CLASS::inequality_operator=299;
+const int YY_parse_CLASS::lessthan_assignment_operator=300;
+const int YY_parse_CLASS::lessthan_operator=301;
+const int YY_parse_CLASS::greaterthan_assignment_operator=302;
+const int YY_parse_CLASS::greaterthan_operator=303;
+const int YY_parse_CLASS::leftshift_operator=304;
+const int YY_parse_CLASS::rightshift_operator=305;
+const int YY_parse_CLASS::add_operator=306;
+const int YY_parse_CLASS::subtract_operator=307;
+const int YY_parse_CLASS::multiplication_operator=308;
+const int YY_parse_CLASS::division_operator=309;
+const int YY_parse_CLASS::modulo_operator=310;
+const int YY_parse_CLASS::SIZEOF=311;
+const int YY_parse_CLASS::tilde_operator=312;
+const int YY_parse_CLASS::exclamation_operator=313;
+const int YY_parse_CLASS::increment_operator=314;
+const int YY_parse_CLASS::decrement_operator=315;
 
 
 #line 341 "/usr/share/bison++/bison.cc"
@@ -639,26 +663,26 @@ YY_parse_CONSTRUCTOR_CODE;
  #line 352 "/usr/share/bison++/bison.cc"
 
 
-#define	YYFINAL		214
+#define	YYFINAL		252
 #define	YYFLAG		-32768
-#define	YYNTBASE	64
+#define	YYNTBASE	70
 
-#define YYTRANSLATE(x) ((unsigned)(x) <= 309 ? yytranslate[x] : 134)
+#define YYTRANSLATE(x) ((unsigned)(x) <= 315 ? yytranslate[x] : 145)
 
 static const char yytranslate[] = {     0,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-     2,     2,     2,     2,     2,     2,     2,     2,     2,    61,
-    62,     2,     2,    56,     2,    63,     2,     2,     2,     2,
-     2,     2,     2,     2,     2,     2,     2,     2,    55,     2,
+     2,     2,     2,     2,     2,     2,     2,     2,     2,    67,
+    68,     2,     2,    62,     2,    69,     2,     2,     2,     2,
+     2,     2,     2,     2,     2,     2,     2,     2,    61,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-    57,     2,    58,     2,     2,     2,     2,     2,     2,     2,
+    63,     2,    64,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-     2,     2,    59,     2,    60,     2,     2,     2,     2,     2,
+     2,     2,    65,     2,    66,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
      2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -676,106 +700,119 @@ static const char yytranslate[] = {     0,
     16,    17,    18,    19,    20,    21,    22,    23,    24,    25,
     26,    27,    28,    29,    30,    31,    32,    33,    34,    35,
     36,    37,    38,    39,    40,    41,    42,    43,    44,    45,
-    46,    47,    48,    49,    50,    51,    52,    53,    54
+    46,    47,    48,    49,    50,    51,    52,    53,    54,    55,
+    56,    57,    58,    59,    60
 };
 
 #if YY_parse_DEBUG != 0
 static const short yyprhs[] = {     0,
-     0,     2,     5,     7,     8,    10,    12,    16,    19,    22,
-    23,    25,    26,    30,    31,    34,    35,    38,    39,    43,
-    49,    51,    53,    57,    60,    65,    70,    76,    80,    84,
-    86,    89,    93,    96,    98,   100,   101,   103,   105,   107,
-   109,   112,   116,   120,   122,   123,   126,   129,   132,   133,
-   134,   138,   141,   142,   144,   146,   148,   150,   152,   154,
-   156,   160,   163,   164,   167,   169,   176,   179,   180,   186,
-   195,   198,   200,   203,   206,   209,   214,   217,   220,   221,
-   224,   226,   229,   232,   235,   238,   241,   244,   246,   248,
-   251,   255,   256,   259,   263,   264,   267,   269,   272,   275,
-   276,   278,   280,   282,   284,   286,   288,   292,   294,   296,
-   298,   302,   304,   306,   308,   310,   312,   314,   316,   319,
-   323,   326,   330,   332,   334,   339,   341,   342,   345,   349,
-   350,   352,   354,   356
+     0,     2,     5,     7,     8,    10,    12,    14,    18,    20,
+    23,    26,    27,    28,    32,    34,    36,    39,    40,    46,
+    49,    51,    53,    57,    60,    64,    67,    69,    71,    72,
+    77,    82,    88,    92,    96,    98,   100,   102,   104,   106,
+   109,   112,   115,   118,   120,   122,   125,   128,   129,   131,
+   134,   137,   138,   140,   141,   143,   144,   145,   153,   156,
+   157,   161,   164,   168,   172,   174,   175,   178,   181,   184,
+   185,   186,   190,   193,   194,   196,   198,   200,   202,   204,
+   206,   208,   212,   215,   216,   219,   221,   228,   231,   232,
+   238,   247,   255,   258,   260,   263,   266,   269,   274,   277,
+   280,   281,   284,   286,   289,   292,   295,   298,   301,   304,
+   306,   308,   311,   315,   316,   319,   323,   324,   327,   329,
+   332,   335,   336,   338,   340,   342,   344,   346,   348,   352,
+   354,   356,   358,   362,   364,   366,   368,   370,   372,   374,
+   376,   379,   383,   386,   390,   392,   394,   399,   401,   402,
+   405,   409,   410,   412,   414,   416
 };
 
-static const short yyrhs[] = {    65,
-     0,    67,    66,     0,    65,     0,     0,    68,     0,    87,
-     0,    86,    69,    55,     0,    71,    70,     0,    56,    69,
-     0,     0,    15,     0,     0,    15,    72,    73,     0,     0,
-    74,    77,     0,     0,    75,    83,     0,     0,    76,    31,
-   111,     0,    57,    78,    58,    57,    79,     0,    16,     0,
-    15,     0,    78,    58,    80,     0,    78,    58,     0,    31,
-    59,    81,    60,     0,    31,    59,    82,    60,     0,    59,
-   109,    60,    56,    81,     0,    59,   109,    60,     0,    17,
-    56,    82,     0,    17,     0,    57,    84,     0,    16,    58,
-    85,     0,    58,   107,     0,   107,     0,   108,     0,     0,
-     4,     0,     5,     0,     6,     0,     9,     0,    88,    89,
-     0,    86,    15,    61,     0,    90,    62,    97,     0,    91,
-     0,     0,    86,    92,     0,    94,    93,     0,    56,    91,
-     0,     0,     0,    15,    95,    96,     0,    57,    58,     0,
-     0,   100,     0,    98,     0,   101,     0,   103,     0,   104,
-     0,   106,     0,    68,     0,    59,    99,    60,     0,    97,
-    99,     0,     0,   111,    55,     0,    55,     0,     3,    61,
-   113,    62,    97,   102,     0,    20,    97,     0,     0,    10,
-    61,   113,    62,    97,     0,    11,    61,   111,    55,   113,
-    55,   111,    62,     0,     7,   105,     0,    55,     0,   111,
-    55,     0,    12,    55,     0,    31,    17,     0,    31,    59,
-   109,    60,     0,    16,   110,     0,    56,   109,     0,     0,
-   126,   112,     0,   113,     0,    31,   111,     0,    29,   111,
-     0,    30,   111,     0,    27,   111,     0,    28,   111,     0,
-    26,   111,     0,    53,     0,    54,     0,   115,   114,     0,
-    32,   115,   114,     0,     0,   117,   116,     0,    33,   117,
-   116,     0,     0,    52,   117,     0,   118,     0,   121,   119,
-     0,   120,   121,     0,     0,    41,     0,    39,     0,    42,
-     0,    40,     0,    37,     0,    38,     0,   121,   122,   123,
-     0,   123,     0,    45,     0,    46,     0,   123,   124,   125,
-     0,   125,     0,    47,     0,    48,     0,    49,     0,   128,
-     0,   126,     0,    15,     0,   126,   127,     0,    57,   111,
-    58,     0,    63,    15,     0,    61,   111,    62,     0,   129,
-     0,   133,     0,    15,    61,   130,    62,     0,   131,     0,
-     0,   111,   132,     0,    56,   111,   132,     0,     0,    16,
-     0,    17,     0,    18,     0,    19,     0
+static const short yyrhs[] = {    71,
+     0,    73,    72,     0,    71,     0,     0,    74,     0,    98,
+     0,    94,     0,    89,    75,    61,     0,    97,     0,    77,
+    76,     0,    62,    75,     0,     0,     0,    21,    78,    79,
+     0,    81,     0,    80,     0,    37,   122,     0,     0,    63,
+    82,    64,    63,    83,     0,    63,    84,     0,    22,     0,
+    21,     0,    82,    64,    86,     0,    82,    64,     0,    22,
+    64,    85,     0,    64,   118,     0,   118,     0,   119,     0,
+     0,    37,    65,    87,    66,     0,    37,    65,    88,    66,
+     0,    65,   120,    66,    62,    87,     0,    65,   120,    66,
+     0,    23,    62,    88,     0,    23,     0,     4,     0,     5,
+     0,     6,     0,     7,     0,     8,    92,     0,     9,    93,
+     0,    11,    90,     0,    10,    91,     0,    15,     0,     4,
+     0,     8,    92,     0,     9,    93,     0,     0,     4,     0,
+     8,    92,     0,     9,    93,     0,     0,     4,     0,     0,
+     4,     0,     0,     0,    12,    21,    95,    65,    96,    66,
+    61,     0,    74,    96,     0,     0,    12,    21,    75,     0,
+    99,   100,     0,    89,    21,    67,     0,   101,    68,   108,
+     0,   102,     0,     0,    89,   103,     0,   105,   104,     0,
+    62,   102,     0,     0,     0,    21,   106,   107,     0,    63,
+    64,     0,     0,   111,     0,   109,     0,   112,     0,   114,
+     0,   115,     0,   117,     0,    74,     0,    65,   110,    66,
+     0,   108,   110,     0,     0,   122,    61,     0,    61,     0,
+     3,    67,   124,    68,   108,   113,     0,    26,   108,     0,
+     0,    16,    67,   124,    68,   108,     0,    17,    67,   122,
+    61,   124,    61,   122,    68,     0,    18,   108,    16,    67,
+   124,    68,    61,     0,    13,   116,     0,    61,     0,   122,
+    61,     0,    19,    61,     0,    37,    23,     0,    37,    65,
+   120,    66,     0,    22,   121,     0,    62,   120,     0,     0,
+   137,   123,     0,   124,     0,    37,   122,     0,    35,   122,
+     0,    36,   122,     0,    33,   122,     0,    34,   122,     0,
+    32,   122,     0,    59,     0,    60,     0,   126,   125,     0,
+    38,   126,   125,     0,     0,   128,   127,     0,    39,   128,
+   127,     0,     0,    58,   128,     0,   129,     0,   132,   130,
+     0,   131,   132,     0,     0,    47,     0,    45,     0,    48,
+     0,    46,     0,    43,     0,    44,     0,   132,   133,   134,
+     0,   134,     0,    51,     0,    52,     0,   134,   135,   136,
+     0,   136,     0,    53,     0,    54,     0,    55,     0,   139,
+     0,   137,     0,    21,     0,   137,   138,     0,    63,   122,
+    64,     0,    69,    21,     0,    67,   122,    68,     0,   140,
+     0,   144,     0,    21,    67,   141,    68,     0,   142,     0,
+     0,   122,   143,     0,    62,   122,   143,     0,     0,    22,
+     0,    23,     0,    24,     0,    25,     0
 };
 
 #endif
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-    65,    68,    71,    72,    75,    76,    80,    84,    87,    88,
-    91,    91,    91,    93,    94,    94,    95,    95,    95,   105,
-   109,   111,   114,   115,   118,   119,   122,   123,   126,   127,
-   133,   136,   137,   140,   141,   142,   145,   145,   145,   146,
-   158,   161,   164,   167,   167,   170,   173,   176,   177,   180,
-   180,   183,   184,   187,   187,   188,   188,   189,   189,   190,
-   193,   196,   197,   200,   201,   204,   207,   208,   211,   212,
-   216,   219,   220,   223,   226,   229,   232,   235,   236,   239,
-   240,   243,   244,   245,   246,   247,   248,   249,   250,   253,
-   256,   256,   259,   262,   263,   266,   267,   270,   273,   274,
-   277,   277,   277,   278,   278,   278,   281,   282,   285,   286,
-   289,   290,   293,   293,   293,   296,   296,   299,   300,   303,
-   304,   307,   308,   308,   311,   314,   314,   317,   320,   321,
-   324,   325,   326,   327
+    67,    70,    73,    74,    77,    78,    79,    82,    83,    86,
+    89,    90,    93,    93,    96,    97,    98,    99,   105,   108,
+   111,   112,   115,   116,   120,   121,   124,   125,   126,   129,
+   130,   134,   135,   138,   139,   143,   143,   143,   143,   144,
+   145,   146,   147,   148,   151,   151,   151,   151,   154,   154,
+   154,   154,   157,   157,   160,   160,   163,   163,   165,   165,
+   168,   172,   175,   178,   181,   181,   184,   187,   190,   191,
+   194,   194,   197,   198,   201,   201,   202,   202,   203,   203,
+   204,   207,   210,   211,   214,   215,   218,   221,   222,   225,
+   226,   227,   230,   233,   234,   237,   240,   243,   246,   249,
+   250,   253,   254,   257,   258,   259,   260,   261,   262,   263,
+   264,   267,   270,   270,   273,   276,   277,   280,   281,   284,
+   287,   288,   291,   291,   291,   292,   292,   292,   295,   296,
+   299,   300,   303,   304,   307,   307,   307,   310,   310,   313,
+   314,   317,   318,   321,   322,   322,   325,   328,   328,   331,
+   334,   335,   338,   339,   340,   341
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","IF","INT",
-"CHAR","FLOAT","RETURN","MAIN","VOID","WHILE","FOR","BREAK","ENDIF","CONTINUE",
-"identifier","integer_constant","string_constant","float_constant","character_constant",
-"ELSE","leftshift_assignment_operator","rightshift_assignment_operator","XOR_assignment_operator",
-"OR_assignment_operator","AND_assignment_operator","modulo_assignment_operator",
-"multiplication_assignment_operator","division_assignment_operator","addition_assignment_operator",
-"subtraction_assignment_operator","assignment_operator","OR_operator","AND_operator",
-"pipe_operator","caret_operator","amp_operator","equality_operator","inequality_operator",
-"lessthan_assignment_operator","lessthan_operator","greaterthan_assignment_operator",
-"greaterthan_operator","leftshift_operator","rightshift_operator","add_operator",
-"subtract_operator","multiplication_operator","division_operator","modulo_operator",
-"SIZEOF","tilde_operator","exclamation_operator","increment_operator","decrement_operator",
-"';'","','","'['","']'","'{'","'}'","'('","')'","'.'","program","declaration_list",
-"D","declaration","variable_declaration","variable_declaration_list","V","variable_declaration_identifier",
-"@1","vdi","@2","@3","@4","identifier_twod_array_type","initilization_params_2d",
-"initilization_params_new","initilization_2d","array_init_2d","string_init_2d",
-"identifier_array_type","initilization_params","initilization","type_specifier",
+"CHAR","FLOAT","DOUBLE","LONG","SHORT","SIGNED","UNSIGNED","STRUCT","RETURN",
+"MAIN","VOID","WHILE","FOR","DO","BREAK","ENDIF","identifier","integer_constant",
+"string_constant","float_constant","character_constant","ELSE","leftshift_assignment_operator",
+"rightshift_assignment_operator","XOR_assignment_operator","OR_assignment_operator",
+"AND_assignment_operator","modulo_assignment_operator","multiplication_assignment_operator",
+"division_assignment_operator","addition_assignment_operator","subtraction_assignment_operator",
+"assignment_operator","OR_operator","AND_operator","pipe_operator","caret_operator",
+"amp_operator","equality_operator","inequality_operator","lessthan_assignment_operator",
+"lessthan_operator","greaterthan_assignment_operator","greaterthan_operator",
+"leftshift_operator","rightshift_operator","add_operator","subtract_operator",
+"multiplication_operator","division_operator","modulo_operator","SIZEOF","tilde_operator",
+"exclamation_operator","increment_operator","decrement_operator","';'","','",
+"'['","']'","'{'","'}'","'('","')'","'.'","program","declaration_list","D","declaration",
+"variable_declaration","variable_declaration_list","V","variable_declaration_identifier",
+"@1","vdi","identifier_twod_array_type","identifier_array_type","initilization_params_2d",
+"initilization_params_new","initilization_params","initilization","initilization_2d",
+"array_init_2d","string_init_2d","type_specifier","unsigned_grammar","signed_grammar",
+"long_grammar","short_grammar","structure_definition","@2","V1","structure_declaration",
 "function_declaration","function_declaration_type","function_declaration_param_statement",
 "params","parameters_list","parameters_identifier_list","parameters_identifier_list_breakup",
-"param_identifier","@5","param_identifier_breakup","statement","compound_statement",
+"param_identifier","@3","param_identifier_breakup","statement","compound_statement",
 "statment_list","expression_statment","conditional_statements","conditional_statements_breakup",
 "iterative_statements","return_statement","return_statement_breakup","break_statement",
 "string_initilization","array_initialization","array_int_declarations","array_int_declarations_breakup",
@@ -788,157 +825,181 @@ static const char * const yytname[] = {   "$","error","$illegal.","IF","INT",
 #endif
 
 static const short yyr1[] = {     0,
-    64,    65,    66,    66,    67,    67,    68,    69,    70,    70,
-    71,    72,    71,    74,    73,    75,    73,    76,    73,    77,
-    78,    78,    79,    79,    80,    80,    81,    81,    82,    82,
-    83,    84,    84,    85,    85,    85,    86,    86,    86,    86,
-    87,    88,    89,    90,    90,    91,    92,    93,    93,    95,
-    94,    96,    96,    97,    97,    97,    97,    97,    97,    97,
-    98,    99,    99,   100,   100,   101,   102,   102,   103,   103,
-   104,   105,   105,   106,   107,   108,   109,   110,   110,   111,
-   111,   112,   112,   112,   112,   112,   112,   112,   112,   113,
-   114,   114,   115,   116,   116,   117,   117,   118,   119,   119,
-   120,   120,   120,   120,   120,   120,   121,   121,   122,   122,
-   123,   123,   124,   124,   124,   125,   125,   126,   126,   127,
-   127,   128,   128,   128,   129,   130,   130,   131,   132,   132,
-   133,   133,   133,   133
+    70,    71,    72,    72,    73,    73,    73,    74,    74,    75,
+    76,    76,    78,    77,    79,    79,    79,    79,    80,    81,
+    82,    82,    83,    83,    84,    84,    85,    85,    85,    86,
+    86,    87,    87,    88,    88,    89,    89,    89,    89,    89,
+    89,    89,    89,    89,    90,    90,    90,    90,    91,    91,
+    91,    91,    92,    92,    93,    93,    95,    94,    96,    96,
+    97,    98,    99,   100,   101,   101,   102,   103,   104,   104,
+   106,   105,   107,   107,   108,   108,   108,   108,   108,   108,
+   108,   109,   110,   110,   111,   111,   112,   113,   113,   114,
+   114,   114,   115,   116,   116,   117,   118,   119,   120,   121,
+   121,   122,   122,   123,   123,   123,   123,   123,   123,   123,
+   123,   124,   125,   125,   126,   127,   127,   128,   128,   129,
+   130,   130,   131,   131,   131,   131,   131,   131,   132,   132,
+   133,   133,   134,   134,   135,   135,   135,   136,   136,   137,
+   137,   138,   138,   139,   139,   139,   140,   141,   141,   142,
+   143,   143,   144,   144,   144,   144
 };
 
 static const short yyr2[] = {     0,
-     1,     2,     1,     0,     1,     1,     3,     2,     2,     0,
-     1,     0,     3,     0,     2,     0,     2,     0,     3,     5,
-     1,     1,     3,     2,     4,     4,     5,     3,     3,     1,
-     2,     3,     2,     1,     1,     0,     1,     1,     1,     1,
-     2,     3,     3,     1,     0,     2,     2,     2,     0,     0,
-     3,     2,     0,     1,     1,     1,     1,     1,     1,     1,
-     3,     2,     0,     2,     1,     6,     2,     0,     5,     8,
-     2,     1,     2,     2,     2,     4,     2,     2,     0,     2,
-     1,     2,     2,     2,     2,     2,     2,     1,     1,     2,
-     3,     0,     2,     3,     0,     2,     1,     2,     2,     0,
-     1,     1,     1,     1,     1,     1,     3,     1,     1,     1,
-     3,     1,     1,     1,     1,     1,     1,     1,     2,     3,
-     2,     3,     1,     1,     4,     1,     0,     2,     3,     0,
-     1,     1,     1,     1
+     1,     2,     1,     0,     1,     1,     1,     3,     1,     2,
+     2,     0,     0,     3,     1,     1,     2,     0,     5,     2,
+     1,     1,     3,     2,     3,     2,     1,     1,     0,     4,
+     4,     5,     3,     3,     1,     1,     1,     1,     1,     2,
+     2,     2,     2,     1,     1,     2,     2,     0,     1,     2,
+     2,     0,     1,     0,     1,     0,     0,     7,     2,     0,
+     3,     2,     3,     3,     1,     0,     2,     2,     2,     0,
+     0,     3,     2,     0,     1,     1,     1,     1,     1,     1,
+     1,     3,     2,     0,     2,     1,     6,     2,     0,     5,
+     8,     7,     2,     1,     2,     2,     2,     4,     2,     2,
+     0,     2,     1,     2,     2,     2,     2,     2,     2,     1,
+     1,     2,     3,     0,     2,     3,     0,     2,     1,     2,
+     2,     0,     1,     1,     1,     1,     1,     1,     3,     1,
+     1,     1,     3,     1,     1,     1,     1,     1,     1,     1,
+     2,     3,     2,     3,     1,     1,     4,     1,     0,     2,
+     3,     0,     1,     1,     1,     1
 };
 
 static const short yydefact[] = {     0,
-    37,    38,    39,    40,     1,     4,     5,     0,     6,    45,
-     3,     2,    11,     0,    10,     0,    41,     0,    44,    42,
-    14,     7,     0,     8,    50,    46,    49,     0,    13,     0,
-     0,     0,    11,     9,    53,     0,    47,     0,     0,     0,
-     0,     0,   118,   131,   132,   133,   134,     0,    65,    63,
-     0,    60,     0,    43,    55,    54,    56,    57,    58,    59,
-     0,    81,    92,    95,    97,   100,   108,   112,   117,   116,
-   123,   124,     0,    15,     0,    17,     0,     0,    51,    48,
-     0,    72,    71,     0,     0,     0,    74,   127,    96,   117,
-    63,     0,     0,    64,     0,    90,     0,    93,   105,   106,
-   102,   104,   101,   103,   109,   110,    98,     0,     0,   113,
-   114,   115,     0,     0,     0,     0,     0,     0,     0,    88,
-    89,     0,     0,    80,   119,    22,    21,     0,     0,     0,
-    31,    19,    52,     0,    73,     0,     0,   130,     0,   126,
-    62,    61,   122,    92,    95,    99,   107,   111,    87,    85,
-    86,    83,    84,    82,     0,   121,     0,    36,     0,    33,
-     0,     0,     0,     0,   128,   125,    91,    94,   120,     0,
-     0,    32,    34,    35,    75,    68,    69,     0,   130,     0,
-    20,     0,     0,    66,     0,   129,    24,    79,     0,    67,
-     0,     0,    23,     0,    77,    76,    70,     0,    78,    30,
-     0,     0,     0,     0,     0,    25,    26,    29,    28,     0,
-    27,     0,     0,     0
+    36,    37,    38,    39,    54,    56,    52,    48,     0,    44,
+     1,     4,     5,     0,     7,     9,     6,    66,    53,    40,
+    55,    41,    49,    54,    56,    43,    45,    54,    56,    42,
+    57,     3,     2,    13,     0,    12,     0,    62,     0,    65,
+    50,    51,    46,    47,    13,    61,     0,    63,    18,     8,
+     0,    10,    71,    67,    70,     0,    60,     0,     0,    14,
+    16,    15,    11,    74,     0,    68,     0,     0,     0,     0,
+     0,     0,     0,   140,   153,   154,   155,   156,     0,    86,
+    84,     0,    81,     0,    64,    76,    75,    77,    78,    79,
+    80,     0,   103,   114,   117,   119,   122,   130,   134,   139,
+   138,   145,   146,    60,     0,    17,    22,     0,     0,     0,
+    20,     0,    72,    69,     0,     0,    94,    93,     0,     0,
+     0,     0,    96,   149,   118,   139,    84,     0,     0,    85,
+     0,   112,     0,   115,   127,   128,   124,   126,   123,   125,
+   131,   132,   120,     0,     0,   135,   136,   137,     0,     0,
+     0,     0,     0,     0,     0,   110,   111,     0,     0,   102,
+   141,    59,     0,    29,     0,    26,     0,    73,     0,    95,
+     0,     0,     0,   152,     0,   148,    83,    82,   144,   114,
+   117,   121,   129,   133,   109,   107,   108,   105,   106,   104,
+     0,   143,    58,     0,    25,    27,    28,    97,     0,     0,
+     0,     0,     0,     0,   150,   147,   113,   116,   142,     0,
+    21,     0,    19,    89,    90,     0,     0,   152,   101,     0,
+    24,     0,    87,     0,     0,   151,     0,    99,    98,     0,
+    23,    88,     0,    92,   100,     0,    91,    35,     0,     0,
+     0,     0,     0,    30,    31,    34,    33,     0,    32,     0,
+     0,     0
 };
 
-static const short yydefgoto[] = {   212,
-     5,    12,     6,    52,    14,    24,    15,    21,    29,    30,
-    31,    32,    74,   128,   181,   193,   202,   203,    76,   131,
-   172,    53,     9,    10,    17,    18,    19,    26,    37,    27,
-    35,    79,    91,    55,    92,    56,    57,   184,    58,    59,
-    83,    60,   160,   174,   189,   195,    61,   124,    62,    96,
-    63,    98,    64,    65,   107,   108,    66,   109,    67,   113,
-    68,    69,   125,    70,    71,   139,   140,   165,    72
+static const short yydefgoto[] = {   250,
+    11,    33,    12,    83,    35,    52,    36,    49,    60,    61,
+    62,   110,   213,   111,   195,   231,   240,   241,    84,    30,
+    26,    20,    22,    15,    47,   105,    16,    17,    18,    38,
+    39,    40,    54,    66,    55,    64,   113,   127,    86,   128,
+    87,    88,   223,    89,    90,   118,    91,   166,   197,   220,
+   228,    92,   160,    93,   132,    94,   134,    95,    96,   143,
+   144,    97,   145,    98,   149,    99,   100,   161,   101,   102,
+   175,   176,   205,   103
 };
 
-static const short yypact[] = {    98,
--32768,-32768,-32768,-32768,-32768,    98,-32768,    -6,-32768,    98,
--32768,-32768,    14,   -30,   -45,    18,-32768,   -22,-32768,-32768,
-    29,-32768,    47,-32768,-32768,-32768,    17,    11,-32768,    10,
-    25,    52,   -23,-32768,    34,    98,-32768,    13,    40,    33,
-    44,    38,    45,-32768,-32768,-32768,-32768,    71,-32768,    11,
-    71,-32768,    47,-32768,-32768,-32768,-32768,-32768,-32768,-32768,
-    62,-32768,    86,    87,-32768,   111,    67,-32768,    82,-32768,
--32768,-32768,    20,-32768,   -14,-32768,    71,    63,-32768,-32768,
-    71,-32768,-32768,    69,    71,    71,-32768,    71,-32768,   -51,
-    11,    65,    60,-32768,    71,-32768,    71,-32768,-32768,-32768,
--32768,-32768,-32768,-32768,-32768,-32768,-32768,    81,    81,-32768,
--32768,-32768,    81,    71,    71,    71,    71,    71,    71,-32768,
--32768,    71,   112,-32768,-32768,-32768,-32768,    70,    72,   100,
--32768,-32768,-32768,    75,-32768,    76,    74,    84,    79,-32768,
--32768,-32768,-32768,    86,    87,     1,    67,-32768,-32768,-32768,
--32768,-32768,-32768,-32768,    85,-32768,    89,   113,   137,-32768,
-    11,    11,    71,    71,-32768,-32768,-32768,-32768,-32768,    20,
-    -7,-32768,-32768,-32768,-32768,   138,-32768,   104,    84,   102,
--32768,   145,    11,-32768,    71,-32768,   131,   107,   105,-32768,
-   106,   108,-32768,   145,-32768,-32768,-32768,     2,-32768,   110,
-   145,   109,   114,   147,   115,-32768,-32768,-32768,   116,   117,
--32768,   170,   171,-32768
+static const short yypact[] = {   123,
+-32768,-32768,-32768,-32768,    22,    35,    53,    67,    23,-32768,
+-32768,   123,-32768,    32,-32768,-32768,-32768,   189,-32768,-32768,
+-32768,-32768,-32768,    22,    35,-32768,-32768,    22,    35,-32768,
+    43,-32768,-32768,    31,    28,    37,    80,-32768,    36,-32768,
+-32768,-32768,-32768,-32768,-32768,-32768,    41,-32768,   -23,-32768,
+    43,-32768,-32768,-32768,    47,   167,   145,     7,   -14,-32768,
+-32768,-32768,-32768,    49,   189,-32768,    46,    89,    12,    51,
+    52,   167,    54,    55,-32768,-32768,-32768,-32768,     7,-32768,
+   167,     7,-32768,    43,-32768,-32768,-32768,-32768,-32768,-32768,
+-32768,    59,-32768,    76,    77,-32768,   162,    33,-32768,    48,
+-32768,-32768,-32768,   145,    57,-32768,-32768,    60,    84,    72,
+-32768,    73,-32768,-32768,     7,    43,-32768,-32768,    78,     7,
+     7,   124,-32768,     7,-32768,   -51,   167,    75,    74,-32768,
+     7,-32768,     7,-32768,-32768,-32768,-32768,-32768,-32768,-32768,
+-32768,-32768,-32768,    24,    24,-32768,-32768,-32768,    24,     7,
+     7,     7,     7,     7,     7,-32768,-32768,     7,   122,-32768,
+-32768,-32768,    83,   108,   135,-32768,    96,-32768,    93,-32768,
+    94,   102,    97,   103,    99,-32768,-32768,-32768,-32768,    76,
+    77,   -10,    33,-32768,-32768,-32768,-32768,-32768,-32768,-32768,
+   104,-32768,-32768,   -13,-32768,-32768,-32768,-32768,    56,   167,
+   167,     7,     7,     7,-32768,-32768,-32768,-32768,-32768,   159,
+-32768,   137,-32768,   161,-32768,   141,   143,   103,   150,   149,
+   166,   167,-32768,     7,   155,-32768,   159,-32768,-32768,   152,
+-32768,-32768,   151,-32768,-32768,    -6,-32768,   156,   159,   154,
+   157,   198,   158,-32768,-32768,-32768,   160,   164,-32768,   226,
+   227,-32768
 };
 
 static const short yypgoto[] = {-32768,
-   167,-32768,-32768,    43,   154,-32768,-32768,-32768,-32768,-32768,
--32768,-32768,-32768,     8,-32768,-32768,   -31,   -24,-32768,-32768,
--32768,    32,-32768,-32768,-32768,-32768,   146,-32768,-32768,-32768,
--32768,-32768,   -28,-32768,    90,-32768,-32768,-32768,-32768,-32768,
--32768,-32768,    26,-32768,  -170,-32768,   -38,-32768,   -78,    39,
-    91,    42,   -43,-32768,-32768,-32768,    77,-32768,    80,-32768,
-    78,   -44,-32768,-32768,-32768,-32768,-32768,     9,-32768
+   218,-32768,-32768,     1,   -26,-32768,-32768,-32768,-32768,-32768,
+-32768,    34,-32768,-32768,-32768,-32768,   -17,    -7,     4,-32768,
+-32768,    -1,    26,-32768,-32768,   132,-32768,-32768,-32768,-32768,
+-32768,   172,-32768,-32768,-32768,-32768,-32768,   -53,-32768,   111,
+-32768,-32768,-32768,-32768,-32768,-32768,-32768,    79,-32768,  -218,
+-32768,   -58,-32768,  -100,    61,   109,    58,   -73,-32768,-32768,
+-32768,    98,-32768,   100,-32768,    95,   -77,-32768,-32768,-32768,
+-32768,-32768,    29,-32768
 };
 
 
-#define	YYLAST		191
+#define	YYLAST		247
 
 
-static const short yytable[] = {    54,
-    84,   129,   134,    90,    89,   122,   136,   -12,    13,   175,
-    23,   123,    93,    38,     1,     2,     3,    39,   200,     4,
-    40,    41,    42,   199,    22,    43,    44,    45,    46,    47,
-   205,     8,    25,   -12,   126,   127,    90,     8,   132,    28,
-    90,    16,     7,   130,   -12,   105,   106,   137,     7,   138,
-    90,   182,    90,   145,    43,    44,    45,    46,    47,   -18,
-   201,    33,    48,    90,    90,    49,    73,    16,    90,    50,
-   -12,    51,    36,    81,    20,   149,   150,   151,   152,   153,
-   154,    75,    77,   155,   178,    43,    44,    45,    46,    47,
-    78,    48,    87,    85,    82,    43,    44,    45,    46,    47,
-    51,     1,     2,     3,    86,    88,     4,   114,   115,   116,
-   117,   118,   119,   110,   111,   112,    94,    95,    90,    97,
-   133,   143,    48,   135,   142,   179,   156,   157,   163,   158,
-   159,    51,   176,   177,   120,   121,   161,   162,   122,   164,
-   166,    51,   169,   171,   123,   170,   191,    99,   100,   101,
-   102,   103,   104,   175,   190,   105,   106,   183,   185,   187,
-   188,   192,   194,   200,   196,   204,   198,   197,   206,   213,
-   214,   210,    11,   207,   209,   201,    34,   180,   211,   208,
-   141,    80,   167,   173,   146,   144,   168,   186,   147,     0,
-   148
+static const short yytable[] = {   106,
+    13,   126,    85,    14,    46,   125,   107,   108,   235,   198,
+   119,   158,    13,    58,   169,    14,   238,   159,   122,   171,
+   243,    37,    41,   129,    63,    19,    43,    74,    75,    76,
+    77,    78,    74,    75,    76,    77,    78,   126,    21,    59,
+   141,   142,   126,    31,    74,    75,    76,    77,    78,   109,
+    42,   210,    34,   126,    44,   126,    23,   104,   239,   181,
+    24,    25,   172,    45,    79,   174,   126,   126,    37,    79,
+    27,   126,   117,    82,    28,    29,   107,   211,    82,   150,
+   151,   152,   153,   154,   155,   146,   147,   148,    50,    46,
+    82,   185,   186,   187,   188,   189,   190,    48,    51,   191,
+    53,   216,   217,    56,   104,    57,   156,   157,    65,   116,
+   158,   112,   115,   131,   123,   133,   159,   120,   121,   130,
+   165,   124,   163,   164,   126,   126,     1,     2,     3,     4,
+     5,     6,     7,     8,     9,   167,   168,    10,   170,   173,
+   178,   179,   192,   193,   194,   218,   214,   215,     1,     2,
+     3,     4,     5,     6,     7,     8,    68,   198,   199,    10,
+   200,   201,   202,   203,   204,   233,   206,   209,   232,    67,
+     1,     2,     3,     4,     5,     6,     7,     8,    68,    69,
+   219,    10,    70,    71,    72,    73,   222,    74,    75,    76,
+    77,    78,     1,     2,     3,     4,     5,     6,     7,     8,
+   221,   224,   230,    10,   135,   136,   137,   138,   139,   140,
+   225,   227,   141,   142,   229,   234,   236,   242,   237,   244,
+   238,   248,   245,   247,    79,   251,   252,    80,   239,    32,
+   249,    81,   212,    82,   246,   162,   114,   177,   208,   180,
+   207,   182,   196,   184,   183,     0,   226
 };
 
-static const short yycheck[] = {    28,
-    39,    16,    81,    48,    48,    57,    85,    31,    15,    17,
-    56,    63,    51,     3,     4,     5,     6,     7,    17,     9,
-    10,    11,    12,   194,    55,    15,    16,    17,    18,    19,
-   201,     0,    15,    57,    15,    16,    81,     6,    77,    62,
-    85,    10,     0,    58,    31,    45,    46,    86,     6,    88,
-    95,    59,    97,    97,    15,    16,    17,    18,    19,    31,
-    59,    15,    52,   108,   109,    55,    57,    36,   113,    59,
-    57,    61,    56,    61,    61,   114,   115,   116,   117,   118,
-   119,    57,    31,   122,   163,    15,    16,    17,    18,    19,
-    57,    52,    55,    61,    55,    15,    16,    17,    18,    19,
-    61,     4,     5,     6,    61,    61,     9,    26,    27,    28,
-    29,    30,    31,    47,    48,    49,    55,    32,   163,    33,
-    58,    62,    52,    55,    60,   164,    15,    58,    55,    58,
-    31,    61,   161,   162,    53,    54,    62,    62,    57,    56,
-    62,    61,    58,    31,    63,    57,   185,    37,    38,    39,
-    40,    41,    42,    17,   183,    45,    46,    20,    55,    58,
-    16,    31,    56,    17,    60,    56,    59,    62,    60,     0,
-     0,    56,     6,    60,    60,    59,    23,   170,   210,   204,
-    91,    36,   144,   158,   108,    95,   145,   179,   109,    -1,
-   113
+static const short yycheck[] = {    58,
+     0,    79,    56,     0,    31,    79,    21,    22,   227,    23,
+    69,    63,    12,    37,   115,    12,    23,    69,    72,   120,
+   239,    18,    24,    82,    51,     4,    28,    21,    22,    23,
+    24,    25,    21,    22,    23,    24,    25,   115,     4,    63,
+    51,    52,   120,    21,    21,    22,    23,    24,    25,    64,
+    25,    65,    21,   131,    29,   133,     4,    57,    65,   133,
+     8,     9,   121,    21,    58,   124,   144,   145,    65,    58,
+     4,   149,    61,    67,     8,     9,    21,    22,    67,    32,
+    33,    34,    35,    36,    37,    53,    54,    55,    61,   116,
+    67,   150,   151,   152,   153,   154,   155,    67,    62,   158,
+    21,   202,   203,    68,   104,    65,    59,    60,    62,    21,
+    63,    63,    67,    38,    61,    39,    69,    67,    67,    61,
+    37,    67,    66,    64,   202,   203,     4,     5,     6,     7,
+     8,     9,    10,    11,    12,    64,    64,    15,    61,    16,
+    66,    68,    21,    61,    37,   204,   200,   201,     4,     5,
+     6,     7,     8,     9,    10,    11,    12,    23,    63,    15,
+    68,    68,    61,    67,    62,   224,    68,    64,   222,     3,
+     4,     5,     6,     7,     8,     9,    10,    11,    12,    13,
+    22,    15,    16,    17,    18,    19,    26,    21,    22,    23,
+    24,    25,     4,     5,     6,     7,     8,     9,    10,    11,
+    64,    61,    37,    15,    43,    44,    45,    46,    47,    48,
+    68,    62,    51,    52,    66,    61,    65,    62,    68,    66,
+    23,    62,    66,    66,    58,     0,     0,    61,    65,    12,
+   248,    65,   199,    67,   242,   104,    65,   127,   181,   131,
+   180,   144,   164,   149,   145,    -1,   218
 };
 
 #line 352 "/usr/share/bison++/bison.cc"
@@ -1434,52 +1495,56 @@ YYLABEL(yyreduce)
 
   switch (yyn) {
 
-case 11:
-#line 91 "parser.y"
-{ ins(); ;
+case 13:
+#line 93 "prakhar.y"
+{ printf("hrllo "); ins(); ;
     break;}
-case 12:
-#line 91 "parser.y"
-{ ins(); ;
-    break;}
-case 14:
-#line 93 "parser.y"
-{;
+case 15:
+#line 96 "prakhar.y"
+{printf("1 ");;
     break;}
 case 16:
-#line 94 "parser.y"
-{;
+#line 97 "prakhar.y"
+{printf("0 ");;
+    break;}
+case 17:
+#line 98 "prakhar.y"
+{printf("2 ");;
     break;}
 case 18:
-#line 95 "parser.y"
-{;
+#line 99 "prakhar.y"
+{printf("3 ");;
     break;}
-case 42:
-#line 161 "parser.y"
-{ ins();;
-    break;}
-case 50:
-#line 180 "parser.y"
+case 57:
+#line 163 "prakhar.y"
 { ins(); ;
     break;}
-case 75:
-#line 226 "parser.y"
+case 63:
+#line 175 "prakhar.y"
+{ ins();;
+    break;}
+case 71:
+#line 194 "prakhar.y"
+{ ins(); ;
+    break;}
+case 97:
+#line 240 "prakhar.y"
 { insV(); ;
     break;}
-case 131:
-#line 324 "parser.y"
+case 153:
+#line 338 "prakhar.y"
 { insV(); ;
     break;}
-case 132:
-#line 325 "parser.y"
+case 154:
+#line 339 "prakhar.y"
 { insV(); ;
     break;}
-case 133:
-#line 326 "parser.y"
+case 155:
+#line 340 "prakhar.y"
 { insV(); ;
     break;}
-case 134:
-#line 327 "parser.y"
+case 156:
+#line 341 "prakhar.y"
 { insV(); ;
     break;}
 }
@@ -1686,7 +1751,7 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 329 "parser.y"
+#line 343 "prakhar.y"
 
 
 extern FILE *yyin;
