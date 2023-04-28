@@ -32,7 +32,7 @@
 %token identifier
 %token integer_constant
 %token string_constant
-%token float_constant
+%token float_constant 
 %token character_constant
 
 %nonassoc ELSE
@@ -102,37 +102,43 @@ vdi
 // handle 2d array here
 
 identifier_twod_array_type
-			:  '[' initilization_params_2d ']' '['initilization_params_new;
+			: '[' integer_constant ']' '['initialization_params_new
+			| '[' identifier ']' '['initialization_params_new;
 
 identifier_array_type
-			: '[' initilization_params;
+			: '[' initialization_params;
+			
+initialization_params_new
+			: initialization_params_2d ']' initialization_2d 
+			| initialization_params_2d ']';
 
-initilization_params_2d
+initialization_params_2d
 			: integer_constant
 			| identifier;
-			
-initilization_params_new
-			: initilization_params_2d ']' initilization_2d 
-			| initilization_params_2d ']';
 
 
-initilization_params
-			: integer_constant ']' initilization
-			| ']' string_initilization;
+initialization_params
+			: integer_constant ']' initialization
+			| ']' string_initialization;
 
-initilization
-			: string_initilization
+initialization
+			: string_initialization
 			| array_initialization
 			| ;
 
-initilization_2d 
-			: assignment_operator '{' array_init_2d '}' 
+initialization_2d 
+			: assignment_operator '{' array_init_int_2d '}'
+			| assignment_operator '{' array_init_float_2d '}' 
 			| assignment_operator '{' string_init_2d '}';
 
 
-array_init_2d
-			: '{' array_int_declarations '}' ',' array_init_2d
+array_init_int_2d
+			: '{' array_int_declarations '}' ',' array_init_int_2d
 			| '{' array_int_declarations '}';
+
+array_init_float_2d
+			: '{' array_float_declarations '}' ',' array_init_float_2d
+			| '{' array_float_declarations '}';
 
 string_init_2d 
 			: string_constant ',' string_init_2d
@@ -236,17 +242,25 @@ return_statement_breakup
 break_statement 
 			: BREAK ';' ;
 
-string_initilization
+string_initialization
 			: assignment_operator string_constant { insV(); };
 
 array_initialization
-			: assignment_operator '{' array_int_declarations '}';
+			: assignment_operator '{' array_int_declarations '}'
+			| assignment_operator '{' array_float_declarations '}';
 
 array_int_declarations
 			: integer_constant array_int_declarations_breakup;
 
+array_float_declarations
+			: float_constant array_float_declarations_breakup;
+
 array_int_declarations_breakup
 			: ',' array_int_declarations 
+			| ;
+
+array_float_declarations_breakup
+			: ',' array_float_declarations 
 			| ;
 
 expression 
