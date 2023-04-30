@@ -263,6 +263,7 @@ IN "include"
 "unsigned"		{ insertST(yytext, "Keyword");  return UNSIGNED;}
 "void"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword");  return VOID;}
 "break"			{ insertST(yytext, "Keyword");  return BREAK;}
+"continue"		{ insertST(yytext, "Keyword");  return CONTINUE;}
 "printf"        { insertST(yytext, "Keyword");  return PRINTF;}
 
 "++"			{ return increment_operator; }

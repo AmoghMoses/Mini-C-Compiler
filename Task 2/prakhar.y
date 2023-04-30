@@ -26,6 +26,8 @@
 %token VOID
 %token WHILE FOR DO 
 %token BREAK
+%token PRINTF
+%token CONTINUE
 %token ENDIF
 %expect 2
 
@@ -64,7 +66,7 @@
 
 %%
 program
-			: declaration_list;
+		:	 declaration_list;
 
 declaration_list
 			: declaration D 
@@ -90,13 +92,13 @@ V
 			| ;
 
 variable_declaration_identifier 
-			: identifier { printf("hrllo "); ins(); } vdi;
+			: identifier { ins(); } vdi;
 
 vdi 
-    : identifier_array_type {printf("1 ");}
-	| identifier_twod_array_type {printf("0 ");}  
-	| assignment_operator expression {printf("2 ");}
-    | {printf("3 ");};
+    : identifier_array_type 
+	| identifier_twod_array_type   
+	| assignment_operator expression 
+    | ;
 
 
 // handle 2d array here
@@ -207,7 +209,14 @@ statement
 			: expression_statment | compound_statement 
 			| conditional_statements | iterative_statements 
 			| return_statement | break_statement 
-			| variable_declaration;
+			| variable_declaration | printf_statement | continue_statement;
+
+printf_statement
+			: PRINTF '(' string_constant ',' identifier ')' ';'
+			| PRINTF '(' string_constant ')' ';';
+
+continue_statement
+			: CONTINUE ';';
 
 compound_statement 
 			: '{' statment_list '}' ;
@@ -241,6 +250,9 @@ return_statement_breakup
 
 break_statement 
 			: BREAK ';' ;
+
+continue_statement 
+			: CONTINUE ';' ;
 
 string_initialization
 			: assignment_operator string_constant { insV(); };
