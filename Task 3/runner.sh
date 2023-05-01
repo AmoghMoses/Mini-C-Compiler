@@ -1,4 +1,4 @@
-yacc -d parser.y  
-flex scanner.l  
-gcc y.tab.c lex.yy.c -ll  
+yacc -d amogh.y  
+flex akshat.l
+gcc y.tab.c lex.yy.c -ll
 ./a.out test.c

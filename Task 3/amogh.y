@@ -38,11 +38,28 @@
 	int call_params_count;
 
 	struct ast_node {
-    int type;       // type of the node (e.g. operator, literal, variable)
-    char* value;    // value of the node (e.g. "+", "42", "x")
-    int num_children;   // number of children of the node
-    struct ast_node** children; // array of pointers to the node's children
-};
+		int type;       // type of the node (e.g. operator, literal, variable)
+		char* value;    // value of the node (e.g. "+", "42", "x")
+		int num_children;   // number of children of the node
+		struct ast_node** children; // array of pointers to the node's children
+	
+	};
+
+	struct ast_node* create_ast_node(char* type, char* value, int num_children, ...) {
+		struct ast_node* node = malloc(sizeof(struct ast_node));
+		node->type = type;
+		node->value = value;
+		node->num_children = num_children;
+		node->children = malloc(sizeof(struct ast_node*) * num_children);
+		va_list args;
+		va_start(args, num_children);
+		for (int i = 0; i < num_children; i++) {
+			node->children[i] = va_arg(args, struct ast_node*);
+		}
+		va_end(args);
+		return node;
+	}
+
 %}
 
 %nonassoc IF
@@ -86,7 +103,7 @@
 
 %%
 program
-			: declaration_list;
+			: declaration_list {create_ast_node()};
 
 declaration_list
 			: declaration D ;
@@ -155,8 +172,8 @@ initialization_params
 			| ']' initialization
 			| ']' string_initialization;
 
-initilization
-			: string_initilization
+initialization
+			: string_initialization
 			| array_initialization
 			| ;
 
@@ -291,7 +308,7 @@ continue_statement
 break_statement 
 			: BREAK ';' ;
 
-string_initilization
+string_initialization
 			: assignment_operator string_constant {insV();} ;
 
 array_initialization
@@ -468,6 +485,9 @@ void incertCT(char *, char *);
 void printST();
 void printCT();
 
+FILE *filePointer; 
+filePointer = fopen("ast.txt", "w");
+
 struct ast_node* create_ast_node(char* type, char* value, int num_children, ...) {
     struct ast_node* node = malloc(sizeof(struct ast_node));
     node->type = type;
@@ -488,13 +508,13 @@ void print_ast(struct ast_node* node, int depth) {
         return;
     }
     for (int i = 0; i < depth; i++) {
-        fprintf("  "); // indent based on depth
+        fprintf(filePointer, "  "); // indent based on depth
     }
-    fprintf("%s", node->type);
+    fprintf(filePointer, "%s", node->type);
     if (node->value != NULL) {
-        fprintf(": %s", node->value);
+        fprintf(filePointer, ": %s", node->value);
     }
-    fprintf("\n");
+    fprintf(filePointer, "\n");
     for (int i = 0; i < node->num_children; i++) {
         print_ast(node->children[i], depth + 1);
     }
@@ -504,26 +524,25 @@ int main(int argc , char **argv)
 {
 	yyin = fopen(argv[1], "r");
 	yyparse();
-	printf("\nTattii....\n")
+	printf("\nTattii....\n");
 	if(flag == 0)
 	{
 		printf(ANSI_COLOR_GREEN "Status: Parsing Complete - Valid" ANSI_COLOR_RESET "\n");
-		// printf("%30s" ANSI_COLOR_CYAN "SYMBOL TABLE" ANSI_COLOR_RESET "\n", " ");
-		// printf("%30s %s\n", " ", "------------");
-		// printST();
+		printf("%30s" ANSI_COLOR_CYAN "SYMBOL TABLE" ANSI_COLOR_RESET "\n", " ");
+		printf("%30s %s\n", " ", "------------");
+		printST();
 
-		// printf("\n\n%30s" ANSI_COLOR_CYAN "CONSTANT TABLE" ANSI_COLOR_RESET "\n", " ");
-		// printf("%30s %s\n", " ", "--------------");
-		// printCT();
+		printf("\n\n%30s" ANSI_COLOR_CYAN "CONSTANT TABLE" ANSI_COLOR_RESET "\n", " ");
+		printf("%30s %s\n", " ", "--------------");
+		printCT();
 	}
 
-printf("\n---------Making file...\n");
-FILE *filePointer; 
-filePointer = fopen("ast.txt", "w");
-fwrite("hello",1,5,filePointer);
-fclose(filePointer);
+printf("\n........................Prakhar making file....................\n");
 
-// print_ast(root_node, 0);
+
+// fclose(filePointer);
+
+print_ast(root_node, 0);
 
 }
 

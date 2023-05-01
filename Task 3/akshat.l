@@ -65,7 +65,6 @@
 			{
 				if(strcmp(ST[i].name,str)==0)
 				{
-					
 					return i;
 				}
 			}
