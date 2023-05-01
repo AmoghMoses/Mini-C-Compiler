@@ -466,6 +466,7 @@ IN "include"
 ":"				{ return(':'); }
 "."				{ return('.'); }
 
+"printf"		{ insertST(yytext, "Keyword"); return PRINTF;}
 "char"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword");return CHAR;}
 "double"		{ strcpy(curtype,yytext); insertST(yytext, "Keyword"); return DOUBLE;}
 "else"			{ insertST(yytext, "Keyword"); return ELSE;}
@@ -484,7 +485,7 @@ IN "include"
 "unsigned"		{ insertST(yytext, "Keyword");   return UNSIGNED;}
 "void"			{ strcpy(curtype,yytext);   insertST(yytext, "Keyword");  return VOID;}
 "break"			{ insertST(yytext, "Keyword");  return BREAK;}
-
+"continue"		{ insertST(yytext, "Keyword");  return CONTINUE;}
 
 
 "++"			{ return increment_operator; }
@@ -521,11 +522,11 @@ IN "include"
 "|"				{ return pipe_operator; }
 \=				{ return assignment_operator;}
 
-\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
+\"[^\"]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
 \'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
 [a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return array_identifier;}
-[1-9][0-9]*|0/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\]|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
-([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
+[1-9][0-9]*|0/[;|,|" "|\)|\]|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\}|:|\n|\t|\^]  {strcpy(curval,yytext); insertCT(yytext, "Number Constant"); yylval = atoi(yytext); return integer_constant;}
+([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^|\}] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
 [A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext); insertST(curid,"Identifier"); return identifier;}
 
 (.?) {

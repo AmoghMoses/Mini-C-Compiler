@@ -204,48 +204,50 @@ typedef
 #define	DO	273
 #define	BREAK	274
 #define	ENDIF	275
-#define	identifier	276
-#define	array_identifier	277
-#define	func_identifier	278
-#define	integer_constant	279
-#define	string_constant	280
-#define	float_constant	281
-#define	character_constant	282
-#define	ELSE	283
-#define	leftshift_assignment_operator	284
-#define	rightshift_assignment_operator	285
-#define	XOR_assignment_operator	286
-#define	OR_assignment_operator	287
-#define	AND_assignment_operator	288
-#define	modulo_assignment_operator	289
-#define	multiplication_assignment_operator	290
-#define	division_assignment_operator	291
-#define	addition_assignment_operator	292
-#define	subtraction_assignment_operator	293
-#define	assignment_operator	294
-#define	OR_operator	295
-#define	AND_operator	296
-#define	pipe_operator	297
-#define	caret_operator	298
-#define	amp_operator	299
-#define	equality_operator	300
-#define	inequality_operator	301
-#define	lessthan_assignment_operator	302
-#define	lessthan_operator	303
-#define	greaterthan_assignment_operator	304
-#define	greaterthan_operator	305
-#define	leftshift_operator	306
-#define	rightshift_operator	307
-#define	add_operator	308
-#define	subtract_operator	309
-#define	multiplication_operator	310
-#define	division_operator	311
-#define	modulo_operator	312
-#define	SIZEOF	313
-#define	tilde_operator	314
-#define	exclamation_operator	315
-#define	increment_operator	316
-#define	decrement_operator	317
+#define	PRINTF	276
+#define	CONTINUE	277
+#define	identifier	278
+#define	array_identifier	279
+#define	func_identifier	280
+#define	integer_constant	281
+#define	string_constant	282
+#define	float_constant	283
+#define	character_constant	284
+#define	ELSE	285
+#define	leftshift_assignment_operator	286
+#define	rightshift_assignment_operator	287
+#define	XOR_assignment_operator	288
+#define	OR_assignment_operator	289
+#define	AND_assignment_operator	290
+#define	modulo_assignment_operator	291
+#define	multiplication_assignment_operator	292
+#define	division_assignment_operator	293
+#define	addition_assignment_operator	294
+#define	subtraction_assignment_operator	295
+#define	assignment_operator	296
+#define	OR_operator	297
+#define	AND_operator	298
+#define	pipe_operator	299
+#define	caret_operator	300
+#define	amp_operator	301
+#define	equality_operator	302
+#define	inequality_operator	303
+#define	lessthan_assignment_operator	304
+#define	lessthan_operator	305
+#define	greaterthan_assignment_operator	306
+#define	greaterthan_operator	307
+#define	leftshift_operator	308
+#define	rightshift_operator	309
+#define	add_operator	310
+#define	subtract_operator	311
+#define	multiplication_operator	312
+#define	division_operator	313
+#define	modulo_operator	314
+#define	SIZEOF	315
+#define	tilde_operator	316
+#define	exclamation_operator	317
+#define	increment_operator	318
+#define	decrement_operator	319
 
 
 #line 169 "/usr/share/bison++/bison.h"
@@ -312,6 +314,8 @@ static const int FOR;
 static const int DO;
 static const int BREAK;
 static const int ENDIF;
+static const int PRINTF;
+static const int CONTINUE;
 static const int identifier;
 static const int array_identifier;
 static const int func_identifier;
@@ -380,48 +384,50 @@ static const int decrement_operator;
 	,DO=273
 	,BREAK=274
 	,ENDIF=275
-	,identifier=276
-	,array_identifier=277
-	,func_identifier=278
-	,integer_constant=279
-	,string_constant=280
-	,float_constant=281
-	,character_constant=282
-	,ELSE=283
-	,leftshift_assignment_operator=284
-	,rightshift_assignment_operator=285
-	,XOR_assignment_operator=286
-	,OR_assignment_operator=287
-	,AND_assignment_operator=288
-	,modulo_assignment_operator=289
-	,multiplication_assignment_operator=290
-	,division_assignment_operator=291
-	,addition_assignment_operator=292
-	,subtraction_assignment_operator=293
-	,assignment_operator=294
-	,OR_operator=295
-	,AND_operator=296
-	,pipe_operator=297
-	,caret_operator=298
-	,amp_operator=299
-	,equality_operator=300
-	,inequality_operator=301
-	,lessthan_assignment_operator=302
-	,lessthan_operator=303
-	,greaterthan_assignment_operator=304
-	,greaterthan_operator=305
-	,leftshift_operator=306
-	,rightshift_operator=307
-	,add_operator=308
-	,subtract_operator=309
-	,multiplication_operator=310
-	,division_operator=311
-	,modulo_operator=312
-	,SIZEOF=313
-	,tilde_operator=314
-	,exclamation_operator=315
-	,increment_operator=316
-	,decrement_operator=317
+	,PRINTF=276
+	,CONTINUE=277
+	,identifier=278
+	,array_identifier=279
+	,func_identifier=280
+	,integer_constant=281
+	,string_constant=282
+	,float_constant=283
+	,character_constant=284
+	,ELSE=285
+	,leftshift_assignment_operator=286
+	,rightshift_assignment_operator=287
+	,XOR_assignment_operator=288
+	,OR_assignment_operator=289
+	,AND_assignment_operator=290
+	,modulo_assignment_operator=291
+	,multiplication_assignment_operator=292
+	,division_assignment_operator=293
+	,addition_assignment_operator=294
+	,subtraction_assignment_operator=295
+	,assignment_operator=296
+	,OR_operator=297
+	,AND_operator=298
+	,pipe_operator=299
+	,caret_operator=300
+	,amp_operator=301
+	,equality_operator=302
+	,inequality_operator=303
+	,lessthan_assignment_operator=304
+	,lessthan_operator=305
+	,greaterthan_assignment_operator=306
+	,greaterthan_operator=307
+	,leftshift_operator=308
+	,rightshift_operator=309
+	,add_operator=310
+	,subtract_operator=311
+	,multiplication_operator=312
+	,division_operator=313
+	,modulo_operator=314
+	,SIZEOF=315
+	,tilde_operator=316
+	,exclamation_operator=317
+	,increment_operator=318
+	,decrement_operator=319
 
 
 #line 215 "/usr/share/bison++/bison.h"
