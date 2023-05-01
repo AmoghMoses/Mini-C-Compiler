@@ -18,6 +18,7 @@ int main()
     }
     for(i = 0; i < 5; i++){}
     int xx = add(i, var1);
-    // printf("%d, %d", var1, hi);
+    // printf("%d, %d", var1);
+    printf("Hello world\n");
     // arr[arr[arr[1]]] = 3;
 }

@@ -39,7 +39,20 @@
 	char getfirst(char*);
 	extern int params_count;
 	int call_params_count;
+	struct node *head;
+	struct node { 
+		struct node *left; 
+		struct node *right; 
+		char *token; 
+	};
 %}
+
+%union { 
+	struct var_name { 
+		char name[100]; 
+		struct node* nd;
+	} nd_obj; 
+}
 
 %nonassoc IF
 %token INT CHAR FLOAT DOUBLE LONG SHORT SIGNED UNSIGNED STRUCT
@@ -54,6 +67,13 @@
 
 %token identifier array_identifier
 %token integer_constant string_constant float_constant character_constant
+
+
+%token <nd_obj> 
+%type <nd_obj> declaration_list program conditional_statements iterative_statements expression return_statement
+%type <nd_obj> simple_expression and_expression unary_relation_expression regular_expression
+%type <nd_obj> sum_expression term factor mutable immutable constant
+
 
 %nonassoc ELSE
 
@@ -84,7 +104,11 @@
 
 %%
 program
-			: declaration_list ;
+			: declaration_list {
+				$$.nd = mknode(NULL, NULL, "program");
+				head = $$.nd;
+                printf("HI HI\n");
+			};
 
 declaration_list
 			: declaration D ;
@@ -465,6 +489,10 @@ void insertSTvalue(char *, char *);
 void incertCT(char *, char *);
 void printST();
 void printCT();
+void printInorder(struct node *tree);
+void printtree(struct node* tree);
+struct node* mknode(struct node *left, struct node *right, char *token);
+
 
 
 
@@ -487,6 +515,38 @@ int main(int argc , char **argv)
 
 printf("\n........................Prakhar doing task 4...................\n");
 
+printtree(head);
+
+}
+
+
+struct node* mknode(struct node *left, struct node *right, char *token) {	
+	struct node *newnode = (struct node *)malloc(sizeof(struct node));
+	char *newstr = (char *)malloc(strlen(token)+1);
+	strcpy(newstr, token);
+	newnode->left = left;
+	
+
+newnode->right = right;
+	newnode->token = newstr;
+	return(newnode);
+}
+
+void printtree(struct node* tree) {
+	printf("\n\n Inorder traversal of the Parse Tree: \n\n");
+	printInorder(tree);
+	printf("\n\n");
+}
+
+void printInorder(struct node *tree) {
+	int i;
+	if (tree->left) {
+		printInorder(tree->left);
+	}
+	printf("%s, ", tree->token);
+	if (tree->right) {
+		printInorder(tree->right);
+	}
 }
 
 void yyerror(char *s)

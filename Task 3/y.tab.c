@@ -1,7 +1,7 @@
 #define YY_parse_h_included
 /*#define YY_USE_CLASS 
 */
-/*  A Bison++ parser, made from amogh.y  */
+/*  A Bison++ parser, made from syntaxtree.y  */
 
  /* with Bison++ version bison++ Version 1.21.9-1, adapted from GNU bison by coetmeur@icdc.fr
 Maintained by Magnus Ekdahl <magnus@debian.org>
@@ -98,7 +98,7 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 #define YYBISON 1  
 
  #line 88 "/usr/share/bison++/bison.cc"
-#line 1 "amogh.y"
+#line 1 "syntaxtree.y"
 
 	void yyerror(char* s);
 	int yylex();
@@ -106,9 +106,12 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 	#include "stdlib.h"
 	#include "ctype.h"
 	#include "string.h"
+	#include "stdarg.h"
 	void ins();
 	void insV();
 	int flag=0;
+
+
 	#define ANSI_COLOR_RED		"\x1b[31m"
 	#define ANSI_COLOR_GREEN	"\x1b[32m"
 	#define ANSI_COLOR_CYAN		"\x1b[36m"
@@ -137,13 +140,24 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 	char getfirst(char*);
 	extern int params_count;
 	int call_params_count;
+	struct node *head;
+	struct node { 
+		struct node *left; 
+		struct node *right; 
+		char *token; 
+	};
 
-	struct ast_node {
-    int type;       // type of the node (e.g. operator, literal, variable)
-    char* value;    // value of the node (e.g. "+", "42", "x")
-    int num_children;   // number of children of the node
-    struct ast_node** children; // array of pointers to the node's children
-};
+#line 50 "syntaxtree.y"
+typedef union { 
+	struct var_name { 
+		char name[100]; 
+		struct node* nd;
+	} nd_obj; 
+} yy_parse_stype;
+#define YY_parse_STYPE yy_parse_stype
+#ifndef YY_USE_CLASS
+#define YYSTYPE yy_parse_stype
+#endif
 
 #line 88 "/usr/share/bison++/bison.cc"
 /* %{ and %header{ and %union, during decl */
@@ -198,12 +212,6 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 /* section apres lecture def, avant lecture grammaire S2 */
 
  #line 134 "/usr/share/bison++/bison.cc"
-#ifndef YY_USE_CLASS
-# ifndef YYSTYPE
-#  define YYSTYPE int
-#  define YYSTYPE_IS_TRIVIAL 1
-# endif
-#endif
 
 #line 134 "/usr/share/bison++/bison.cc"
 /* prefix */
@@ -821,24 +829,24 @@ static const short yyrhs[] = {    73,
 
 #if (YY_parse_DEBUG != 0) || defined(YY_parse_ERROR_VERBOSE) 
 static const short yyrline[] = { 0,
-    89,    92,    95,    96,    99,   100,   103,   106,   109,   110,
-   113,   114,   114,   114,   119,   120,   121,   122,   127,   128,
-   131,   132,   133,   134,   137,   140,   141,   142,   146,   147,
-   150,   151,   154,   155,   156,   159,   160,   161,   164,   165,
-   166,   169,   170,   171,   174,   175,   176,   177,   180,   181,
-   184,   184,   184,   184,   185,   186,   187,   188,   189,   192,
-   192,   192,   192,   195,   195,   195,   195,   198,   198,   201,
-   201,   204,   207,   210,   213,   213,   216,   216,   219,   222,
-   223,   226,   226,   229,   230,   233,   234,   235,   236,   237,
-   238,   239,   240,   241,   244,   244,   247,   248,   251,   252,
-   255,   255,   258,   259,   262,   263,   263,   263,   264,   264,
-   267,   268,   281,   284,   285,   286,   289,   292,   295,   298,
-   299,   302,   305,   306,   309,   310,   313,   314,   317,   325,
-   331,   337,   343,   349,   355,   356,   357,   361,   362,   365,
-   366,   370,   371,   374,   375,   378,   378,   378,   379,   379,
-   379,   382,   383,   386,   387,   390,   391,   394,   394,   394,
-   397,   398,   401,   414,   422,   423,   424,   427,   432,   445,
-   445,   448,   448,   451,   452,   452,   455,   456,   457,   458
+   107,   114,   117,   118,   121,   122,   125,   128,   131,   132,
+   135,   136,   136,   136,   141,   142,   143,   144,   149,   150,
+   153,   154,   155,   156,   159,   162,   163,   164,   168,   169,
+   172,   173,   176,   177,   178,   181,   182,   183,   186,   187,
+   188,   191,   192,   193,   196,   197,   198,   199,   202,   203,
+   206,   206,   206,   206,   207,   208,   209,   210,   211,   214,
+   214,   214,   214,   217,   217,   217,   217,   220,   220,   223,
+   223,   226,   229,   232,   235,   235,   238,   238,   241,   244,
+   245,   248,   248,   251,   252,   255,   256,   257,   258,   259,
+   260,   261,   262,   263,   266,   266,   269,   270,   273,   274,
+   277,   277,   280,   281,   284,   285,   285,   285,   286,   286,
+   289,   290,   303,   306,   307,   308,   311,   314,   317,   320,
+   321,   324,   327,   328,   331,   332,   335,   336,   339,   347,
+   353,   359,   365,   371,   377,   378,   379,   383,   384,   387,
+   388,   392,   393,   396,   397,   400,   400,   400,   401,   401,
+   401,   404,   405,   408,   409,   412,   413,   416,   416,   416,
+   419,   420,   423,   436,   444,   445,   446,   449,   454,   467,
+   467,   470,   470,   473,   474,   474,   477,   478,   479,   480
 };
 
 static const char * const yytname[] = {   "$","error","$illegal.","IF","INT",
@@ -1570,66 +1578,74 @@ YYLABEL(yyreduce)
 
   switch (yyn) {
 
+case 1:
+#line 107 "syntaxtree.y"
+{
+				yyval.nd_obj.nd = mknode(NULL, NULL, "program");
+				head = yyval.nd_obj.nd;
+                printf("HI HI\n");
+			;
+    break;}
 case 11:
-#line 113 "amogh.y"
+#line 135 "syntaxtree.y"
 {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  ;
     break;}
 case 13:
-#line 114 "amogh.y"
+#line 136 "syntaxtree.y"
 {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  ;
     break;}
 case 73:
-#line 207 "amogh.y"
+#line 229 "syntaxtree.y"
 { strcpy(currfunctype, curtype); strcpy(currfunc, curid); check_duplicate(curid); insertSTF(curid); ins(); ;
     break;}
 case 77:
-#line 216 "amogh.y"
+#line 238 "syntaxtree.y"
 { check_params(curtype); ;
     break;}
 case 78:
-#line 216 "amogh.y"
+#line 238 "syntaxtree.y"
 { insertSTparamscount(currfunc, params_count); ;
     break;}
 case 82:
-#line 226 "amogh.y"
+#line 248 "syntaxtree.y"
 { ins();insertSTnest(curid,1); params_count++; ;
     break;}
 case 95:
-#line 244 "amogh.y"
+#line 266 "syntaxtree.y"
 {currnest++;;
     break;}
 case 96:
-#line 244 "amogh.y"
+#line 266 "syntaxtree.y"
 {deletedata(currnest);currnest--;;
     break;}
 case 101:
-#line 255 "amogh.y"
-{if(yyvsp[-1]!=1){printf("Condition checking is not of type int\n");exit(0);};
+#line 277 "syntaxtree.y"
+{if(yyvsp[-1].nd_obj!=1){printf("Condition checking is not of type int\n");exit(0);};
     break;}
 case 105:
-#line 262 "amogh.y"
-{if(yyvsp[-1]!=1){printf("Condition checking is not of type int\n");exit(0);};
+#line 284 "syntaxtree.y"
+{if(yyvsp[-1].nd_obj!=1){printf("Condition checking is not of type int\n");exit(0);};
     break;}
 case 107:
-#line 263 "amogh.y"
-{if(yyvsp[-1]!=1){printf("Condition checking is not of type int\n");exit(0);};
+#line 285 "syntaxtree.y"
+{if(yyvsp[-1].nd_obj!=1){printf("Condition checking is not of type int\n");exit(0);};
     break;}
 case 109:
-#line 264 "amogh.y"
-{if(yyvsp[-1]!=1){printf("Condition checking is not of type int\n");exit(0);};
+#line 286 "syntaxtree.y"
+{if(yyvsp[-1].nd_obj!=1){printf("Condition checking is not of type int\n");exit(0);};
     break;}
 case 111:
-#line 267 "amogh.y"
+#line 289 "syntaxtree.y"
 {if(strcmp(currfunctype,"void")) {printf("Returning void of a non-void function\n"); exit(0);};
     break;}
 case 112:
-#line 268 "amogh.y"
+#line 290 "syntaxtree.y"
 { 	if(!strcmp(currfunctype, "void"))
 										{ 
 											yyerror("Function is void");
 										}
 
-										if((currfunctype[0]=='i' || currfunctype[0]=='c') && yyvsp[-1]!=1)
+										if((currfunctype[0]=='i' || currfunctype[0]=='c') && yyvsp[-1].nd_obj!=1)
 										{
 											printf("Expression doesn't match return type of function\n"); exit(0);
 										}
@@ -1637,135 +1653,135 @@ case 112:
 			                     	;
     break;}
 case 119:
-#line 295 "amogh.y"
+#line 317 "syntaxtree.y"
 {insV();;
     break;}
 case 129:
-#line 317 "amogh.y"
+#line 339 "syntaxtree.y"
 {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
+																	  if(yyvsp[-2].nd_obj==1 && yyvsp[0].nd_obj==1) 
 																	  {
-			                                                          yyval=1;
+			                                                          yyval.nd_obj=1;
 			                                                          } 
 			                                                          else 
-			                                                          {yyval=-1; printf("Type mismatch\n"); exit(0);} 
+			                                                          {yyval.nd_obj=-1; printf("Type mismatch\n"); exit(0);} 
 			                                                       ;
     break;}
 case 130:
-#line 325 "amogh.y"
+#line 347 "syntaxtree.y"
 {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
+																	  if(yyvsp[-2].nd_obj==1 && yyvsp[0].nd_obj==1) 
+			                                                          yyval.nd_obj=1; 
 			                                                          else 
-			                                                          {yyval=-1; printf("Type mismatch\n"); exit(0);} 
+			                                                          {yyval.nd_obj=-1; printf("Type mismatch\n"); exit(0);} 
 			                                                       ;
     break;}
 case 131:
-#line 331 "amogh.y"
+#line 353 "syntaxtree.y"
 {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
+																	  if(yyvsp[-2].nd_obj==1 && yyvsp[0].nd_obj==1) 
+			                                                          yyval.nd_obj=1; 
 			                                                          else 
-			                                                          {yyval=-1; printf("Type mismatch\n"); exit(0);} 
+			                                                          {yyval.nd_obj=-1; printf("Type mismatch\n"); exit(0);} 
 			                                                       ;
     break;}
 case 132:
-#line 337 "amogh.y"
+#line 359 "syntaxtree.y"
 {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
+																	  if(yyvsp[-2].nd_obj==1 && yyvsp[0].nd_obj==1) 
+			                                                          yyval.nd_obj=1; 
 			                                                          else 
-			                                                          {yyval=-1; printf("Type mismatch\n"); exit(0);} 
+			                                                          {yyval.nd_obj=-1; printf("Type mismatch\n"); exit(0);} 
 			                                                       ;
     break;}
 case 133:
-#line 343 "amogh.y"
+#line 365 "syntaxtree.y"
 {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
+																	  if(yyvsp[-2].nd_obj==1 && yyvsp[0].nd_obj==1) 
+			                                                          yyval.nd_obj=1; 
 			                                                          else 
-			                                                          {yyval=-1; printf("Type mismatch\n"); exit(0);} 
+			                                                          {yyval.nd_obj=-1; printf("Type mismatch\n"); exit(0);} 
 			                                                       ;
     break;}
 case 134:
-#line 349 "amogh.y"
+#line 371 "syntaxtree.y"
 {
-																	  if(yyvsp[-2]==1 && yyvsp[0]==1) 
-			                                                          yyval=1; 
+																	  if(yyvsp[-2].nd_obj==1 && yyvsp[0].nd_obj==1) 
+			                                                          yyval.nd_obj=1; 
 			                                                          else 
-			                                                          {yyval=-1; printf("Type mismatch\n"); exit(0);} 
+			                                                          {yyval.nd_obj=-1; printf("Type mismatch\n"); exit(0);} 
 			                                                       ;
     break;}
 case 135:
-#line 355 "amogh.y"
-{if(yyvsp[-1] == 1) yyval=1; else yyval=-1;;
+#line 377 "syntaxtree.y"
+{if(yyvsp[-1].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 136:
-#line 356 "amogh.y"
-{if(yyvsp[-1] == 1) yyval=1; else yyval=-1;;
+#line 378 "syntaxtree.y"
+{if(yyvsp[-1].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 137:
-#line 357 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 379 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 138:
-#line 361 "amogh.y"
-{if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;;
+#line 383 "syntaxtree.y"
+{if(yyvsp[-2].nd_obj == 1 && yyvsp[0].nd_obj==1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 139:
-#line 362 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 384 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 140:
-#line 365 "amogh.y"
-{if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;;
+#line 387 "syntaxtree.y"
+{if(yyvsp[-2].nd_obj == 1 && yyvsp[0].nd_obj==1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 141:
-#line 366 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 388 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 142:
-#line 370 "amogh.y"
-{if(yyvsp[0]==1) yyval=1; else yyval=-1;;
+#line 392 "syntaxtree.y"
+{if(yyvsp[0].nd_obj==1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 143:
-#line 371 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 393 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 144:
-#line 374 "amogh.y"
-{if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;;
+#line 396 "syntaxtree.y"
+{if(yyvsp[-2].nd_obj == 1 && yyvsp[0].nd_obj==1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 145:
-#line 375 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 397 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 152:
-#line 382 "amogh.y"
-{if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;;
+#line 404 "syntaxtree.y"
+{if(yyvsp[-2].nd_obj == 1 && yyvsp[0].nd_obj==1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 153:
-#line 383 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 405 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 156:
-#line 390 "amogh.y"
-{if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1;;
+#line 412 "syntaxtree.y"
+{if(yyvsp[-2].nd_obj == 1 && yyvsp[0].nd_obj==1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 157:
-#line 391 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 413 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 161:
-#line 397 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 419 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 162:
-#line 398 "amogh.y"
-{if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
+#line 420 "syntaxtree.y"
+{if(yyvsp[0].nd_obj == 1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 163:
-#line 401 "amogh.y"
+#line 423 "syntaxtree.y"
 {
 						  if(check_id_is_func(curid))
 						  {printf("Function name used as Identifier\n"); exit(8);}
@@ -1774,21 +1790,21 @@ case 163:
 			              if(!checkarray(curid))
 			              {printf("%s\n",curid);printf("Array ID has no subscript\n");exit(0);}
 			              if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
-			              yyval = 1;
+			              yyval.nd_obj = 1;
 			              else
-			              yyval = -1;
+			              yyval.nd_obj = -1;
 			              ;
     break;}
 case 165:
-#line 422 "amogh.y"
-{if(yyvsp[-1]==1) yyval=1; else yyval=-1;;
+#line 444 "syntaxtree.y"
+{if(yyvsp[-1].nd_obj==1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 167:
-#line 424 "amogh.y"
-{if(yyvsp[0]==1) yyval=1; else yyval=-1;;
+#line 446 "syntaxtree.y"
+{if(yyvsp[0].nd_obj==1) yyval.nd_obj=1; else yyval.nd_obj=-1;;
     break;}
 case 168:
-#line 427 "amogh.y"
+#line 449 "syntaxtree.y"
 {
 			             if(!check_declaration(curid, "Function"))
 			             { printf("Function not declared"); exit(0);} 
@@ -1797,7 +1813,7 @@ case 168:
 			             ;
     break;}
 case 169:
-#line 433 "amogh.y"
+#line 455 "syntaxtree.y"
 { if(strcmp(currfunccall,"printf"))
 							{ 
 								if(getSTparamscount(currfunccall)!=call_params_count)
@@ -1810,28 +1826,28 @@ case 169:
 						 ;
     break;}
 case 172:
-#line 448 "amogh.y"
+#line 470 "syntaxtree.y"
 { call_params_count++; ;
     break;}
 case 174:
-#line 451 "amogh.y"
+#line 473 "syntaxtree.y"
 { call_params_count++; ;
     break;}
 case 177:
-#line 455 "amogh.y"
-{  insV(); yyval=1; ;
+#line 477 "syntaxtree.y"
+{  insV(); yyval.nd_obj=1; ;
     break;}
 case 178:
-#line 456 "amogh.y"
-{  insV(); yyval=-1;;
+#line 478 "syntaxtree.y"
+{  insV(); yyval.nd_obj=-1;;
     break;}
 case 179:
-#line 457 "amogh.y"
+#line 479 "syntaxtree.y"
 {  insV(); ;
     break;}
 case 180:
-#line 458 "amogh.y"
-{  insV();yyval=1; ;
+#line 480 "syntaxtree.y"
+{  insV();yyval.nd_obj=1; ;
     break;}
 }
 
@@ -2037,7 +2053,7 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 460 "amogh.y"
+#line 482 "syntaxtree.y"
 
 
 extern FILE *yyin;
@@ -2048,47 +2064,18 @@ void insertSTvalue(char *, char *);
 void incertCT(char *, char *);
 void printST();
 void printCT();
+void printInorder(struct node *tree);
+void printtree(struct node* tree);
+struct node* mknode(struct node *left, struct node *right, char *token);
 
-FILE *filePointer; 
-filePointer = fopen("ast.txt", "w");
 
-struct ast_node* create_ast_node(char* type, char* value, int num_children, ...) {
-    struct ast_node* node = malloc(sizeof(struct ast_node));
-    node->type = type;
-    node->value = value;
-    node->num_children = num_children;
-    node->children = malloc(sizeof(struct ast_node*) * num_children);
-    va_list args;
-    va_start(args, num_children);
-    for (int i = 0; i < num_children; i++) {
-        node->children[i] = va_arg(args, struct ast_node*);
-    }
-    va_end(args);
-    return node;
-}
 
-void print_ast(struct ast_node* node, int depth) {
-    if (node == NULL) {
-        return;
-    }
-    for (int i = 0; i < depth; i++) {
-        fprintf(filePointer, "  "); // indent based on depth
-    }
-    fprintf(filePointer, "%s", node->type);
-    if (node->value != NULL) {
-        fprintf(filePointer, ": %s", node->value);
-    }
-    fprintf(filePointer, "\n");
-    for (int i = 0; i < node->num_children; i++) {
-        print_ast(node->children[i], depth + 1);
-    }
-}
 
 int main(int argc , char **argv)
 {
 	yyin = fopen(argv[1], "r");
 	yyparse();
-	printf("\nTattii....\n");
+
 	if(flag == 0)
 	{
 		printf(ANSI_COLOR_GREEN "Status: Parsing Complete - Valid" ANSI_COLOR_RESET "\n");
@@ -2101,13 +2088,40 @@ int main(int argc , char **argv)
 		printCT();
 	}
 
-printf("\n........................Prakhar making file....................\n");
+printf("\n........................Prakhar doing task 4...................\n");
+
+printtree(head);
+
+}
 
 
-// fclose(filePointer);
+struct node* mknode(struct node *left, struct node *right, char *token) {	
+	struct node *newnode = (struct node *)malloc(sizeof(struct node));
+	char *newstr = (char *)malloc(strlen(token)+1);
+	strcpy(newstr, token);
+	newnode->left = left;
+	
 
-print_ast(root_node, 0);
+newnode->right = right;
+	newnode->token = newstr;
+	return(newnode);
+}
 
+void printtree(struct node* tree) {
+	printf("\n\n Inorder traversal of the Parse Tree: \n\n");
+	printInorder(tree);
+	printf("\n\n");
+}
+
+void printInorder(struct node *tree) {
+	int i;
+	if (tree->left) {
+		printInorder(tree->left);
+	}
+	printf("%s, ", tree->token);
+	if (tree->right) {
+		printInorder(tree->right);
+	}
 }
 
 void yyerror(char *s)
