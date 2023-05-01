@@ -2,7 +2,7 @@
 	#include <stdio.h>
 	#include <string.h>
 	#include "y.tab.h"
-
+ 
 	#define ANSI_COLOR_RED		"\x1b[31m"
 	#define ANSI_COLOR_GREEN	"\x1b[32m"
 	#define ANSI_COLOR_YELLOW	"\x1b[33m"
@@ -10,7 +10,7 @@
 	#define ANSI_COLOR_MAGENTA	"\x1b[35m"
 	#define ANSI_COLOR_CYAN		"\x1b[36m"
 	#define ANSI_COLOR_RESET	"\x1b[0m"
-
+ 
 	struct symboltable
 	{
 		char name[100];
@@ -20,14 +20,14 @@
 		int lineno;
 		int length;
 	}ST[1001];
-
+ 
 	struct constanttable
 	{
 		char name[100];
 		char type[100];
 		int length;
 	}CT[1001];
-
+ 
 	int hash(char *str)
 	{
 		int value = 0;
@@ -40,7 +40,7 @@
 		}
 		return value;
 	}
-
+ 
 	int lookupST(char *str)
 	{
 		int value = hash(str);
@@ -64,7 +64,7 @@
 			return 0;
 		}
 	}
-
+ 
 	int lookupCT(char *str)
 	{
 		int value = hash(str);
@@ -84,7 +84,7 @@
 			return 0;
 		}
 	}
-
+ 
 	void insertST(char *str1, char *str2)
 	{
 		if(lookupST(str1))
@@ -102,9 +102,9 @@
 				insertSTline(str1,yylineno);
 				return;
 			}
-
+ 
 			int pos = 0;
-
+ 
 			for (int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(ST[i].length == 0)
@@ -113,13 +113,13 @@
 					break;
 				}
 			}
-
+ 
 			strcpy(ST[pos].name,str1);
 			strcpy(ST[pos].class,str2);
 			ST[pos].length = strlen(str1);
 		}
 	}
-
+ 
 	void insertSTtype(char *str1, char *str2)
 	{
 		for(int i = 0 ; i < 1001 ; i++)
@@ -130,7 +130,7 @@
 			}
 		}
     }
-
+ 
 	void insertSTvalue(char *str1, char *str2)
 	{
 		for(int i = 0 ; i < 1001 ; i++)
@@ -141,7 +141,7 @@
 			}
 		}
 	}
-
+ 
 	void insertSTline(char *str1, int line)
 	{
 		for(int i = 0 ; i < 1001 ; i++)
@@ -152,7 +152,7 @@
 			}
 		}
 	}
-
+ 
 	void insertCT(char *str1, char *str2)
 	{
 		if(lookupCT(str1))
@@ -167,9 +167,9 @@
 				CT[value].length = strlen(str1);
 				return;
 			}
-
+ 
 			int pos = 0;
-
+ 
 			for (int i = value + 1 ; i!=value ; i = (i+1)%1001)
 			{
 				if(CT[i].length == 0)
@@ -178,13 +178,13 @@
 					break;
 				}
 			}
-
+ 
 			strcpy(CT[pos].name,str1);
 			strcpy(CT[pos].type,str2);
 			CT[pos].length = strlen(str1);
 		}
 	}
-
+ 
 	void printST()
 	{
 		printf("%10s | %15s | %10s | %10s | %10s\n","SYMBOL", "CLASS", "TYPE","VALUE", "LINE NO");
@@ -201,8 +201,8 @@
 			printf("%10s | %15s | %10s | %10s | %10d\n",ST[i].name, ST[i].class, ST[i].type, ST[i].value, ST[i].lineno);
 		}
     }
-
-
+ 
+ 
 	void printCT()
 	{
 		printf("%10s | %15s\n","NAME", "TYPE");
@@ -214,20 +214,23 @@
 		{
 			if(CT[i].length == 0)
 				continue;
-
+ 
 			printf("%10s | %15s\n",CT[i].name, CT[i].type);
 		}
 	}
 	char curid[20];
 	char curtype[20];
 	char curval[20];
-
+ 
 %}
 
 DE "define"
 IN "include"
 
+
 %%
+
+
 \n 	{yylineno++;}
 ([#][" "]*({IN})[ ]*([<]?)([A-Za-z]+)[.]?([A-Za-z]*)([>]?))/["\n"|\/|" "|"\t"]	{ }
 ([#][" "]*({DE})[" "]*([A-Za-z]+)(" ")*[0-9]+)/["\n"|\/|" "|"\t"]				{ } 
@@ -244,7 +247,7 @@ IN "include"
 ("]"|":>") 		{ return(']'); }
 ":"				{ return(':'); }
 "."				{ return('.'); }
-
+ 
 "char"			{ strcpy(curtype,yytext); insertST(yytext, "Keyword"); return CHAR;}
 "double"		{ strcpy(curtype,yytext); insertST(yytext, "Keyword"); return DOUBLE;}
 "else"			{ insertSTline(yytext, yylineno); insertST(yytext, "Keyword"); return ELSE;}
@@ -265,7 +268,7 @@ IN "include"
 "break"			{ insertST(yytext, "Keyword");  return BREAK;}
 "continue"		{ insertST(yytext, "Keyword");  return CONTINUE;}
 "printf"        { insertST(yytext, "Keyword");  return PRINTF;}
-
+ 
 "++"			{ return increment_operator; }
 "--"			{ return decrement_operator; }
 "<<"			{ return leftshift_operator; }
@@ -299,14 +302,14 @@ IN "include"
 "%"				{ return modulo_operator; }
 "|"				{ return pipe_operator; }
 \=				{ return assignment_operator;}
-
-\"[^\n]*\"/[;|,|\)] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
+ 
+\"[^\"]*\"/[;|,|\)|\}] 			{strcpy(curval,yytext); insertCT(yytext,"String Constant"); return string_constant;}
 \'[A-Z|a-z]\'/[;|,|\)|:] 		{strcpy(curval,yytext); insertCT(yytext,"Character Constant"); return character_constant;}
 [a-z|A-Z]([a-z|A-Z]|[0-9])*/\[ 	{strcpy(curid,yytext); insertST(yytext, "Array Identifier");  return identifier;}
 [1-9][0-9]*|0/[;|,|" "|\)|\]|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\}|:|\n|\t|\^] 	{strcpy(curval,yytext); insertCT(yytext, "Number Constant"); return integer_constant;}
 ([0-9]*)\.([0-9]+)/[;|,|" "|\)|<|>|=|\!|\||&|\+|\-|\*|\/|\%|~|\n|\t|\^|\}] 	{strcpy(curval,yytext); insertCT(yytext, "Floating Constant"); return float_constant;}
 [A-Za-z_][A-Za-z_0-9]* {strcpy(curid,yytext);insertST(yytext,"Identifier");  return identifier;}
-
+ 
 (.?) {
 		if(yytext[0]=='#')
 		{
@@ -327,5 +330,5 @@ IN "include"
 		printf("%s\n", yytext);
 		return 0;
 }
-
+ 
 %%
