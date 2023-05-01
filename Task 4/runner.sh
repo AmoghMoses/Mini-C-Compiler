@@ -1,4 +1,4 @@
-yacc -d old.y  
-flex old.l
+yacc -d parser.y  
+flex lexer.l
 gcc y.tab.c lex.yy.c -ll
-./a.out test1.c
+./a.out test.c

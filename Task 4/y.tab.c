@@ -1,7 +1,7 @@
 #define YY_parse_h_included
 /*#define YY_USE_CLASS 
 */
-/*  A Bison++ parser, made from old.y  */
+/*  A Bison++ parser, made from parser.y  */
 
  /* with Bison++ version bison++ Version 1.21.9-1, adapted from GNU bison by coetmeur@icdc.fr
 Maintained by Magnus Ekdahl <magnus@debian.org>
@@ -98,7 +98,7 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 #define YYBISON 1  
 
  #line 88 "/usr/share/bison++/bison.cc"
-#line 1 "old.y"
+#line 1 "parser.y"
 
 	#include <stdio.h>
 	#include <string.h>
@@ -1611,111 +1611,111 @@ YYLABEL(yyreduce)
   switch (yyn) {
 
 case 10:
-#line 126 "old.y"
+#line 126 "parser.y"
 {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  ;
     break;}
 case 12:
-#line 127 "old.y"
+#line 127 "parser.y"
 {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  ;
     break;}
 case 32:
-#line 163 "old.y"
+#line 163 "parser.y"
 {if(yyval < 1) {printf("Wrong array size\n"); exit(0);} ;
     break;}
 case 72:
-#line 216 "old.y"
+#line 216 "parser.y"
 { strcpy(currfunctype, curtype); strcpy(currfunc, curid); check_duplicate(curid); insertSTF(curid); ins(); ;
     break;}
 case 73:
-#line 219 "old.y"
+#line 219 "parser.y"
 {params_count=0;;
     break;}
 case 74:
-#line 219 "old.y"
+#line 219 "parser.y"
 {funcgen();;
     break;}
 case 75:
-#line 219 "old.y"
+#line 219 "parser.y"
 {funcgenend();;
     break;}
 case 76:
-#line 222 "old.y"
+#line 222 "parser.y"
 { insertSTparamscount(currfunc, params_count); ;
     break;}
 case 77:
-#line 222 "old.y"
+#line 222 "parser.y"
 { insertSTparamscount(currfunc, params_count); ;
     break;}
 case 78:
-#line 225 "old.y"
+#line 225 "parser.y"
 { check_params(curtype);;
     break;}
 case 83:
-#line 235 "old.y"
+#line 235 "parser.y"
 { ins();insertSTnest(curid,1); params_count++; ;
     break;}
 case 96:
-#line 253 "old.y"
+#line 253 "parser.y"
 {currnest++;;
     break;}
 case 97:
-#line 253 "old.y"
+#line 253 "parser.y"
 {deletedata(currnest);currnest--;;
     break;}
 case 102:
-#line 264 "old.y"
+#line 264 "parser.y"
 {label1();if(yyvsp[-1]!=1){printf("Condition checking is not of type int\n");exit(0);};
     break;}
 case 103:
-#line 264 "old.y"
+#line 264 "parser.y"
 {label2();;
     break;}
 case 105:
-#line 267 "old.y"
+#line 267 "parser.y"
 {label3();;
     break;}
 case 106:
-#line 268 "old.y"
+#line 268 "parser.y"
 {label3();;
     break;}
 case 107:
-#line 271 "old.y"
+#line 271 "parser.y"
 {label4();;
     break;}
 case 108:
-#line 271 "old.y"
+#line 271 "parser.y"
 {label1();if(yyvsp[-1]!=1){printf("Condition checking is not of type int\n");exit(0);};
     break;}
 case 109:
-#line 271 "old.y"
+#line 271 "parser.y"
 {label5();;
     break;}
 case 110:
-#line 272 "old.y"
+#line 272 "parser.y"
 {label4();;
     break;}
 case 111:
-#line 272 "old.y"
+#line 272 "parser.y"
 {label1();if(yyvsp[-1]!=1){printf("Condition checking is not of type int\n");exit(0);};
     break;}
 case 112:
-#line 272 "old.y"
+#line 272 "parser.y"
 {label5();;
     break;}
 case 113:
-#line 273 "old.y"
+#line 273 "parser.y"
 {label4();;
     break;}
 case 114:
-#line 273 "old.y"
+#line 273 "parser.y"
 {label1();label5();if(yyvsp[-1]!=1){printf("Condition checking is not of type int\n");exit(0);};
     break;}
 case 116:
-#line 275 "old.y"
+#line 275 "parser.y"
 {if(strcmp(currfunctype,"void")) {printf("Returning void of a non-void function\n"); exit(0);};
     break;}
 case 117:
-#line 276 "old.y"
+#line 276 "parser.y"
 { 	if(!strcmp(currfunctype, "void"))
 										{ 
 											yyerror("Function is void");
@@ -1729,19 +1729,19 @@ case 117:
 									;
     break;}
 case 118:
-#line 289 "old.y"
+#line 289 "parser.y"
 {print();;
     break;}
 case 124:
-#line 303 "old.y"
+#line 303 "parser.y"
 {insV();;
     break;}
 case 134:
-#line 325 "old.y"
+#line 325 "parser.y"
 {push("=");;
     break;}
 case 135:
-#line 325 "old.y"
+#line 325 "parser.y"
 {   
 																	  if(yyvsp[-3]==1 && yyvsp[0]==1) 
 																	  {
@@ -1753,11 +1753,11 @@ case 135:
 			                                                       ;
     break;}
 case 136:
-#line 334 "old.y"
+#line 334 "parser.y"
 {push("+=");;
     break;}
 case 137:
-#line 334 "old.y"
+#line 334 "parser.y"
 {  
 																	  if(yyvsp[-3]==1 && yyvsp[0]==1) 
 			                                                          yyval=1; 
@@ -1767,11 +1767,11 @@ case 137:
 			                                                       ;
     break;}
 case 138:
-#line 341 "old.y"
+#line 341 "parser.y"
 {push("-=");;
     break;}
 case 139:
-#line 341 "old.y"
+#line 341 "parser.y"
 {	  
 																	  if(yyvsp[-3]==1 && yyvsp[0]==1) 
 			                                                          yyval=1; 
@@ -1781,11 +1781,11 @@ case 139:
 			                                                       ;
     break;}
 case 140:
-#line 348 "old.y"
+#line 348 "parser.y"
 {push("*=");;
     break;}
 case 141:
-#line 348 "old.y"
+#line 348 "parser.y"
 {
 																	  if(yyvsp[-3]==1 && yyvsp[0]==1) 
 			                                                          yyval=1; 
@@ -1795,11 +1795,11 @@ case 141:
 			                                                       ;
     break;}
 case 142:
-#line 355 "old.y"
+#line 355 "parser.y"
 {push("/=");;
     break;}
 case 143:
-#line 355 "old.y"
+#line 355 "parser.y"
 { 
 																	  if(yyvsp[-3]==1 && yyvsp[0]==1) 
 			                                                          yyval=1; 
@@ -1808,11 +1808,11 @@ case 143:
 			                                                       ;
     break;}
 case 144:
-#line 361 "old.y"
+#line 361 "parser.y"
 {push("%=");;
     break;}
 case 145:
-#line 361 "old.y"
+#line 361 "parser.y"
 { 
 																	  if(yyvsp[-3]==1 && yyvsp[-1]==1) 
 			                                                          yyval=1; 
@@ -1822,131 +1822,131 @@ case 145:
 																	;
     break;}
 case 146:
-#line 368 "old.y"
+#line 368 "parser.y"
 { push("++");if(yyvsp[-1] == 1) yyval=1; else yyval=-1; genunary();;
     break;}
 case 147:
-#line 369 "old.y"
+#line 369 "parser.y"
 {push("--");if(yyvsp[-1] == 1) yyval=1; else yyval=-1;;
     break;}
 case 148:
-#line 370 "old.y"
+#line 370 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 149:
-#line 374 "old.y"
+#line 374 "parser.y"
 {push("||");;
     break;}
 case 150:
-#line 374 "old.y"
+#line 374 "parser.y"
 {if(yyvsp[-3] == 1 && yyvsp[-1]==1) yyval=1; else yyval=-1; codegen();;
     break;}
 case 151:
-#line 375 "old.y"
+#line 375 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 152:
-#line 378 "old.y"
+#line 378 "parser.y"
 {push("&&");;
     break;}
 case 153:
-#line 378 "old.y"
+#line 378 "parser.y"
 {if(yyvsp[-3] == 1 && yyvsp[-1]==1) yyval=1; else yyval=-1; codegen();;
     break;}
 case 154:
-#line 379 "old.y"
+#line 379 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 155:
-#line 383 "old.y"
+#line 383 "parser.y"
 {push("!");;
     break;}
 case 156:
-#line 383 "old.y"
+#line 383 "parser.y"
 {if(yyvsp[-1]==1) yyval=1; else yyval=-1; codegen();;
     break;}
 case 157:
-#line 384 "old.y"
+#line 384 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 158:
-#line 387 "old.y"
+#line 387 "parser.y"
 {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1; codegen();;
     break;}
 case 159:
-#line 388 "old.y"
+#line 388 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 160:
-#line 391 "old.y"
+#line 391 "parser.y"
 {push(">=");;
     break;}
 case 161:
-#line 391 "old.y"
+#line 391 "parser.y"
 {push("<=");;
     break;}
 case 162:
-#line 391 "old.y"
+#line 391 "parser.y"
 {push(">");;
     break;}
 case 163:
-#line 391 "old.y"
+#line 391 "parser.y"
 {push("<");;
     break;}
 case 164:
-#line 391 "old.y"
+#line 391 "parser.y"
 {push("==");;
     break;}
 case 165:
-#line 391 "old.y"
+#line 391 "parser.y"
 {push("!=");;
     break;}
 case 166:
-#line 394 "old.y"
+#line 394 "parser.y"
 {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1; codegen();;
     break;}
 case 167:
-#line 395 "old.y"
+#line 395 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 168:
-#line 398 "old.y"
+#line 398 "parser.y"
 {push("+");;
     break;}
 case 169:
-#line 399 "old.y"
+#line 399 "parser.y"
 {push("-");;
     break;}
 case 170:
-#line 402 "old.y"
+#line 402 "parser.y"
 {if(yyvsp[-2] == 1 && yyvsp[0]==1) yyval=1; else yyval=-1; codegen();;
     break;}
 case 171:
-#line 403 "old.y"
+#line 403 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 172:
-#line 406 "old.y"
+#line 406 "parser.y"
 {push("*");;
     break;}
 case 173:
-#line 406 "old.y"
+#line 406 "parser.y"
 {push("/");;
     break;}
 case 174:
-#line 406 "old.y"
+#line 406 "parser.y"
 {push("%");;
     break;}
 case 175:
-#line 409 "old.y"
+#line 409 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 176:
-#line 410 "old.y"
+#line 410 "parser.y"
 {if(yyvsp[0] == 1) yyval=1; else yyval=-1;;
     break;}
 case 177:
-#line 413 "old.y"
+#line 413 "parser.y"
 {
 						  push(curid);
 						  if(check_id_is_func(curid))
@@ -1962,7 +1962,7 @@ case 177:
 			              ;
     break;}
 case 178:
-#line 426 "old.y"
+#line 426 "parser.y"
 {if(!checkscope(curid)){printf("%s\n",curid);printf("Undeclared\n");exit(0);}
 			                   	if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
 			              		yyval = 1;
@@ -1971,19 +1971,19 @@ case 178:
 			              		;
     break;}
 case 179:
-#line 434 "old.y"
+#line 434 "parser.y"
 {if(yyvsp[-1]==1) yyval=1; else yyval=-1;;
     break;}
 case 180:
-#line 435 "old.y"
+#line 435 "parser.y"
 {if(yyvsp[0]==-1) yyval=-1; else yyval=1;;
     break;}
 case 181:
-#line 436 "old.y"
+#line 436 "parser.y"
 {if(yyvsp[0]==1) yyval=1; else yyval=-1;;
     break;}
 case 182:
-#line 439 "old.y"
+#line 439 "parser.y"
 {
 
 			             if(!check_declaration(curid, "Function"))
@@ -2000,7 +2000,7 @@ case 182:
 			             ;
     break;}
 case 183:
-#line 454 "old.y"
+#line 454 "parser.y"
 { if(strcmp(currfunccall,"printf"))
 							{ 
 								if(getSTparamscount(currfunccall)!=call_params_count)
@@ -2013,47 +2013,47 @@ case 183:
 						 ;
     break;}
 case 186:
-#line 469 "old.y"
+#line 469 "parser.y"
 { call_params_count++; ;
     break;}
 case 187:
-#line 470 "old.y"
+#line 470 "parser.y"
 { call_params_count++; ;
     break;}
 case 188:
-#line 472 "old.y"
+#line 472 "parser.y"
 {arggen(1);;
     break;}
 case 189:
-#line 472 "old.y"
+#line 472 "parser.y"
 {arggen(2);;
     break;}
 case 190:
-#line 472 "old.y"
+#line 472 "parser.y"
 {arggen(3);;
     break;}
 case 191:
-#line 472 "old.y"
+#line 472 "parser.y"
 {arggen(4);;
     break;}
 case 192:
-#line 472 "old.y"
+#line 472 "parser.y"
 {arggen(5);;
     break;}
 case 193:
-#line 475 "old.y"
+#line 475 "parser.y"
 {  insV(); codegencon(); yyval=1; ;
     break;}
 case 194:
-#line 476 "old.y"
+#line 476 "parser.y"
 {  insV(); codegencon();yyval=-1;;
     break;}
 case 195:
-#line 477 "old.y"
+#line 477 "parser.y"
 {  insV(); codegencon();;
     break;}
 case 196:
-#line 478 "old.y"
+#line 478 "parser.y"
 {  insV(); codegencon();yyval=1; ;
     break;}
 }
@@ -2260,7 +2260,7 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 480 "old.y"
+#line 480 "parser.y"
 
 
 extern FILE *yyin;
