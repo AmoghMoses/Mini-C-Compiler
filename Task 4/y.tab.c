@@ -2443,13 +2443,13 @@ int main(int argc , char **argv)
 	if(flag == 0)
 	{
 		printf(ANSI_COLOR_GREEN "Status: Parsing Complete - Valid" ANSI_COLOR_RESET "\n");
-		printf("%30s" ANSI_COLOR_CYAN "SYMBOL TABLE" ANSI_COLOR_RESET "\n", " ");
-		printf("%30s %s\n", " ", "------------");
-		printST();
+		// printf("%30s" ANSI_COLOR_CYAN "SYMBOL TABLE" ANSI_COLOR_RESET "\n", " ");
+		// printf("%30s %s\n", " ", "------------");
+		// printST();
 
-		printf("\n\n%30s" ANSI_COLOR_CYAN "CONSTANT TABLE" ANSI_COLOR_RESET "\n", " ");
-		printf("%30s %s\n", " ", "--------------");
-		printCT();
+		// printf("\n\n%30s" ANSI_COLOR_CYAN "CONSTANT TABLE" ANSI_COLOR_RESET "\n", " ");
+		// printf("%30s %s\n", " ", "--------------");
+		// printCT();
 	}
 }
 

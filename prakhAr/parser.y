@@ -37,13 +37,14 @@
 	extern int params_count;
 	int call_params_count;
 
-	struct ast_node {
-    int type;       // type of the node (e.g. operator, literal, variable)
-    char* value;    // value of the node (e.g. "+", "42", "x")
-    int num_children;   // number of children of the node
-    struct ast_node** children; // array of pointers to the node's children
-};
+// 	struct ast_node {
+//     int type;       // type of the node (e.g. operator, literal, variable)
+//     char* value;    // value of the node (e.g. "+", "42", "x")
+//     int num_children;   // number of children of the node
+//     struct ast_node** children; // array of pointers to the node's children
+// };
 %}
+
 
 %nonassoc IF
 %token INT CHAR FLOAT DOUBLE LONG SHORT SIGNED UNSIGNED STRUCT
@@ -83,6 +84,7 @@
 
 
 %start program
+
 
 %%
 program
@@ -468,37 +470,7 @@ void incertCT(char *, char *);
 void printST();
 void printCT();
 
-struct ast_node* create_ast_node(char* type, char* value, int num_children, ...) {
-    struct ast_node* node = malloc(sizeof(struct ast_node));
-    node->type = type;
-    node->value = value;
-    node->num_children = num_children;
-    node->children = malloc(sizeof(struct ast_node*) * num_children);
-    va_list args;
-    va_start(args, num_children);
-    for (int i = 0; i < num_children; i++) {
-        node->children[i] = va_arg(args, struct ast_node*);
-    }
-    va_end(args);
-    return node;
-}
 
-void print_ast(struct ast_node* node, int depth) {
-    if (node == NULL) {
-        return;
-    }
-    for (int i = 0; i < depth; i++) {
-        fprintf("  "); // indent based on depth
-    }
-    fprintf("%s", node->type);
-    if (node->value != NULL) {
-        fprintf(": %s", node->value);
-    }
-    fprintf("\n");
-    for (int i = 0; i < node->num_children; i++) {
-        print_ast(node->children[i], depth + 1);
-    }
-}
 
 int main(int argc , char **argv)
 {
