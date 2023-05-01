@@ -3,22 +3,27 @@
 ## How to Compile and Run 
 
 ### Task 1
-`flex task1.l`  
+`flex scanner.l`  
 `gcc lex.yy.c -ll`  
 `./a.out`
 
 ### Task 2
-`yacc -d task2.y`  
-`flex task2.l`  
+`yacc -d parser.y`  
+`flex scanner.l`  
 `gcc y.tab.c lex.yy.c -ll`  
 `./a.out`
 
 ### Task 3
-
+`yacc -d parser.y`  
+`flex scanner.l`  
+`gcc y.tab.c lex.yy.c -ll`  
+`./a.out`
 
 ### Task 4
-
-
+`yacc -d parser.y`  
+`flex scanner.l`  
+`gcc y.tab.c lex.yy.c -ll`  
+`./a.out`
 
 ### Task 5
 
