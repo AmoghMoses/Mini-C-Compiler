@@ -100,12 +100,37 @@ vdi
 	| assignment_operator expression 
     | ;
 
+array_random_access
+	: identifier '[' array_random_access_breakup ']'
+	| identifier '[' array_random_access_breakup ']' '[' array_random_access_breakup ']';
+
+// array_random_access_breakup
+// 	: array_random_access_breakup_1d;
+// 	| array_random_access_breakup_2d;
+
+array_random_access_breakup
+	: integer_constant
+	| identifier
+	| array_random_access;
+
+// array_random_access_breakup_2d
+// 	: integer_constant ']' '[' integer_constant
+// 	| integer_constant ']' '[' identifier
+// 	| integer_constant ']' '[' array_random_access
+// 	| identifier ']' '[' integer_constant
+// 	| identifier ']' '[' identifier
+// 	| identifier ']' '[' array_random_access
+// 	| array_random_access ']' '[' integer_constant
+// 	| array_random_access ']' '[' identifier
+// 	| array_random_access ']' '[' array_random_access;
+
 
 // handle 2d array here
 
 identifier_twod_array_type
 			: '[' integer_constant ']' '['initialization_params_new
-			| '[' identifier ']' '['initialization_params_new;
+			| '[' identifier ']' '['initialization_params_new
+			| '[' ']' '[' initialization_params_new; 
 
 identifier_array_type
 			: '[' initialization_params;
@@ -121,6 +146,7 @@ initialization_params_2d
 
 initialization_params
 			: integer_constant ']' initialization
+			| ']' initialization
 			| ']' string_initialization;
 
 initialization
@@ -131,19 +157,22 @@ initialization
 initialization_2d 
 			: assignment_operator '{' array_init_int_2d '}'
 			| assignment_operator '{' array_init_float_2d '}' 
-			| assignment_operator '{' string_init_2d '}';
+			| assignment_operator '{' array_init_string_2d '}';
 
 
 array_init_int_2d
 			: '{' array_int_declarations '}' ',' array_init_int_2d
-			| '{' array_int_declarations '}';
+			| '{' array_int_declarations '}'
+			| integer_constant;
 
 array_init_float_2d
 			: '{' array_float_declarations '}' ',' array_init_float_2d
-			| '{' array_float_declarations '}';
+			| '{' array_float_declarations '}'
+			| integer_constant
+			| float_constant;
 
-string_init_2d 
-			: string_constant ',' string_init_2d
+array_init_string_2d 
+			: string_constant ',' array_init_string_2d
 			| string_constant;
 
 
@@ -212,8 +241,12 @@ statement
 			| variable_declaration | printf_statement | continue_statement;
 
 printf_statement
-			: PRINTF '(' string_constant ',' identifier ')' ';'
-			| PRINTF '(' string_constant ')' ';';
+			: PRINTF '(' string_constant printf_identifier_list ')' ';';
+
+printf_identifier_list
+			: ',' identifier printf_identifier_list
+			| ',' array_random_access printf_identifier_list
+			| ;
 
 continue_statement
 			: CONTINUE ';';
@@ -265,7 +298,8 @@ array_int_declarations
 			: integer_constant array_int_declarations_breakup;
 
 array_float_declarations
-			: float_constant array_float_declarations_breakup;
+			: float_constant array_float_declarations_breakup 
+			| integer_constant array_float_declarations_breakup;
 
 array_int_declarations_breakup
 			: ',' array_int_declarations 
@@ -337,6 +371,7 @@ factor
 
 mutable 
 			: identifier 
+			| array_random_access
 			| mutable mutable_breakup;
 
 mutable_breakup
