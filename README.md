@@ -5,25 +5,25 @@
 ### Task 1
 `flex scanner.l`  
 `gcc lex.yy.c -ll`  
-`./a.out`
+`./a.out test.c`
 
 ### Task 2
 `yacc -d parser.y`  
 `flex scanner.l`  
 `gcc y.tab.c lex.yy.c -ll`  
-`./a.out`
+`./a.out test.c`
 
 ### Task 3
 `yacc -d parser.y`  
 `flex scanner.l`  
 `gcc y.tab.c lex.yy.c -ll`  
-`./a.out`
+`./a.out test.c`
 
 ### Task 4
 `yacc -d parser.y`  
 `flex scanner.l`  
 `gcc y.tab.c lex.yy.c -ll`  
-`./a.out`
+`./a.out test.c`
 
 ### Task 5
 

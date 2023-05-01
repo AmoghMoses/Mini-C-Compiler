@@ -44,10 +44,12 @@
 %token VOID
 %token WHILE FOR DO 
 %token BREAK
+%token PRINTF
+%token CONTINUE
 %token ENDIF
-%expect 1
+%expect 1 
 
-%token identifier array_identifier func_identifier
+%token identifier
 %token integer_constant string_constant float_constant character_constant
 
 %nonassoc ELSE
@@ -82,7 +84,7 @@ program
 			: declaration_list;
 
 declaration_list
-			: declaration D 
+			: declaration D ;
 
 D
 			: declaration_list
@@ -90,34 +92,87 @@ D
 
 declaration
 			: variable_declaration 
-			| function_declaration
+			| function_declaration ;
 
 variable_declaration
-			: type_specifier variable_declaration_list ';' 
+			: type_specifier variable_declaration_list ';' ;
 
 variable_declaration_list
-			: variable_declaration_list ',' variable_declaration_identifier | variable_declaration_identifier;
-
-variable_declaration_identifier 
-			: identifier {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi   
-			  | array_identifier {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi;
-			
-			
-
-vdi : identifier_array_type | assignment_operator simple_expression  ; 
-
-identifier_array_type
-			: '[' initilization_params
+			: variable_declaration_identifier V;
+ 
+V
+			: ',' variable_declaration_list 
 			| ;
 
-initilization_params
-			: integer_constant ']' initilization {if($$ < 1) {printf("Wrong array size\n"); exit(0);} }
-			| ']' string_initilization;
+variable_declaration_identifier 
+			: identifier {if(duplicate(curid)){printf("Duplicate\n");exit(0);}insertSTnest(curid,currnest); ins();  } vdi;
+			
+			
+//Handle
+vdi 
+    : identifier_array_type 
+	| identifier_twod_array_type   
+	| assignment_operator expression 
+    | ;
+
+//Handle
+
+array_random_access
+	: identifier '[' array_random_access_breakup ']'
+	| identifier '[' array_random_access_breakup ']' '[' array_random_access_breakup ']';
+
+array_random_access_breakup
+	: integer_constant
+	| identifier
+	| array_random_access
+	| expression;
+
+identifier_array_type
+			: '[' initialization_params;
+
+identifier_twod_array_type
+			: '[' integer_constant ']' '[' initialization_params_new
+			| '[' identifier ']' '[' initialization_params_new
+			| '[' ']' '[' initialization_params_new; 
+
+//Handle
+initialization_params_new
+			: initialization_params_2d ']' initialization_2d 
+			| initialization_params_2d ']';
+ 
+initialization_params_2d
+			: integer_constant
+			| identifier;
+
+initialization_params
+			: integer_constant ']' initialization
+			| ']' initialization
+			| ']' string_initialization;
 
 initilization
 			: string_initilization
 			| array_initialization
 			| ;
+
+initialization_2d 
+			: assignment_operator '{' array_init_int_2d '}'
+			| assignment_operator '{' array_init_float_2d '}' 
+			| assignment_operator '{' array_init_string_2d '}';
+
+array_init_int_2d
+			: '{' array_int_declarations '}' ',' array_init_int_2d
+			| '{' array_int_declarations '}'
+			| integer_constant;
+
+array_init_float_2d
+			: '{' array_float_declarations '}' ',' array_init_float_2d
+			| '{' array_float_declarations '}'
+			| integer_constant
+			| float_constant;
+
+array_init_string_2d 
+			: string_constant ',' array_init_string_2d
+			| string_constant;
 
 type_specifier 
 			: INT | CHAR | FLOAT  | DOUBLE  
@@ -172,7 +227,7 @@ statement
 			: expression_statment | compound_statement 
 			| conditional_statements | iterative_statements 
 			| return_statement | break_statement 
-			| variable_declaration;
+			| variable_declaration | printf_statement | continue_statement;
 
 compound_statement 
 			: {currnest++;} '{'  statment_list  '}' {deletedata(currnest);currnest--;}  ;
@@ -196,6 +251,7 @@ iterative_statements
 			: WHILE '(' simple_expression ')' {if($3!=1){printf("Condition checking is not of type int\n");exit(0);}} statement 
 			| FOR '(' expression ';' simple_expression ';' {if($5!=1){printf("Condition checking is not of type int\n");exit(0);}} expression ')' 
 			| DO statement WHILE '(' simple_expression ')'{if($5!=1){printf("Condition checking is not of type int\n");exit(0);}} ';';
+
 return_statement 
 			: RETURN ';' {if(strcmp(currfunctype,"void")) {printf("Returning void of a non-void function\n"); exit(0);}}
 			| RETURN expression ';' { 	if(!strcmp(currfunctype, "void"))
@@ -209,6 +265,17 @@ return_statement
 										}
 			              
 			                     	};
+//Handle Semantics
+printf_statement
+			: PRINTF '(' string_constant printf_identifier_list ')' ';';
+
+printf_identifier_list
+			: ',' identifier printf_identifier_list
+			| ',' array_random_access printf_identifier_list
+			| ;
+
+continue_statement
+			: CONTINUE ';';
 
 break_statement 
 			: BREAK ';' ;
@@ -217,13 +284,22 @@ string_initilization
 			: assignment_operator string_constant {insV();} ;
 
 array_initialization
-			: assignment_operator '{' array_int_declarations '}';
+			: assignment_operator '{' array_int_declarations '}'
+			| assignment_operator '{' array_float_declarations '}';
 
 array_int_declarations
 			: integer_constant array_int_declarations_breakup;
 
+array_float_declarations
+			: float_constant array_float_declarations_breakup 
+			| integer_constant array_float_declarations_breakup;
+
 array_int_declarations_breakup
 			: ',' array_int_declarations 
+			| ;
+
+array_float_declarations_breakup
+			: ',' array_float_declarations 
 			| ;
 
 expression 
@@ -276,7 +352,7 @@ simple_expression
 
 and_expression 
 			: and_expression AND_operator unary_relation_expression {if($1 == 1 && $3==1) $$=1; else $$=-1;}
-			  |unary_relation_expression {if($1 == 1) $$=1; else $$=-1;} ;
+			|unary_relation_expression {if($1 == 1) $$=1; else $$=-1;} ;
 
 
 unary_relation_expression 
@@ -285,7 +361,7 @@ unary_relation_expression
 
 regular_expression 
 			: regular_expression relational_operators sum_expression {if($1 == 1 && $3==1) $$=1; else $$=-1;}
-			  | sum_expression {if($1 == 1) $$=1; else $$=-1;} ;
+			| sum_expression {if($1 == 1) $$=1; else $$=-1;} ;
 			
 relational_operators 
 			: greaterthan_assignment_operator | lessthan_assignment_operator | greaterthan_operator 
@@ -323,12 +399,12 @@ mutable
 			              else
 			              $$ = -1;
 			              }
-			| array_identifier {if(!checkscope(curid)){printf("%s\n",curid);printf("Undeclared\n");exit(0);}} '[' expression ']' 
-			                   {if(gettype(curid,0)=='i' || gettype(curid,1)== 'c')
-			              		$$ = 1;
-			              		else
-			              		$$ = -1;
-			              		};
+			| array_random_access;
+			// | mutable mutable_breakup;
+
+// mutable_breakup
+// 			: '[' expression ']' 
+// 			| '.' identifier;
 
 immutable 
 			: '(' expression ')' {if($2==1) $$=1; else $$=-1;}
