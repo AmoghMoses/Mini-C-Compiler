@@ -5,9 +5,12 @@
 	#include "stdlib.h"
 	#include "ctype.h"
 	#include "string.h"
+	#include "stdarg.h"
 	void ins();
 	void insV();
 	int flag=0;
+
+
 	#define ANSI_COLOR_RED		"\x1b[31m"
 	#define ANSI_COLOR_GREEN	"\x1b[32m"
 	#define ANSI_COLOR_CYAN		"\x1b[36m"
@@ -37,14 +40,57 @@
 	extern int params_count;
 	int call_params_count;
 
-// 	struct ast_node {
-//     int type;       // type of the node (e.g. operator, literal, variable)
-//     char* value;    // value of the node (e.g. "+", "42", "x")
-//     int num_children;   // number of children of the node
-//     struct ast_node** children; // array of pointers to the node's children
-// };
-%}
+	  struct ast_node {
+		char* type;       // type of the node (e.g. operator, literal, variable)
+		char* value;    // value of the node (e.g. "+", "42", "x")
+		int num_children;   // number of children of the node
+		struct ast_node** children; // array of pointers to the node's children
 
+	};
+
+	struct ast_node* create_ast_node(char* type, char* value, int num_children, ...) {
+		struct ast_node* node = malloc(sizeof(struct ast_node));
+		node->type = type;
+		node->value = value;
+		node->num_children = num_children;
+		node->children = malloc(sizeof(struct ast_node*) * num_children);
+		va_list args;
+		va_start(args, num_children);
+		for (int i = 0; i < num_children; i++) {
+			node->children[i] = va_arg(args, struct ast_node*);
+		}
+		va_end(args);
+		return node;
+	}
+
+	void add_child_node(struct ast_node* parent, struct ast_node* child) {
+    if (parent == NULL || child == NULL) {
+        return;
+    }
+    int num_children = parent->num_children;
+    parent->children = realloc(parent->children, sizeof(struct ast_node*) * (num_children + 1));
+    parent->children[num_children] = child;
+    parent->num_children++;
+}
+
+	void print_ast(struct ast_node* node, int depth) {
+    if (node == NULL) {
+        return;
+    }
+    for (int i = 0; i < depth; i++) {
+        printf("  "); // print two spaces for each level of depth
+    }
+    printf("%s", node->type);
+    if (node->value != NULL) {
+        printf(" (%s)", node->value);
+    }
+    printf("\n");
+    for (int i = 0; i < node->num_children; i++) {
+        print_ast(node->children[i], depth + 1);
+    }
+}
+
+%}
 
 %nonassoc IF
 %token INT CHAR FLOAT DOUBLE LONG SHORT SIGNED UNSIGNED STRUCT
@@ -52,6 +98,8 @@
 %token VOID
 %token WHILE FOR DO 
 %token BREAK PRINTF CONTINUE
+
+
 %token ENDIF
 %expect 1 
 
@@ -83,12 +131,14 @@
 %left increment_operator decrement_operator 
 
 
-%start program
-
+%start program 
 
 %%
 program
-			: declaration_list;
+			: declaration_list {
+				
+			}
+			;
 
 declaration_list
 			: declaration D ;
@@ -157,8 +207,8 @@ initialization_params
 			| ']' initialization
 			| ']' string_initialization;
 
-initilization
-			: string_initilization
+initialization
+			: string_initialization
 			| array_initialization
 			| ;
 
@@ -293,7 +343,7 @@ continue_statement
 break_statement 
 			: BREAK ';' ;
 
-string_initilization
+string_initialization
 			: assignment_operator string_constant {insV();} ;
 
 array_initialization
@@ -476,26 +526,20 @@ int main(int argc , char **argv)
 {
 	yyin = fopen(argv[1], "r");
 	yyparse();
-	printf("\nTattii....\n")
+
 	if(flag == 0)
 	{
 		printf(ANSI_COLOR_GREEN "Status: Parsing Complete - Valid" ANSI_COLOR_RESET "\n");
-		// printf("%30s" ANSI_COLOR_CYAN "SYMBOL TABLE" ANSI_COLOR_RESET "\n", " ");
-		// printf("%30s %s\n", " ", "------------");
-		// printST();
+		printf("%30s" ANSI_COLOR_CYAN "SYMBOL TABLE" ANSI_COLOR_RESET "\n", " ");
+		printf("%30s %s\n", " ", "------------");
+		printST();
 
-		// printf("\n\n%30s" ANSI_COLOR_CYAN "CONSTANT TABLE" ANSI_COLOR_RESET "\n", " ");
-		// printf("%30s %s\n", " ", "--------------");
-		// printCT();
+		printf("\n\n%30s" ANSI_COLOR_CYAN "CONSTANT TABLE" ANSI_COLOR_RESET "\n", " ");
+		printf("%30s %s\n", " ", "--------------");
+		printCT();
 	}
 
-printf("\n---------Making file...\n");
-FILE *filePointer; 
-filePointer = fopen("ast.txt", "w");
-fwrite("hello",1,5,filePointer);
-fclose(filePointer);
-
-// print_ast(root_node, 0);
+printf("\n........................Prakhar doing task 4...................\n");
 
 }
 

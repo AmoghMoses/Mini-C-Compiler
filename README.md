@@ -2,26 +2,30 @@
 
 ## How to Compile and Run 
 
-### Task 1
-`flex scanner.l`  
+### Task 1 
+#### You should be in the Task 1 folder
+`flex lexer.l`  
 `gcc lex.yy.c -ll`  
 `./a.out test.c`
 
 ### Task 2
+#### You should be in the Task 2 folder
 `yacc -d parser.y`  
 `flex scanner.l`  
 `gcc y.tab.c lex.yy.c -ll`  
 `./a.out test.c`
 
 ### Task 3
+#### You should be in the Task 3 folder
 `yacc -d parser.y`  
-`flex scanner.l`  
+`flex lexer.l`  
 `gcc y.tab.c lex.yy.c -ll`  
 `./a.out test.c`
 
 ### Task 4
+#### You should be in the Task 4 folder
 `yacc -d parser.y`  
-`flex scanner.l`  
+`flex lexer.l`  
 `gcc y.tab.c lex.yy.c -ll`  
 `./a.out test.c`
 
