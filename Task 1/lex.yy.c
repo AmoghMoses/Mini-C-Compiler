@@ -699,8 +699,8 @@ goto find_rule; \
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "scanner.l"
-#line 2 "scanner.l"
+#line 1 "lexer.l"
+#line 2 "lexer.l"
 	#include <stdio.h>
 	#include <string.h>
 	
@@ -969,7 +969,7 @@ YY_DECL
 		}
 
 	{
-#line 54 "scanner.l"
+#line 54 "lexer.l"
 
 #line 975 "lex.yy.c"
 
@@ -1054,7 +1054,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 55 "scanner.l"
+#line 55 "lexer.l"
 {yylineno++;}
 	YY_BREAK
 case 2:
@@ -1064,7 +1064,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 56 "scanner.l"
+#line 56 "lexer.l"
 {printf("%s \t-Pre Processor directive\n",yytext);}	//Matches #include<stdio.h>
 	YY_BREAK
 case 3:
@@ -1074,79 +1074,79 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 57 "scanner.l"
+#line 57 "lexer.l"
 {printf("%s \t-Macro\n",yytext);} //Matches macro
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 58 "scanner.l"
+#line 58 "lexer.l"
 {printf("%s \t- SINGLE LINE COMMENT\n", yytext);}				
 	YY_BREAK
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 59 "scanner.l"
+#line 59 "lexer.l"
 {printf("%s \t- MULTI LINE COMMENT\n", yytext);}
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 60 "scanner.l"
+#line 60 "lexer.l"
 ;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 61 "scanner.l"
+#line 61 "lexer.l"
 {printf("%s \t- SEMICOLON \n", yytext);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 62 "scanner.l"
+#line 62 "lexer.l"
 {printf("%s \t- COMMA \n", yytext);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 63 "scanner.l"
+#line 63 "lexer.l"
 {printf("%s \t- OPENING BRACES\n", yytext);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 64 "scanner.l"
+#line 64 "lexer.l"
 {printf("%s \t- CLOSING BRACES\n", yytext);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 65 "scanner.l"
+#line 65 "lexer.l"
 {printf("%s \t- OPENING BRACKET\n", yytext);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 66 "scanner.l"
+#line 66 "lexer.l"
 {printf("%s \t- CLOSING BRACKET\n", yytext);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 67 "scanner.l"
+#line 67 "lexer.l"
 {printf("%s \t- SQUARE OPENING BRACKET\n", yytext);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 68 "scanner.l"
+#line 68 "lexer.l"
 {printf("%s \t- SQUARE CLOSING BRACKET\n", yytext);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 69 "scanner.l"
+#line 69 "lexer.l"
 {printf("%s \t- COLON \n", yytext);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 70 "scanner.l"
+#line 70 "lexer.l"
 {printf("%s \t- FORWARD SLASH\n", yytext);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 71 "scanner.l"
+#line 71 "lexer.l"
 {printf("%s \t- DOT \n", yytext);}
 	YY_BREAK
 case 18:
@@ -1156,7 +1156,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 72 "scanner.l"
+#line 72 "lexer.l"
 {printf("%s \t- KEYWORD\n", yytext); insert_into_sym_table(yytext, "KEYWORD");}
 	YY_BREAK
 case 19:
@@ -1164,7 +1164,7 @@ case 19:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 73 "scanner.l"
+#line 73 "lexer.l"
 {printf("%s \t- STRING CONSTANT\n", yytext); }
 	YY_BREAK
 case 20:
@@ -1172,7 +1172,7 @@ case 20:
 (yy_c_buf_p) = yy_cp = yy_bp + 3;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 74 "scanner.l"
+#line 74 "lexer.l"
 {printf("%s \t- CHARACTER CONSTANT\n", yytext); }
 	YY_BREAK
 case 21:
@@ -1180,13 +1180,13 @@ case 21:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 75 "scanner.l"
+#line 75 "lexer.l"
 {printf("%s \t- ARRAY IDENTIFIER\n", yytext); insert_into_sym_table(yytext, "IDENTIFIER");}
 	YY_BREAK
 case 22:
 /* rule 22 can match eol */
 YY_RULE_SETUP
-#line 77 "scanner.l"
+#line 77 "lexer.l"
 {printf("%s \t- OPERATOR\n", yytext);} 
 	YY_BREAK
 case 23:
@@ -1196,7 +1196,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 79 "scanner.l"
+#line 79 "lexer.l"
 {printf("%s \t- NUMBER CONSTANT\n", yytext); }
 	YY_BREAK
 case 24:
@@ -1206,7 +1206,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 80 "scanner.l"
+#line 80 "lexer.l"
 {printf("%s \t- Floating CONSTANT\n", yytext); }
 	YY_BREAK
 case 25:
@@ -1216,12 +1216,12 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 81 "scanner.l"
+#line 81 "lexer.l"
 {printf("%s \t- IDENTIFIER\n", yytext); insert_into_sym_table(yytext, "IDENTIFIER");}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 84 "scanner.l"
+#line 84 "lexer.l"
 {
 		if(yytext[0]=='#')
 		{
@@ -1245,7 +1245,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 105 "scanner.l"
+#line 105 "lexer.l"
 ECHO;
 	YY_BREAK
 #line 1252 "lex.yy.c"
@@ -2226,7 +2226,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 105 "scanner.l"
+#line 105 "lexer.l"
 
 
 int main(int argc , char **argv){

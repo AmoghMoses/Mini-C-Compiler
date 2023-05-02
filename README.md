@@ -30,8 +30,11 @@
 `./a.out test.c`
 
 ### Task 5
-
-
+#### You should be in the Task 5 folder
+`yacc -d parser.y`  
+`flex lexer.l`  
+`gcc y.tab.c lex.yy.c -ll`  
+`./a.out test.c`
 
 
 ## Team Members
